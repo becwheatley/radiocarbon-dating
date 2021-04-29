@@ -1,0 +1,93 @@
+---
+title: "Sampling bias in radiocarbon dating project: simulation study"
+author: "Rebecca Wheatley"
+date: "29 April 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Set up
+
+Load required packages:
+```{r, message = FALSE, echo = TRUE}
+library(rcarbon)
+library(ggplot2)
+library(extraDistr)
+library(truncdist)
+library(data.table)
+library(tidyverse)
+```
+
+Specify path for source functions:
+```{r, message = FALSE, echo = TRUE}
+source("C:/Users/Bec/Work/Projects/Radiocarbon dating/Analysis/simulation_study-source.R")
+```
+
+## Unbiased data with no pull of the recent
+
+Set the parameters we want for our simulated data:
+```{r, message = FALSE}
+timeRange  <- c(12000, 0) ## for Holocene sites
+no_sites   <- 100         ## the number of sites we want in our simulated data set
+no_samples <- 100         ## the number of samples we want each site to have
+pull       <- FALSE       ## will we simulate pull of the recent in our baseline data set?
+```
+
+Generate our complete simulated data set (we will be using this as our baseline data set and compare results using this data to results from various sub-samples):
+```{r}
+baseline.data <- get_available_evidence(timeRange = timeRange, no_sites = no_sites, no_samples = no_samples, pull = pull)
+glimpse(baseline.data)
+```
+
+We will run several sampling methods on this data set to investigate different potential biases in radiocarbon dating sampling. These sampling methods are:  
+1. **Uniform**. For each site (or some % of sites), choose a number of samples (`sampling_effort`) from a uniform distribution  
+2. **Singleton**. For each site (or some % of sites), choose one sample. There are three methods of choosing which sample to use:  
++ the most **ancient** sample  
++ the most **recent** sample  
++ a **random** sample  
+3. **Bracketed**. For each site (or some % of sites), choose the most recent and the most ancient sample  
+
+There are, therefore, two new parameters for subsampling the baseline data: `percent_sites` and `sampling_effort`. These determine the percent of sites we apply the sampling methods to and the number of samples we want to select if using a uniform sampling method. We also set a few extra parameters for calibrating our resulting data sets and calculating summed probability distributions for them: 
+
+```{r}
+percent_sites   <- 50   ## the number of sites we want to apply the sampling method across (the remainder will be exhaustively sampled)
+sampling_effort <- 10   ## the number of samples we want to take using the uniform sampling method
+runm            <- 100  ## the running mean to use for the SPDs
+nsim            <- 10   ## the number of simulations to run for each sub-sampling type
+ncores          <- 6    ## the number of threads to use when calibrating the radiocarbon dates  
+normalised      <- TRUE ## are calibration curves and SPDs normalised?
+```
+
+Using these parameters, generate nsim replicates of the data using the sampling method specified, calibrate and generate an SPD for each replicate, and then compare to the baseline SPD and nsim SPDs that are sampled using the uniform sampling method:
+```{r, message = FALSE}
+spd_singleton_ancient <- compare_spds(evidence = baseline.data, timeRange = timeRange, sampling_method = "singleton_ancient", 
+                                      sampling_effort = sampling_effort, percent_sites = percent_sites, pull = pull, runm = runm, 
+                                      nsim = nsim, normalised = normalised, ncores = ncores)
+```
+
+Get p-values:
+```{r}
+spd_singleton_ancient$pValueList ## do these make any sense?
+```
+
+Plot the resulting SPDs:
+```{r}
+## Plot confidence interval ribbons for the different sampling method SPDs (which have had nsim replicates run for each)
+p <- ggplot(NULL) +
+  geom_ribbon(aes(x = spd_singleton_ancient$baseline$calBP, ymin = spd_singleton_ancient$envelope[[1]][,1], 
+                  ymax = spd_singleton_ancient$envelope[[1]][,3]), fill = "forestgreen", alpha = 0.3) +
+  geom_ribbon(aes(x = spd_singleton_ancient$baseline$calBP, ymin = spd_singleton_ancient$envelope[[2]][,1], 
+                  ymax = spd_singleton_ancient$envelope[[2]][,3]),  fill = "cornflowerblue", alpha = 0.3) +
+  geom_line(aes(x = spd_singleton_ancient$baseline$calBP, y = spd_singleton_ancient$envelope[[1]][,2]), lwd = 1, color = "forestgreen") +
+  geom_line(aes(x = spd_singleton_ancient$baseline$calBP, y = spd_singleton_ancient$envelope[[2]][,2]), lwd = 1, 
+            color ="cornflowerblue") +
+  geom_line(aes(x = spd_singleton_ancient$baseline$calBP, y = spd_singleton_ancient$baseline$PrDens), lwd = 1, colour = "black", 
+            linetype = "dashed") +
+  labs(x = "Years cal BP", y = "Probability") +
+  scale_x_reverse(limits=timeRange) +
+  theme_bw()
+p
+
