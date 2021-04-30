@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Load required packages:
 ```{r, message = FALSE, echo = TRUE}
 library(rcarbon)
-library(ggplot2)
+library(ggformula)
 library(extraDistr)
 library(truncdist)
 library(data.table)
@@ -23,17 +23,17 @@ library(tidyverse)
 
 Specify path for source functions:
 ```{r, message = FALSE, echo = TRUE}
-source("C:/Users/Bec/Work/Projects/Radiocarbon dating/Analysis/simulation_study-source.R")
+source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation_study-source.R")
 ```
 
 ## Unbiased data with no pull of the recent
 
 Set the parameters we want for our simulated data:
 ```{r, message = FALSE}
-timeRange  <- c(12000, 0) ## for Holocene sites
-no_sites   <- 100         ## the number of sites we want in our simulated data set
-no_samples <- 100         ## the number of samples we want each site to have
-pull       <- FALSE       ## will we simulate pull of the recent in our baseline data set?
+timeRange  <- c(12000, 200) ## for Holocene sites
+no_sites   <- 100           ## the number of sites we want in our simulated data set
+no_samples <- 100           ## the number of samples we want each site to have
+pull       <- FALSE         ## will we simulate pull of the recent in our baseline data set?
 ```
 
 Generate our complete simulated data set (we will be using this as our baseline data set and compare results using this data to results from various sub-samples):
@@ -50,44 +50,80 @@ We will run several sampling methods on this data set to investigate different p
 + a **random** sample  
 3. **Bracketed**. For each site (or some % of sites), choose the most recent and the most ancient sample  
 
-There are, therefore, two new parameters for subsampling the baseline data: `percent_sites` and `sampling_effort`. These determine the percent of sites we apply the sampling methods to and the number of samples we want to select if using a uniform sampling method. We also set a few extra parameters for calibrating our resulting data sets and calculating summed probability distributions for them: 
+There are, therefore, two new parameters for subsampling the baseline data: `percent_sites` and `sampling_effort`. These determine the percent of sites we apply the sampling methods to and the number of samples we want to select if using a uniform sampling method.
 
 ```{r}
-percent_sites   <- 50   ## the number of sites we want to apply the sampling method across (the remainder will be exhaustively sampled)
-sampling_effort <- 10   ## the number of samples we want to take using the uniform sampling method
-runm            <- 100  ## the running mean to use for the SPDs
-nsim            <- 10   ## the number of simulations to run for each sub-sampling type
-ncores          <- 6    ## the number of threads to use when calibrating the radiocarbon dates  
-normalised      <- TRUE ## are calibration curves and SPDs normalised?
+percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be exhaustively sampled)
+sampling_effort = 10   ## the number of samples we want to take using the uniform sampling method
+nsim            = 10    ## the number of replicates to make when sampling
 ```
 
-Using these parameters, generate nsim replicates of the data using the sampling method specified, calibrate and generate an SPD for each replicate, and then compare to the baseline SPD and nsim SPDs that are sampled using the uniform sampling method:
+Using these parameters, generate nsim replicates of the data using the sampling method specified and calibrate:
+```{r}
+sample.data <- get_samples(evidence = baseline.data, sampling_method = "singleton_ancient", 
+                           sampling_effort = sampling_effort, percent_sites = percent_sites, nsim = nsim)
+```
+
+Calibrate the baseline and sample data (using the `'rcarbon` package):
 ```{r, message = FALSE}
-spd_singleton_ancient <- compare_spds(evidence = baseline.data, timeRange = timeRange, sampling_method = "singleton_ancient", 
-                                      sampling_effort = sampling_effort, percent_sites = percent_sites, pull = pull, runm = runm, 
-                                      nsim = nsim, normalised = normalised, ncores = ncores)
+normalised      = TRUE ## are calibration curves (and, later, SPDs) normalised?
+ncores          = 6    ## the number of threads to use when calibrating the radiocarbon dates
+cal.baseline.data <- rcarbon::calibrate(x = baseline.data$age, errors = baseline.data$error, calCurves = 'shcal20', 
+                                        normalised = normalised, ncores = ncores)
+cal.sample.data <- calibrate_samples(samples = sample.data, normalised = normalised, ncores = ncores)
+```
+
+Calculate the summed probability distribution for each sample, and then compare the mean SPD over the samples to the baseline SPD:
+```{r, message = FALSE}
+runm = 100 ## the running mean to use for the SPDs
+spd.singleton.ancient <- compare_spds(calibrated_evidence = cal.baseline.data, calibrated_samples = cal.sample.data, 
+                                      timeRange = timeRange, runm = runm, normalised = normalised, ncores = ncores)
 ```
 
 Get p-values:
 ```{r}
-spd_singleton_ancient$pValueList ## do these make any sense?
+spd.singleton.ancient$pValueList ## do these make any sense?
 ```
 
 Plot the resulting SPDs:
-```{r}
+```{r, message = TRUE}
 ## Plot confidence interval ribbons for the different sampling method SPDs (which have had nsim replicates run for each)
 p <- ggplot(NULL) +
-  geom_ribbon(aes(x = spd_singleton_ancient$baseline$calBP, ymin = spd_singleton_ancient$envelope[[1]][,1], 
-                  ymax = spd_singleton_ancient$envelope[[1]][,3]), fill = "forestgreen", alpha = 0.3) +
-  geom_ribbon(aes(x = spd_singleton_ancient$baseline$calBP, ymin = spd_singleton_ancient$envelope[[2]][,1], 
-                  ymax = spd_singleton_ancient$envelope[[2]][,3]),  fill = "cornflowerblue", alpha = 0.3) +
-  geom_line(aes(x = spd_singleton_ancient$baseline$calBP, y = spd_singleton_ancient$envelope[[1]][,2]), lwd = 1, color = "forestgreen") +
-  geom_line(aes(x = spd_singleton_ancient$baseline$calBP, y = spd_singleton_ancient$envelope[[2]][,2]), lwd = 1, 
-            color ="cornflowerblue") +
-  geom_line(aes(x = spd_singleton_ancient$baseline$calBP, y = spd_singleton_ancient$baseline$PrDens), lwd = 1, colour = "black", 
+  geom_ribbon(aes(x = spd.singleton.ancient$baseline$calBP, ymin = spd.singleton.ancient$envelope[[1]][,1], 
+                  ymax = spd.singleton.ancient$envelope[[1]][,3]), fill = "forestgreen", alpha = 0.3) +
+  geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$envelope[[1]][,2]), lwd = 1, color = "forestgreen") +
+  geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$baseline$PrDens), lwd = 1, colour = "black", 
             linetype = "dashed") +
   labs(x = "Years cal BP", y = "Probability") +
   scale_x_reverse(limits=timeRange) +
   theme_bw()
 p
+```
+
+Calculate the frequency distribution for each sample, and then compare the mean frequency distribution over the samples to the baseline frequency distribution:
+
+```{r}
+taphCorrect = FALSE   ## whether to taphonomically correct the open sites - not currently as haven't specified whether sites are open
+correctForSite = TRUE ## per bin: number of sites with at least one date in them, or number of dates within the bin total
+binSize = 100         ## the size of the bins to use (years) - use a bin size that actually fits the timeRange specified
+fd.singleton.ancient <- compare_frequency_dists(evidence = baseline.data, samples = sample.data, calibrated_evidence = cal.baseline.data,
+                                                calibrated_samples = cal.sample.data, timeRange = timeRange, taphCorrect = taphCorrect,
+                                                correctForSite = correctForSite, binSize = binSize)
+```
+So confused - lengths of breaks and labels differ, but they are both 118 when I run the code manually? What is going on?
+```{r}
+## Get the median bin ages
+median.bin.age   <- seq(timeRange[2] + binSize/2, timeRange[1] - binSize/2, by = binSize)
+p <- ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.ancient$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.ancient$standardised.envelope[[1]][,3]), fill = "forestgreen", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "forestgreen", df = 25) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 25) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  scale_x_reverse() +
+  theme_bw()
+p
+```
 
