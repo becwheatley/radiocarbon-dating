@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 30 April 2021
+# Last modified 3 May 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------
@@ -39,13 +39,12 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pull)
   names(evidence) <- c("site", "sample", "age", "error")
   for (s in 1:no_sites){
     
-    ## if pull of the recent is set to TRUE, draw from a truncated decaying exponential distribution
+    ## if pull of the recent is set to TRUE, draw from a truncated exponential distribution
     if (pull){
-      ## what I really want here is to design an exponential distribution that applies across the entire possible date history (e.g. 0 to 55,000 ybp)
-      ## and then truncate this single distribution using occupation_history[s,1] and occupation_history[s,2] for the purposes of sampling
-      temp1 <- rtrunc(no_samples, spec = "exp", a = occupation_history[s,1], b = occupation_history[s,2])#, rate = 1) ## this code doesn't work
-      temp <- round(temp1)
-    
+      
+      ## note that our rate is informed by the results from the taphonomic loss dynamic occupancy model on AustArch
+      temp <- rtrunc(n = no_samples, spec = "exp", a = timeRange[2], b = timeRange[1], rate = 0.04/500)
+      
     ## if pull of the recent is set to FALSE, draw from a discrete uniform distribution
     } else {
       temp <- rdunif(no_samples, occupation_history[s,1], occupation_history[s,2])
@@ -505,7 +504,10 @@ generate_multiple_frequency_dists <- function(data, calibrated_data, timeRange, 
     summary <- summary(calibrated_data[[s]])
     
     ## Get age bins
-    data[[s]]$bin <- cut(summary$MedianBP, breaks = c(seq(timeRange[2]+binSize, timeRange[1], by = binSize)), labels = 1:((timeRange[1] - timeRange[2])/binSize))
+    data[[s]]$bin <- cut(summary$MedianBP, 
+                         breaks = c(timeRange[2], seq(timeRange[2]+binSize, timeRange[1], by = binSize)), 
+                         labels = 1:((timeRange[1] - timeRange[2])/binSize)
+                         )
     
     ## If we only want to count one occurance of a particular site per bin
     if (correctForSite){
