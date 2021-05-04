@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 3 May 2021
+# Last modified 4 May 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------
@@ -43,7 +43,7 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pull)
     if (pull){
       
       ## note that our rate is informed by the results from the taphonomic loss dynamic occupancy model on AustArch
-      temp <- rtrunc(n = no_samples, spec = "exp", a = timeRange[2], b = timeRange[1], rate = 0.04/500)
+      temp <- round(rtrunc(n = no_samples, spec = "exp", a = timeRange[2], b = timeRange[1], rate = 0.04/500))
       
     ## if pull of the recent is set to FALSE, draw from a discrete uniform distribution
     } else {
@@ -99,7 +99,7 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
       if (i <= (percent_sites/100) * length(unique(evidence$site))){
       
         ## choose which samples to take from this site
-        site_samples <- rdunif(no_samples, 1, nrow(just_this_site)) ## this will be no_samples long
+        site_samples <- rdunif(sampling_effort, 1, nrow(just_this_site)) ## this will be no_samples long
 
         ## this might work      
         for (p in 1:length(site_samples))
@@ -161,20 +161,17 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
   # SINGLETON RANDOM sampling takes one random date from a certain % of sites (the rest are exhaustively sampled)  
   } else if (sampling_method == "singleton_random"){
     
-    # Create a new copy of the baseline data set to work with
-    random.order <- evidence
-    
     # So that we are not always sampling from the same sites, assign each site a number from 1 to the total number of sites, 
     # in random order
     site.RN <- sample(1:length(unique(evidence$site)), length(unique(evidence$site)), replace = FALSE)
-    random.order$site_RN <- site.RN[rleid(evidence$site)]
+    evidence$site_RN <- site.RN[rleid(evidence$site)]
     
     # Organise data randomly (to randomise the order of the samples within each site)
-    rows <- sample(nrow(random.order))
-    random.order <- random.order[rows, ]
+    rows <- sample(nrow(evidence))
+    evidence <- evidence[rows, ]
     
     # Then arrange the data frame by the site's random number
-    random.order <- random.order %>% 
+    evidence <- evidence %>% 
       arrange(site_RN)
     
     # Create a new data frame to store our samples in
@@ -183,29 +180,29 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
     # Set initial integer for loop
     p <- 1
     
-    for (i in 1:nrow(random.order)) {
+    for (i in 1:nrow(evidence)) {
       
       ## if we are within the first percent% of sites
-      if (random.order$site[i] <= (percent_sites/100) * length(unique(evidence$site))) {
+      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$site))) {
         
-        ## if we are in the last row of the data set
-        if (i == nrow(random.order)) {
+        ## if we are in the last row of the data set (i.e. the last sample of the last site)
+        if (i == nrow(evidence)) {
           samples[p,] <- evidence[i,]
           p <- p + 1
-        
-        ## if the site in the current row is not the same as the site in the next row
-        } else if (random.order$site[i] != random.order$site[i+1]) { 
+          
+          ## if the site in this row is NOT the same as the site in the next row (i.e. it is the last sample for the site)
+        } else if (evidence$site_RN[i] != evidence$site_RN[i+1]) { 
           
           ## write the line to the new data file (taking the last sample of each site)
-          samples[p,] <- random.order[i,]
+          samples[p,] <- evidence[i,]
           p <- p + 1
         }
         
-      ## if we are not within the first percent% of sites
+        ## if we are not within the first percent% of sites
       } else {
         
         ## write the row to the sample data frame
-        samples[p,] <- random.order[i,]
+        samples[p,] <- evidence[i,]
         p <- p + 1
       }
     }
