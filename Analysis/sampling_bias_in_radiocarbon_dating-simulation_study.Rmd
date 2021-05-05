@@ -56,11 +56,11 @@ There are, therefore, two new parameters for subsampling the baseline data: `per
 ```{r}
 percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
-sampling_effort = 10   ## the number of samples we want to take using the uniform sampling method
-nsim            = 2    ## the number of replicates to make when sampling
+sampling_effort = 5    ## the number of samples we want to take using the uniform sampling method
+nsim            = 20   ## the number of replicates to make when sampling
 ```
 
-Using these parameters, generate nsim replicates of the data using the sampling method specified and calibrate:
+Using these parameters, generate nsim replicates of the data using the sampling method specified:
 ```{r, message = FALSE}
 sample.uniform           <- get_samples(evidence = baseline.data, 
                                         sampling_method = "uniform", 
@@ -175,7 +175,7 @@ ggplot(NULL) +
   geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$baseline$PrDens), lwd = 1, colour = "black", 
             linetype = "dashed") +
   labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("10 uniformly selected samples from 50% sites") +
+  ggtitle("5 uniformly selected samples from 50% sites") +
   scale_x_reverse(limits=timeRange) +
   theme_bw()
 
@@ -324,7 +324,7 @@ ggplot(NULL) +
   geom_spline(aes(x = median.bin.age, y = fd.uniform$standardised.baseline[,1]), lwd = 1, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("10 uniformly selected samples from 50% of sites") +
+  ggtitle("5 uniformly selected samples from 50% of sites") +
   scale_x_reverse() +
   theme_bw()
 
@@ -481,7 +481,7 @@ ggplot(NULL) +
   geom_spline(aes(x = median.bin.age, y = fd.uniform.sites$standardised.baseline[,1]), lwd = 1, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("10 uniformly selected samples from 50% of sites") +
+  ggtitle("5 uniformly selected samples from 50% of sites") +
   scale_x_reverse() +
   theme_bw()
 
@@ -597,7 +597,7 @@ There are, therefore, two new parameters for subsampling the baseline data: `per
 ```{r}
 percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
-sampling_effort = 10   ## the number of samples we want to take using the uniform sampling method
+sampling_effort = 5    ## the number of samples we want to take using the uniform sampling method
 nsim            = 20   ## the number of replicates to make when sampling
 ```
 
@@ -716,7 +716,7 @@ ggplot(NULL) +
   geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$baseline$PrDens), lwd = 1, colour = "black", 
             linetype = "dashed") +
   labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("10 uniformly selected samples from 50% sites") +
+  ggtitle("5 uniformly selected samples from 50% sites") +
   scale_x_reverse(limits=timeRange) +
   theme_bw()
 
@@ -865,7 +865,7 @@ ggplot(NULL) +
   geom_spline(aes(x = median.bin.age, y = fd.uniform$standardised.baseline[,1]), lwd = 1, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("10 uniformly selected samples from 50% of sites") +
+  ggtitle("5 uniformly selected samples from 50% of sites") +
   scale_x_reverse() +
   theme_bw()
 
@@ -1022,7 +1022,7 @@ ggplot(NULL) +
   geom_spline(aes(x = median.bin.age, y = fd.uniform.sites$standardised.baseline[,1]), lwd = 1, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("10 uniformly selected samples from 50% of sites") +
+  ggtitle("5 uniformly selected samples from 50% of sites") +
   scale_x_reverse() +
   theme_bw()
 

@@ -1,0 +1,633 @@
+---
+title: "Sampling bias in radiocarbon dating project: broad approach 1 using the AustArch database"
+author: "Rebecca Wheatley"
+date: "5 May 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Set up
+
+Load required packages:
+```{r, message = FALSE}
+library(ggformula)
+library(plyr)
+library(tidyverse)
+library(data.table)
+library(rcarbon)
+library(parallel)
+```
+
+Specify path for source functions:
+```{r, message = FALSE, echo = TRUE}
+source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/broad_approach_1-source.R")
+```
+
+Load the AustArch data and make sure relevant columns read in correctly:
+```{r, message = FALSE}
+AustArch <- read.csv("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Data/Austarch_1-3_and_IDASQ_28Nov13-1.csv")
+AustArch$AGE_NORM     <- as.numeric(AustArch$AGE_NORM)
+AustArch$ERROR        <- as.numeric(AustArch$ERROR)
+AustArch$LATITUDE     <- as.numeric(AustArch$LATITUDE)
+AustArch$LONGITUDE    <- as.numeric(AustArch$LONGITUDE)
+AustArch$IBRA_REGION  <- as.factor(AustArch$IBRA_REGION)
+AustArch$SITE         <- as.factor(AustArch$SITE)
+```
+
+Get rid of:  
+* "unusable" samples 
+* samples missing an age and/or error estimate  
+* samples generated using any method that is not radiocarbon dating  
+* samples that fall outside of the calibration age range
+* samples that fall outside of the age range we are interested in (in this case, we only want Holocene dates)
+```{r, message = FALSE, results = 'hide'}
+data <- AustArch %>%
+  filter(Data.pertinent.for.time.series.analysis.or.calibration != "Unusuable") %>%
+  filter(AGE_NORM != "NA") %>%
+  filter(ERROR != "NA") %>%
+  filter(METHOD == "Radiocarbon") %>%
+  filter((Data.pertinent.for.time.series.analysis.or.calibration == "Marine" && AGE_NORM >= 400) 
+         || Data.pertinent.for.time.series.analysis.or.calibration == "Terrestrial") %>%
+  subset(AGE_NORM <= 12000)
+```
+
+Create a new column that records the number of dated samples available for that site: NO_DATES_PER_SITE
+```{r, message = FALSE}
+data <- data %>%
+  dplyr::arrange(SITE) %>%
+  dplyr::group_by(SITE, .drop = TRUE) %>%
+  dplyr::mutate(DATES_PER_SITE = length(AGE_NORM))
+```
+
+Create a new column that records a sample's position in the time series of the youngest dated sample at that site (1) to the oldest dated sample at that site (NO_DATES_PER_SITE): POSITION_IN_SERIES
+```{r, message = FALSE}
+data <- data %>%
+  dplyr::arrange(SITE, AGE_NORM)
+position <- vector(length = nrow(data))
+for (i in 1:nrow(data)) {
+  ## if we're not in row 1
+  if (i > 1)
+  {
+    ## if the site in this row is the same as the site in the previous row
+    if (data$SITE[i] == data$SITE[i-1]) { 
+      position[i] <- position[i-1] + 1 ##
+      ## if the site in this row is NOT the same as the site in the previous row
+    } else {
+      position[i] <- 1
+    }
+  } else { position[i] <- 1}
+}
+data$POSITION_IN_SERIES <- position
+```
+
+Create a new data set that contains only sites which have at least 5 samples. This will be our "baseline" data set, which we assume contains relatively little by way of sampling bias. We can then compare the results of common analysis methods (summed probability distributions, frequency distributions) using the baseline data set to those using various subsets of the baseline data which introduce known sampling biases.
+```{r, message = FALSE}
+baseline.data <- data %>% 
+  subset(DATES_PER_SITE >= 5)
+glimpse(data)
+```
+
+## Generate and calibrate repeated sub-samples of the data to explore the effect of different sampling biases
+
+We will run several sampling methods on the baseline data set to investigate different potential biases in radiocarbon dating sampling. These sampling methods are:  
+1. **Uniform**. For each site (or some % of sites), choose a number of samples (`sampling_effort`) from a uniform distribution  
+2. **Singleton**. For each site (or some % of sites), choose one sample. There are three methods of choosing which sample to use:  
++ the most **ancient** sample  
++ the most **recent** sample  
++ a **random** sample  
+3. **Bracketed**. For each site (or some % of sites), choose the most recent and the most ancient sample  
+
+There are, therefore, two new parameters for subsampling the baseline data: `percent_sites` and `sampling_effort`. These determine the percent of sites we apply the sampling methods to and the number of samples we want to select if using a uniform sampling method.
+
+```{r, message = FALSE}
+percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be 
+                       ## exhaustively sampled)
+sampling_effort = 5    ## the number of samples we want to take using the uniform sampling method
+nsim            = 20   ## the number of replicates to make when sampling
+```
+
+Using these parameters, generate `nsim` replicates of the data using the sampling method specified and calibrate:
+```{r, message = FALSE}
+sample.uniform           <- get_samples(evidence = baseline.data, 
+                                        sampling_method = "uniform", 
+                                        sampling_effort = sampling_effort, 
+                                        percent_sites = percent_sites, 
+                                        nsim = nsim)
+
+sample.singleton.ancient <- get_samples(evidence = baseline.data, 
+                                        sampling_method = "singleton_ancient", 
+                                        sampling_effort = sampling_effort, 
+                                        percent_sites = percent_sites, 
+                                        nsim = nsim)
+
+sample.singleton.recent  <- get_samples(evidence = baseline.data, 
+                                        sampling_method = "singleton_recent", 
+                                        sampling_effort = sampling_effort, 
+                                        percent_sites = percent_sites, 
+                                        nsim = nsim)
+
+sample.singleton.random  <- get_samples(evidence = baseline.data, 
+                                        sampling_method = "singleton_random", 
+                                        sampling_effort = sampling_effort, 
+                                        percent_sites = percent_sites, 
+                                        nsim = nsim)
+
+sample.bracketed         <- get_samples(evidence = baseline.data, 
+                                        sampling_method = "bracketed", 
+                                        sampling_effort = sampling_effort, 
+                                        percent_sites = percent_sites, 
+                                        nsim = nsim)
+```
+
+
+Calibrate the baseline and sample data (using the `'rcarbon` package):
+```{r, message = FALSE, results = 'hide', progress_bar = FALSE}
+normalised      = TRUE ## are calibration curves (and, later, SPDs) normalised?
+cl              = detectCores()
+ncores          = cl   ## the number of threads to use when calibrating the radiocarbon dates
+
+# Baseline data
+baseline.T  <- baseline.data %>% subset(Data.pertinent.for.time.series.analysis.or.calibration == "Terrestrial")
+baseline.M  <- baseline.data %>% subset(Data.pertinent.for.time.series.analysis.or.calibration == "Marine")
+cal.baseline.T    <- rcarbon::calibrate(x = baseline.T$AGE_NORM,
+                                        errors = baseline.T$ERROR,
+                                        ids = baseline.T$ADSID,
+                                        calCurves = 'shcal20',
+                                        normalised = normalised,
+                                        ncores = ncores)
+cal.baseline.M    <- rcarbon::calibrate(x = baseline.M$AGE_NORM,
+                                        errors = baseline.M$ERROR,
+                                        ids = baseline.M$ADSID,
+                                        calCurves = 'marine20',
+                                        normalised = normalised,
+                                        ncores = ncores)
+cal.baseline.data <- combine(cal.baseline.T, cal.baseline.M)
+
+
+# Subsampled data
+cal.uniform           <- calibrate_samples(samples = sample.uniform, 
+                                           normalised = normalised, 
+                                           ncores = ncores)
+
+cal.singleton.ancient <- calibrate_samples(samples = sample.singleton.ancient, 
+                                           normalised = normalised, 
+                                           ncores = ncores)
+
+cal.singleton.recent  <- calibrate_samples(samples = sample.singleton.recent, 
+                                           normalised = normalised, 
+                                           ncores = ncores)
+
+cal.singleton.random  <- calibrate_samples(samples = sample.singleton.random, 
+                                           normalised = normalised, 
+                                           ncores = ncores)
+
+cal.bracketed         <- calibrate_samples(samples = sample.bracketed, 
+                                           normalised = normalised, 
+                                           ncores = ncores)
+```
+
+## Generate and compare summed probability distributions (SPDs)
+
+Calculate the summed probability distribution for each sample, and then compare the mean SPD over the samples to the baseline SPD:
+```{r, message = FALSE,  results = 'hide', progress_bar = FALSE}
+timeRange = c(12000, 0) ## time range we want our SPDs to cover
+runm = 100              ## the running mean to use for the SPDs
+
+spd.uniform           <- compare_spds(calibrated_evidence = cal.baseline.data, 
+                                      calibrated_samples = cal.uniform, 
+                                      timeRange = timeRange, 
+                                      runm = runm, 
+                                      normalised = normalised)
+
+spd.singleton.ancient <- compare_spds(calibrated_evidence = cal.baseline.data, 
+                                      calibrated_samples = cal.singleton.ancient, 
+                                      timeRange = timeRange, 
+                                      runm = runm, 
+                                      normalised = normalised)
+
+spd.singleton.recent  <- compare_spds(calibrated_evidence = cal.baseline.data, 
+                                      calibrated_samples = cal.singleton.recent, 
+                                      timeRange = timeRange, 
+                                      runm = runm, 
+                                      normalised = normalised)
+
+spd.singleton.random  <- compare_spds(calibrated_evidence = cal.baseline.data, 
+                                      calibrated_samples = cal.singleton.random, 
+                                      timeRange = timeRange, 
+                                      runm = runm, 
+                                      normalised = normalised)
+
+spd.bracketed         <- compare_spds(calibrated_evidence = cal.baseline.data, 
+                                      calibrated_samples = cal.bracketed, 
+                                      timeRange = timeRange, 
+                                      runm = runm, 
+                                      normalised = normalised)
+```
+
+Plot the resulting summed probability distributions:  
+* dashed black line is the SPD for the full data set  
+* solid coloured line is the median SPD for the sampled data set  
+* ribbon is the 95% confidence interval for the sampled data set  
+```{r, echo = FALSE, message = TRUE}
+# Uniform
+ggplot(NULL) +
+  geom_ribbon(aes(x = spd.uniform$baseline$calBP, ymin = spd.uniform$envelope[[1]][,1], 
+                  ymax = spd.uniform$envelope[[1]][,3]), fill = "#66C2A5", alpha = 0.3) +
+  geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$envelope[[1]][,2]), lwd = 1, color = "#66C2A5") +
+  geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$baseline$PrDens), lwd = 1, colour = "black", 
+            linetype = "dashed") +
+  labs(x = "Years cal BP", y = "Probability") +
+  ggtitle("5 uniformly selected samples from 50% sites") +
+  scale_x_reverse(limits=timeRange) +
+  theme_bw()
+
+# Singleton ancient
+ggplot(NULL) +
+  geom_ribbon(aes(x = spd.singleton.ancient$baseline$calBP, ymin = spd.singleton.ancient$envelope[[1]][,1], 
+                  ymax = spd.singleton.ancient$envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
+  geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$envelope[[1]][,2]), lwd = 1, color = "#FC8D62") +
+  geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$baseline$PrDens), lwd = 1, colour = "black", 
+            linetype = "dashed") +
+  labs(x = "Years cal BP", y = "Probability") +
+  ggtitle("Only the most ancient sample from 50% sites") +
+  scale_x_reverse(limits=timeRange) +
+  theme_bw()
+
+# Singleton recent
+ggplot(NULL) +
+  geom_ribbon(aes(x = spd.singleton.recent$baseline$calBP, ymin = spd.singleton.recent$envelope[[1]][,1], 
+                  ymax = spd.singleton.recent$envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
+  geom_line(aes(x = spd.singleton.recent$baseline$calBP, y = spd.singleton.recent$envelope[[1]][,2]), lwd = 1, color = "#8DA0CB") +
+  geom_line(aes(x = spd.singleton.recent$baseline$calBP, y = spd.singleton.recent$baseline$PrDens), lwd = 1, colour = "black", 
+            linetype = "dashed") +
+  labs(x = "Years cal BP", y = "Probability") +
+  ggtitle("Only the most recent sample from 50% sites") +
+  scale_x_reverse(limits=timeRange) +
+  theme_bw()
+
+# Singleton random
+ggplot(NULL) +
+  geom_ribbon(aes(x = spd.singleton.random$baseline$calBP, ymin = spd.singleton.random$envelope[[1]][,1], 
+                  ymax = spd.singleton.random$envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
+  geom_line(aes(x = spd.singleton.random$baseline$calBP, y = spd.singleton.random$envelope[[1]][,2]), lwd = 1, color = "#E78AC3") +
+  geom_line(aes(x = spd.singleton.random$baseline$calBP, y = spd.singleton.random$baseline$PrDens), lwd = 1, colour = "black", 
+            linetype = "dashed") +
+  labs(x = "Years cal BP", y = "Probability") +
+  ggtitle("One random sample from 50% sites") +
+  scale_x_reverse(limits=timeRange) +
+  theme_bw()
+
+# Bracketed
+ggplot(NULL) +
+  geom_ribbon(aes(x = spd.bracketed$baseline$calBP, ymin = spd.bracketed$envelope[[1]][,1], 
+                  ymax = spd.bracketed$envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
+  geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$envelope[[1]][,2]), lwd = 1, color = "#A6D854") +
+  geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$baseline$PrDens), lwd = 1, colour = "black", 
+            linetype = "dashed") +
+  labs(x = "Years cal BP", y = "Probability") +
+  ggtitle("Only most ancient and most recent sample from 50% sites (bracketed)") +
+  scale_x_reverse(limits=timeRange) +
+  theme_bw()
+
+
+# Combined
+ggplot(NULL) +
+  geom_ribbon(aes(x = spd.uniform$baseline$calBP, ymin = spd.uniform$envelope[[1]][,1], 
+                  ymax = spd.uniform$envelope[[1]][,3]), fill = "#66C2A5", alpha = 0.3) +
+  geom_ribbon(aes(x = spd.singleton.ancient$baseline$calBP, ymin = spd.singleton.ancient$envelope[[1]][,1], 
+                  ymax = spd.singleton.ancient$envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
+   geom_ribbon(aes(x = spd.singleton.recent$baseline$calBP, ymin = spd.singleton.recent$envelope[[1]][,1], 
+                  ymax = spd.singleton.recent$envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
+  geom_ribbon(aes(x = spd.singleton.random$baseline$calBP, ymin = spd.singleton.random$envelope[[1]][,1], 
+                  ymax = spd.singleton.random$envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
+  geom_ribbon(aes(x = spd.bracketed$baseline$calBP, ymin = spd.bracketed$envelope[[1]][,1], 
+                  ymax = spd.bracketed$envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
+  geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$envelope[[1]][,2]), lwd = 1, color = "#66C2A5") +
+  geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$envelope[[1]][,2]), lwd = 1, color = "#FC8D62") +
+  geom_line(aes(x = spd.singleton.recent$baseline$calBP, y = spd.singleton.recent$envelope[[1]][,2]), lwd = 1, color = "#8DA0CB") +
+  geom_line(aes(x = spd.singleton.random$baseline$calBP, y = spd.singleton.random$envelope[[1]][,2]), lwd = 1, color = "#E78AC3") +
+  geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$envelope[[1]][,2]), lwd = 1, color = "#A6D854") +
+  geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$baseline$PrDens), lwd = 1, colour = "black", 
+            linetype = "dashed") +
+  labs(x = "Years cal BP", y = "Probability") +
+  ggtitle("All subsets combined") +
+  scale_x_reverse(limits=timeRange) +
+  theme_bw()
+```
+
+## Generate and compare frequency distributions of dates within time bins
+
+Calculate the frequency distribution for each sample, and then compare the mean frequency distribution over the samples to the baseline frequency distribution:
+```{r}
+taphCorrect = TRUE     ## whether to taphonomically correct the open sites - not currently as haven't specified whether sites are open
+correctForSite = FALSE ## per bin: number of sites with at least one date in them, or number of dates within the bin total
+binSize = 100          ## the size of the bins to use (years) - use a bin size that actually fits the timeRange specified
+
+# Get median bin age for x axis (same for all)
+median.bin.age   <- seq(timeRange[2] + binSize/2, timeRange[1] - binSize/2, by = binSize)
+
+fd.uniform           <- compare_frequency_dists(evidence = baseline.data, 
+                                                samples = sample.uniform, 
+                                                calibrated_evidence = cal.baseline.data,
+                                                calibrated_samples = cal.uniform,
+                                                timeRange = timeRange, 
+                                                taphCorrect = taphCorrect, 
+                                                correctForSite = correctForSite, 
+                                                binSize = binSize)
+
+fd.singleton.ancient <- compare_frequency_dists(evidence = baseline.data, 
+                                                samples = sample.singleton.ancient, 
+                                                calibrated_evidence = cal.baseline.data,
+                                                calibrated_samples = cal.singleton.ancient,
+                                                timeRange = timeRange, 
+                                                taphCorrect = taphCorrect, 
+                                                correctForSite = correctForSite, 
+                                                binSize = binSize)
+
+fd.singleton.recent  <- compare_frequency_dists(evidence = baseline.data, 
+                                                samples = sample.singleton.recent, 
+                                                calibrated_evidence = cal.baseline.data,
+                                                calibrated_samples = cal.singleton.recent, 
+                                                timeRange = timeRange, 
+                                                taphCorrect = taphCorrect,
+                                                correctForSite = correctForSite, 
+                                                binSize = binSize)
+
+fd.singleton.random  <- compare_frequency_dists(evidence = baseline.data, 
+                                                samples = sample.singleton.random, 
+                                                calibrated_evidence = cal.baseline.data,
+                                                calibrated_samples = cal.singleton.random, 
+                                                timeRange = timeRange, 
+                                                taphCorrect = taphCorrect,
+                                                correctForSite = correctForSite, 
+                                                binSize = binSize)
+
+fd.bracketed         <- compare_frequency_dists(evidence = baseline.data, 
+                                                samples = sample.bracketed, 
+                                                calibrated_evidence = cal.baseline.data,
+                                                calibrated_samples = cal.bracketed, 
+                                                timeRange = timeRange, 
+                                                taphCorrect = taphCorrect,
+                                                correctForSite = correctForSite, 
+                                                binSize = binSize)
+```
+
+Plot the resulting frequency distributions:  
+* dashed black line is a smoothed spline of the frequency distribution for the full data set  
+* solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
+* ribbon is the 95% confidence interval for the sampled data set  
+```{r, echo = FALSE}
+# Uniform
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.uniform$standardised.envelope[[1]][,1], 
+                  ymax = fd.uniform$standardised.envelope[[1]][,3]), fill = "#66C2A5", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.uniform$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#66C2A5", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.uniform$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("5 uniformly selected samples from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Singleton ancient
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.ancient$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.ancient$standardised.envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#FC8D62", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("Only the most ancient sample from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Singleton recent
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.recent$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.recent$standardised.envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.recent$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#8DA0CB", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.recent$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("Only the most recent sample from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Singleton random
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.random$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.random$standardised.envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.random$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#E78AC3", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.random$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("One random sample from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Bracketed
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.bracketed$standardised.envelope[[1]][,1], 
+                  ymax = fd.bracketed$standardised.envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#A6D854", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("Only most ancient and most recent sample from 50% sites (bracketed)") +
+  scale_x_reverse() +
+  theme_bw()
+
+# All
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.uniform$standardised.envelope[[1]][,1], 
+                  ymax = fd.uniform$standardised.envelope[[1]][,3]), fill = "#66C2A5", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.ancient$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.ancient$standardised.envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.recent$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.recent$standardised.envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.random$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.random$standardised.envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.bracketed$standardised.envelope[[1]][,1], 
+                  ymax = fd.bracketed$standardised.envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.uniform$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#66C2A5", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#FC8D62", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.recent$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#8DA0CB", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.random$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#E78AC3", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#A6D854", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("All sampling methods on same plot") +
+  scale_x_reverse() +
+  theme_bw()
+```
+
+### Frequency distributions of sites with dates within time bins
+
+Calculate the frequency distribution for each sample, and then compare the mean frequency distribution over the samples to the baseline frequency distribution:
+```{r}
+taphCorrect = FALSE    ## whether to taphonomically correct the open sites - not currently as haven't specified whether sites are open
+correctForSite = TRUE  ## per bin: number of sites with at least one date in them, or number of dates within the bin total
+binSize = 100          ## the size of the bins to use (years) - use a bin size that actually fits the timeRange specified
+
+# Get median bin age for x axis (same for all plots)
+median.bin.age   <- seq(timeRange[2] + binSize/2, timeRange[1] - binSize/2, by = binSize)
+
+fd.uniform.sites           <- compare_frequency_dists(evidence = baseline.data, 
+                                                      samples = sample.uniform, 
+                                                      calibrated_evidence = cal.baseline.data,
+                                                      calibrated_samples = cal.uniform,
+                                                      timeRange = timeRange, 
+                                                      taphCorrect = taphCorrect, 
+                                                      correctForSite = correctForSite, 
+                                                      binSize = binSize)
+
+fd.singleton.ancient.sites <- compare_frequency_dists(evidence = baseline.data, 
+                                                      samples = sample.singleton.ancient, 
+                                                      calibrated_evidence = cal.baseline.data,
+                                                      calibrated_samples = cal.singleton.ancient,
+                                                      timeRange = timeRange, 
+                                                      taphCorrect = taphCorrect, 
+                                                      correctForSite = correctForSite, 
+                                                      binSize = binSize)
+
+fd.singleton.recent.sites  <- compare_frequency_dists(evidence = baseline.data, 
+                                                      samples = sample.singleton.recent, 
+                                                      calibrated_evidence = cal.baseline.data,
+                                                      calibrated_samples = cal.singleton.recent, 
+                                                      timeRange = timeRange, 
+                                                      taphCorrect = taphCorrect,
+                                                      correctForSite = correctForSite, 
+                                                      binSize = binSize)
+
+fd.singleton.random.sites  <- compare_frequency_dists(evidence = baseline.data, 
+                                                      samples = sample.singleton.random, 
+                                                      calibrated_evidence = cal.baseline.data,
+                                                      calibrated_samples = cal.singleton.random, 
+                                                      timeRange = timeRange, 
+                                                      taphCorrect = taphCorrect,
+                                                      correctForSite = correctForSite, 
+                                                      binSize = binSize)
+
+fd.bracketed.sites         <- compare_frequency_dists(evidence = baseline.data, 
+                                                      samples = sample.bracketed, 
+                                                      calibrated_evidence = cal.baseline.data,
+                                                      calibrated_samples = cal.bracketed, 
+                                                      timeRange = timeRange, 
+                                                      taphCorrect = taphCorrect,
+                                                      correctForSite = correctForSite, 
+                                                      binSize = binSize)
+```
+
+Plot the resulting frequency distributions:  
+* dashed black line is a smoothed spline of the frequency distribution for the full data set  
+* solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set   
+* ribbon is the 95% confidence interval for the sampled data set  
+```{r, echo = FALSE}
+# Uniform
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.uniform.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.uniform.sites$standardised.envelope[[1]][,3]), fill = "#66C2A5", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.uniform.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#66C2A5", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.uniform.sites$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("5 uniformly selected samples from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Singleton ancient
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.ancient.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.ancient.sites$standardised.envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#FC8D62", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient.sites$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("Only the most ancient sample from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Singleton recent
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.recent.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.recent.sites$standardised.envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.recent.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#8DA0CB", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.recent.sites$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("Only the most recent sample from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Singleton random
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.random.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.random.sites$standardised.envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.random.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#E78AC3", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.random.sites$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("One random sample from 50% of sites") +
+  scale_x_reverse() +
+  theme_bw()
+
+# Bracketed
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.bracketed.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.bracketed.sites$standardised.envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#A6D854", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed.sites$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("Only most ancient and most recent sample from 50% sites (bracketed)") +
+  scale_x_reverse() +
+  theme_bw()
+
+# All
+ggplot(NULL) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.uniform.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.uniform.sites$standardised.envelope[[1]][,3]), fill = "#66C2A5", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.ancient.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.ancient.sites$standardised.envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.recent.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.recent.sites$standardised.envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.singleton.random.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.singleton.random.sites$standardised.envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
+  geom_ribbon(aes(x = median.bin.age, ymin = fd.bracketed.sites$standardised.envelope[[1]][,1], 
+                  ymax = fd.bracketed.sites$standardised.envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
+  geom_spline(aes(x = median.bin.age, y = fd.uniform.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#66C2A5", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.ancient.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#FC8D62", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.recent.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#8DA0CB", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.singleton.random.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#E78AC3", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed.sites$standardised.envelope[[1]][,2]), lwd = 1, 
+              colour = "#A6D854", df = 40) +
+  geom_spline(aes(x = median.bin.age, y = fd.bracketed.sites$standardised.baseline[,1]), lwd = 1, 
+              colour = "black", linetype = "dashed", df = 40) +
+  labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
+  ggtitle("All sampling methods on same plot") +
+  scale_x_reverse() +
+  theme_bw()
+```

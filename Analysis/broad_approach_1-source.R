@@ -1,72 +1,13 @@
 #--------------------------------------------------------------------------------------------------------------------------------
 # RADIOCARBON DATING PROJECT
-# SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
+# AUSTARCH - BROAD APPROACH USING ONLY SITES THAT HAVE AT LEAST 5 SAMPLES AND THEN SUBSETTING
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 4 May 2021
+# Last modified 5 May 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
-#------------------------------------------------
-# I. GET EVIDENCE OF HUMAN OCCUPATION
-#------------------------------------------------
-
-## Generate some potential evidence of human occupation at some sites with no biases other than (potentially) pull of the recent
-## across the specified time range
-## @param timeRange  = the time range we are interested in sampling over
-## @param no_sites   = the number of sites we want in our data set
-## @param no_samples = the number of samples we want to take per site
-## @param pull       = pull of the recent (logical)
-get_available_evidence <- function(timeRange, no_sites, no_samples, pull)
-{
-  
-  ## Generate the real occupation period for each site
-  ## (year max, year min in cal BP) - at the moment this is just uniform distribution but really it could be more sophisticated, 
-  ## e.g. have fewer sites have earlier occupations
-  occupation_history <- matrix(data = NA, nrow = no_sites, ncol = 2)
-  for (s in 1:no_sites){
-    temp <- extraDistr::rdunif(2, min = timeRange[2], max = timeRange[1])
-    if (temp[1] < temp[2]) {
-      occupation_history[s,1] <- temp[1]
-      occupation_history[s,2] <- temp[2]
-    } else if (temp[1] > temp[2]) {
-      occupation_history[s,1] <- temp[2]
-      occupation_history[s,2] <- temp[1]
-    }
-  }
-  
-  # For each site, generate some evidence of human occupation that could be sampled from
-  evidence <- data.frame(matrix(data = NA, nrow = no_samples * no_sites, ncol = 4))
-  names(evidence) <- c("site", "sample", "age", "error")
-  for (s in 1:no_sites){
-    
-    ## if pull of the recent is set to TRUE, draw from a truncated exponential distribution
-    if (pull){
-      
-      ## note that our rate is informed by the results from the taphonomic loss dynamic occupancy model on AustArch
-      temp <- round(rtrunc(n = no_samples, spec = "exp", a = timeRange[2], b = timeRange[1], rate = 0.04/500))
-      
-    ## if pull of the recent is set to FALSE, draw from a discrete uniform distribution
-    } else {
-      temp <- rdunif(no_samples, occupation_history[s,1], occupation_history[s,2])
-    }
-    
-    for (i in 1:no_samples)
-    {
-      evidence[(s-1)*no_samples+i, 1] <- s
-      evidence[(s-1)*no_samples+i, 2] <- i
-      evidence[(s-1)*no_samples+i, 3] <- temp[i]
-    }
-  }
-  
-  ## construct normally distributed errors (mean = 100, sd = 50)
-  evidence$error <- round(rtnorm(no_sites * no_samples, mean = 100, sd = 50, a = 0, b = 500))
-  
-  ## return evidence
-  return(evidence)
-}
-
 #--------------------------------------------------------------------------------------------------------------------------------
-# II. GENERATE A SAMPLE (FROM SITE EVIDENCE)
+# I. GENERATE A SAMPLE (FROM BASELINE DATA, I.E. EVIDENCE)
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Sample the evidence at each site
@@ -81,8 +22,8 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
     
     # So that we are not always sampling from the same sites, assign each site a number from 1 to the total number of sites, 
     # in random order, then arrange the data by the site's random number
-    site.RN <- sample(1:length(unique(evidence$site)), length(unique(evidence$site)), replace = FALSE)
-    evidence$site_RN <- site.RN[rleid(evidence$site)]
+    site.RN <- sample(1:length(unique(evidence$SITE)), length(unique(evidence$SITE)), replace = FALSE)
+    evidence$site_RN <- site.RN[rleid(evidence$SITE)]
     evidence <- evidence %>% 
       arrange(site_RN)
     
@@ -90,37 +31,37 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
     samples <- evidence[FALSE,]
     
     # For each site in our evidence set...
-    for (i in 1:length(unique(evidence$site))) {
+    for (i in 1:length(unique(evidence$SITE))) {
       
       ## get the data for this site only
       just_this_site <- subset(evidence, site_RN == i)
       
       ## if we are in the first percent% of sites, take no_samples from a uniform distribution
-      if (i <= (percent_sites/100) * length(unique(evidence$site))){
-      
+      if (i <= (percent_sites/100) * length(unique(evidence$SITE))){
+        
         ## choose which samples to take from this site
         site_samples <- sample(1:nrow(just_this_site), sampling_effort, replace = FALSE) ## this will be no_samples long
-
+        
         ## this might work      
         for (p in 1:length(site_samples))
         {
           samples <- rbind(samples, just_this_site[site_samples[p],])
         }
         
-      ## if we are not in the first percent% of sites, sample exhaustively
+        ## if we are not in the first percent% of sites, sample exhaustively
       } else {
         samples <- rbind(samples, just_this_site)
       }
     }
     
     
-  # SINGLETON ANCIENT sampling takes the most ancient date only from a certain % of sites (the rest are exhaustively sampled)  
+    # SINGLETON ANCIENT sampling takes the most ancient date only from a certain % of sites (the rest are exhaustively sampled)  
   } else if (sampling_method == "singleton_ancient"){
     
     # So that we are not always sampling from the same sites, assign each site a number from 1 to the total number of sites, 
     # in random order, then arrange the data by the site's random number
-    site.RN <- sample(1:length(unique(evidence$site)), length(unique(evidence$site)), replace = FALSE)
-    evidence$site_RN <- site.RN[rleid(evidence$site)]
+    site.RN <- sample(1:length(unique(evidence$SITE)), length(unique(evidence$SITE)), replace = FALSE)
+    evidence$site_RN <- site.RN[rleid(evidence$SITE)]
     evidence <- evidence %>% 
       arrange(site_RN)
     
@@ -133,57 +74,7 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
     for (i in 1:nrow(evidence)) {
       
       ## if we are within the first percent% of sites
-      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$site))) {
-        
-        ## if we are in the last row of the data set (i.e. the last sample of the last site)
-        if (i == nrow(evidence)) {
-          samples[p,] <- evidence[i,]
-          p <- p + 1
-        
-        ## if the site in this row is NOT the same as the site in the next row (i.e. it is the last sample for the site)
-        } else if (evidence$site_RN[i] != evidence$site_RN[i+1]) { 
-          
-          ## write the line to the new data file (taking the last sample of each site)
-          samples[p,] <- evidence[i,]
-          p <- p + 1
-        }
-        
-      ## if we are not within the first percent% of sites
-      } else {
-        
-        ## write the row to the sample data frame
-        samples[p,] <- evidence[i,]
-        p <- p + 1
-      }
-    }
-  
-  
-  # SINGLETON RANDOM sampling takes one random date from a certain % of sites (the rest are exhaustively sampled)  
-  } else if (sampling_method == "singleton_random"){
-    
-    # So that we are not always sampling from the same sites, assign each site a number from 1 to the total number of sites, 
-    # in random order
-    site.RN <- sample(1:length(unique(evidence$site)), length(unique(evidence$site)), replace = FALSE)
-    evidence$site_RN <- site.RN[rleid(evidence$site)]
-    
-    # Organise data randomly (to randomise the order of the samples within each site)
-    rows <- sample(nrow(evidence))
-    evidence <- evidence[rows, ]
-    
-    # Then arrange the data frame by the site's random number
-    evidence <- evidence %>% 
-      arrange(site_RN)
-    
-    # Create a new data frame to store our samples in
-    samples <- evidence[FALSE,]
-    
-    # Set initial integer for loop
-    p <- 1
-    
-    for (i in 1:nrow(evidence)) {
-      
-      ## if we are within the first percent% of sites
-      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$site))) {
+      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$SITE))) {
         
         ## if we are in the last row of the data set (i.e. the last sample of the last site)
         if (i == nrow(evidence)) {
@@ -206,15 +97,21 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
         p <- p + 1
       }
     }
-
     
-  # SINGLETON RECENT sampling takes the most recent date only from a certain % of sites (the rest are exhaustively sampled)      
-  } else if (sampling_method == "singleton_recent"){
+    
+    # SINGLETON RANDOM sampling takes one random date from a certain % of sites (the rest are exhaustively sampled)  
+  } else if (sampling_method == "singleton_random"){
     
     # So that we are not always sampling from the same sites, assign each site a number from 1 to the total number of sites, 
-    # in random order, then arrange the data by the site's random number
-    site.RN <- sample(1:length(unique(evidence$site)), length(unique(evidence$site)), replace = FALSE)
-    evidence$site_RN <- site.RN[rleid(evidence$site)]
+    # in random order
+    site.RN <- sample(1:length(unique(evidence$SITE)), length(unique(evidence$SITE)), replace = FALSE)
+    evidence$site_RN <- site.RN[rleid(evidence$SITE)]
+    
+    # Organise data randomly (to randomise the order of the samples within each site)
+    rows <- sample(nrow(evidence))
+    evidence <- evidence[rows, ]
+    
+    # Then arrange the data frame by the site's random number
     evidence <- evidence %>% 
       arrange(site_RN)
     
@@ -227,14 +124,58 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
     for (i in 1:nrow(evidence)) {
       
       ## if we are within the first percent% of sites
-      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$site))) {
+      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$SITE))) {
+        
+        ## if we are in the last row of the data set (i.e. the last sample of the last site)
+        if (i == nrow(evidence)) {
+          samples[p,] <- evidence[i,]
+          p <- p + 1
+          
+          ## if the site in this row is NOT the same as the site in the next row (i.e. it is the last sample for the site)
+        } else if (evidence$site_RN[i] != evidence$site_RN[i+1]) { 
+          
+          ## write the line to the new data file (taking the last sample of each site)
+          samples[p,] <- evidence[i,]
+          p <- p + 1
+        }
+        
+        ## if we are not within the first percent% of sites
+      } else {
+        
+        ## write the row to the sample data frame
+        samples[p,] <- evidence[i,]
+        p <- p + 1
+      }
+    }
+    
+    
+    # SINGLETON RECENT sampling takes the most recent date only from a certain % of sites (the rest are exhaustively sampled)      
+  } else if (sampling_method == "singleton_recent"){
+    
+    # So that we are not always sampling from the same sites, assign each site a number from 1 to the total number of sites, 
+    # in random order, then arrange the data by the site's random number
+    site.RN <- sample(1:length(unique(evidence$SITE)), length(unique(evidence$SITE)), replace = FALSE)
+    evidence$site_RN <- site.RN[rleid(evidence$SITE)]
+    evidence <- evidence %>% 
+      arrange(site_RN)
+    
+    # Create a new data frame to store our samples in
+    samples <- evidence[FALSE,]
+    
+    # Set initial integer for loop
+    p <- 1
+    
+    for (i in 1:nrow(evidence)) {
+      
+      ## if we are within the first percent% of sites
+      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$SITE))) {
         
         ## if we are in the first row of the data set (i.e. the first sample of the first site)
         if (i == 1) {
           samples[p,] <- evidence[i,]
           p <- p + 1
           
-        ## if the site in this row is NOT the same as the site in the previous row (i.e. the first sample for a new site)
+          ## if the site in this row is NOT the same as the site in the previous row (i.e. the first sample for a new site)
         } else if (evidence$site_RN[i] != evidence$site_RN[i-1]) {
           
           ## write the line to the new data file (taking the last sample of each site)
@@ -242,7 +183,7 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
           p <- p + 1
         }
         
-      ## if we are not within the first percent% of sites
+        ## if we are not within the first percent% of sites
       } else {
         
         ## write the row to the sample data frame
@@ -250,15 +191,15 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
         p <- p + 1
       }
     }
-  
     
-  # BRACKETED sampling takes the most recent and most ancient dates only from a certain % of sites (the rest are exhaustively sampled)  
+    
+    # BRACKETED sampling takes the most recent and most ancient dates only from a certain % of sites (the rest are exhaustively sampled)  
   } else if (sampling_method == "bracketed") {
     
     # So that we are not always sampling from the same sites, assign each site a number from 1 to the total number of sites, 
     # in random order, then arrange the data by the site's random number
-    site.RN <- sample(1:length(unique(evidence$site)), length(unique(evidence$site)), replace = FALSE)
-    evidence$site_RN <- site.RN[rleid(evidence$site)]
+    site.RN <- sample(1:length(unique(evidence$SITE)), length(unique(evidence$SITE)), replace = FALSE)
+    evidence$site_RN <- site.RN[rleid(evidence$SITE)]
     evidence <- evidence %>% 
       arrange(site_RN)
     
@@ -271,40 +212,39 @@ get_a_sample <- function(evidence, sampling_method, sampling_effort, percent_sit
     for (i in 1:nrow(evidence)) {
       
       ## if we are within the first percent% of sites
-      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$site))) {
+      if (evidence$site_RN[i] <= (percent_sites/100) * length(unique(evidence$SITE))) {
         
         ## if we are in the very first row (the first sample of our first site) or the last row (the last sample of our last site),
         ## add it to the data frame
         if (i == 1 || i == nrow(evidence)) { 
           samples[p,] <- evidence[i,] 
           p <- p + 1
-        
-        ## if we are not in the first row of the data frame, and the site in the current row is not the same as the previous row 
-        ## (i.e. it is the first sample for a new site) OR the site in the current row is not the same as the next row (i.e. it is the last
-        ## sample for the site), add it to the data frame
+          
+          ## if we are not in the first row of the data frame, and the site in the current row is not the same as the previous row 
+          ## (i.e. it is the first sample for a new site) OR the site in the current row is not the same as the next row (i.e. it is the last
+          ## sample for the site), add it to the data frame
         } else if (evidence$site_RN[i] != evidence$site_RN[i-1] || evidence$site_RN[i] != evidence$site_RN[i+1]) {
-        
+          
           samples[p,] <- evidence[i,]
           p <- p + 1
         }
         
-      ## if we are not within the first percent% of sites
+        ## if we are not within the first percent% of sites
       } else {
         ## write the row to the sample data frame
         samples[p,] <- evidence[i,]
         p <- p + 1
       }
     }
-  
-  
+    
+    
   }
   
   return(samples)
 }
 
-
 #--------------------------------------------------------------------------------------------------------------------------------
-# III. GENERATE REPEATED SAMPLES (FROM SITE EVIDENCE)
+# II. GENERATE REPEATED SAMPLES (FROM SITE EVIDENCE)
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Sample the evidence at each site nsim times (returns a list of data frames)
@@ -329,7 +269,7 @@ get_samples <- function(evidence, sampling_method, sampling_effort, percent_site
 
 
 #--------------------------------------------------------------------------------------------------------------------------------
-# IV. CALIBRATE SAMPLE DATA
+# III. CALIBRATE SAMPLE DATA
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Calibrate the sample data generated using get_samples (returns a list of data frames)
@@ -344,12 +284,16 @@ calibrate_samples <- function(samples, normalised, ncores){
   # For each sample:
   for (s in 1:length(samples)){
     
-    ## Create vectors of the ages and their respective errors and ids in the data set
-    ages   <- samples[[s]]$age
-    errors <- samples[[s]]$error
+    ## Subset data for terrestrial vs marine (for calibration)
+    sample.T <- samples[[s]] %>% subset(Data.pertinent.for.time.series.analysis.or.calibration == "Terrestrial")
+    sample.M <- samples[[s]] %>% subset(Data.pertinent.for.time.series.analysis.or.calibration == "Marine")
     
-    ## Calibrate these ages using the SHCal20 calibration curves (can calibrate dates up to 55,000 years old)
-    calibrated_data[[s]] <- rcarbon::calibrate(x = ages, errors = errors, calCurves = 'shcal20', normalised = normalised, ncores = ncores)
+    ## Calibrate these ages using the SHCal20 and MARINE20 calibration curves (can calibrate dates up to 55,000 years old)
+    calibrate.T <- rcarbon::calibrate(x = sample.T$AGE_NORM, errors = sample.T$ERROR, ids = sample.T$ADSID, calCurves = 'shcal20', normalised = normalised, ncores = ncores)
+    calibrate.M <- rcarbon::calibrate(x = sample.M$AGE_NORM, errors = sample.M$ERROR, ids = sample.M$ADSID, calCurves = 'marine20', normalised = normalised, ncores = ncores)
+    
+    ## Combine the two calibrated data sets
+    calibrated_data[[s]] <- combine(calibrate.T, calibrate.M)
   }
   
   return(calibrated_data)
@@ -357,7 +301,7 @@ calibrate_samples <- function(samples, normalised, ncores){
 
 
 #--------------------------------------------------------------------------------------------------------------------------------
-# V. CREATE MULTIPLE SPDS WITH DIFFERENT DATA SETS
+# IV. CREATE MULTIPLE SPDS WITH DIFFERENT DATA SETS
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Create a summed probability distribution for each sample
@@ -390,7 +334,7 @@ generate_multiple_spds <- function(calibrated_samples, timeRange, runm, normalis
 }
 
 #--------------------------------------------------------------------------------------------------------------------------------
-# VI. COMPARE SAMPLE SPDS TO BASELINE SPD
+# V. COMPARE SAMPLE SPDS TO BASELINE SPD
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Generate and compare the mean SPD to the baseline SPD
@@ -455,7 +399,7 @@ compare_spds <- function(calibrated_evidence, calibrated_samples, timeRange, run
     
     ## Compute expected statistic
     expected.statistic <- abs(apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a<0); return(sum(a[i])) }, y = tmp.ci[,1])) +
-                              apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a>0); return(sum(a[i])) }, y = tmp.ci[,2])
+      apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a>0); return(sum(a[i])) }, y = tmp.ci[,2])
     
     ## Compute observed statistic
     lower    <- tmp.baseline - tmp.ci[,1]
@@ -468,7 +412,7 @@ compare_spds <- function(calibrated_evidence, calibrated_samples, timeRange, run
     pValueList[[x]] <- 1
     if (observed.statistic > 0) {    
       pValueList[[x]] <- c(length(expected.statistic[expected.statistic > observed.statistic]) + 1)/c(nsim + 1)    
-      }
+    }
   } 
   
   # RETURN OUTPUT
@@ -478,7 +422,7 @@ compare_spds <- function(calibrated_evidence, calibrated_samples, timeRange, run
 
 
 #--------------------------------------------------------------------------------------------------------------------------------
-# VII. GENERATE MULTIPLE FREQUENCY DISTRIBUTIONS USING DIFFERENT DATA SETS
+# VI. GENERATE MULTIPLE FREQUENCY DISTRIBUTIONS USING DIFFERENT DATA SETS
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Create a frequency distribution of dates within bins for each sample
@@ -504,31 +448,31 @@ generate_multiple_frequency_dists <- function(data, calibrated_data, timeRange, 
     data[[s]]$bin <- cut(summary$MedianBP, 
                          breaks = c(timeRange[2], seq(timeRange[2]+binSize, timeRange[1], by = binSize)), 
                          labels = 1:((timeRange[1] - timeRange[2])/binSize)
-                         )
+    )
     
     ## If we only want to count one occurance of a particular site per bin
     if (correctForSite){
-      one_site_per_bin <- unique(data[[s]][c("site", "bin")])
+      one_site_per_bin <- unique(data[[s]][c("SITE", "bin")])
       count.bins <- as.data.frame(table(one_site_per_bin$bin))$Freq
-    
-    ## Else if we want to count all radiocarbon dates
+      
+      ## Else if we want to count all radiocarbon dates
     } else {
       
-#      ## Apply taphonomic correction to open sites
-#      if (taphCorrect){
-#        open.sites                     <- samples %>% subset(Open.Closed == "Open")
-#        count.bins.open                <- as.data.frame(table(open.sites$bin))
-#        count.bins.open$corrected.freq <- count.bins.open$Freq/(2.107 * 10^7*(median.bin.age + 2754)^(-1.526))
-#        closed.sites                   <- samples %>% subset(Open.Closed == "Closed")
-#        count.bins.closed              <- as.data.frame(as.data.frame(table(closed.sites$bin)))
-    
-#        ## Combine taphonomically corrected open site counts to non-corrected closed site counts to get the corrected frequency distribution in bins
-#        count.bins                     <- count.bins.open$corrected.freq + count.bins.closed$Freq
-#      } else {
-    
-        ## Get uncorrected frequency distribution in bins
-        count.bins                     <- as.data.frame(table(data[[s]]$bin))$Freq
-#      }
+      ## Apply taphonomic correction to open sites
+      if (taphCorrect){
+          open.sites                     <- data[[s]] %>% subset(Open.or.Closed.Site == "Open")
+          count.bins.open                <- as.data.frame(table(open.sites$bin))
+          count.bins.open$corrected.freq <- count.bins.open$Freq/(2.107 * 10^7*(median.bin.age + 2754)^(-1.526))
+          closed.sites                   <- data[[s]] %>% subset(Open.or.Closed.Site == "Closed")
+          count.bins.closed              <- as.data.frame(as.data.frame(table(closed.sites$bin)))
+      
+          ## Combine taphonomically corrected open site counts to non-corrected closed site counts to get the corrected frequency distribution in bins
+          count.bins                     <- count.bins.open$corrected.freq + count.bins.closed$Freq
+      } else {
+      
+      ## Get uncorrected frequency distribution in bins
+      count.bins                     <- as.data.frame(table(data[[s]]$bin))$Freq
+      }
     }
     
     ## Save to frequency matrix
@@ -542,7 +486,7 @@ generate_multiple_frequency_dists <- function(data, calibrated_data, timeRange, 
 
 
 #--------------------------------------------------------------------------------------------------------------------------------
-# VIII. COMPARE SAMPLE FREQUENCY DISTRIBUTIONS TO BASELINE FREQUENCY DISTRIBUTION
+# VII. COMPARE SAMPLE FREQUENCY DISTRIBUTIONS TO BASELINE FREQUENCY DISTRIBUTION
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Generate and compare the mean sample frequency distributions to the baseline frequency distribution
@@ -569,7 +513,7 @@ compare_frequency_dists <- function(evidence, samples, calibrated_evidence, cali
   # Get frequency distributions for sub-samples
   sample_freq <- generate_multiple_frequency_dists(data = samples, calibrated_data = calibrated_samples, timeRange = timeRange,
                                                    taphCorrect = taphCorrect, correctForSite = correctForSite, binSize = binSize)
-
+  
   # Combine subsampled frequency distributions into a list
   sample.freq.dists <- list(sample_freq)
   
@@ -592,14 +536,14 @@ compare_frequency_dists <- function(evidence, samples, calibrated_evidence, cali
   sample.CI.list <- vector("list",length=length(sample.freq.dists))
   for (x in 1:length(sample.freq.dists)) {
     sample.CI.list[[x]] <- cbind(apply(sample.freq.dists[[x]], 1, quantile, prob = c(0.025)),
-                                     apply(sample.freq.dists[[x]], 1, quantile, prob = c(0.500)),
-                                     apply(sample.freq.dists[[x]], 1, quantile, prob = c(0.975)))
+                                 apply(sample.freq.dists[[x]], 1, quantile, prob = c(0.500)),
+                                 apply(sample.freq.dists[[x]], 1, quantile, prob = c(0.975)))
   }
   standardised.sample.CI.list <- vector("list",length=length(standardised.sample.freq.dists))
   for (x in 1:length(standardised.sample.freq.dists)) {
     standardised.sample.CI.list[[x]] <- cbind(apply(standardised.sample.freq.dists[[x]], 1, quantile, prob = c(0.025)),
-                                                  apply(standardised.sample.freq.dists[[x]], 1, quantile, prob = c(0.500)),
-                                                  apply(standardised.sample.freq.dists[[x]], 1, quantile, prob = c(0.975)))
+                                              apply(standardised.sample.freq.dists[[x]], 1, quantile, prob = c(0.500)),
+                                              apply(standardised.sample.freq.dists[[x]], 1, quantile, prob = c(0.975)))
   }
   
   # RETURN OUTPUT
