@@ -40,7 +40,7 @@ AustArch$SITE         <- as.factor(AustArch$SITE)
 Get rid of:  
 * "unusable" samples 
 * samples missing an age and/or error estimate  
-* samples generated using any method that is not radiocarbon dating (this should be anything < 400 years BP for marine samples, and < 200 years for terrestrial samples, but for whatever reason the dplyr functions are behaving oddly since the update to R v.4 and it isn't working. So I've set to just < 400 for now)  
+* samples generated using any method that is not radiocarbon dating (this should be anything < 400 years BP for marine samples, and < 200 years for terrestrial samples)  
 * samples that fall outside of the calibration age range
 * samples that fall outside of the age range we are interested in (in this case, we only want Holocene dates)
 ```{r, message = FALSE, results = 'hide'}
@@ -49,7 +49,8 @@ data <- AustArch %>%
   dplyr::filter(AGE_NORM != "NA") %>%
   dplyr::filter(ERROR != "NA") %>%
   dplyr::filter(METHOD == "Radiocarbon") %>%
-  dplyr::filter(AGE_NORM >= 400) %>%
+  dplyr::filter((AGE_NORM >= 400 & Data.pertinent.for.time.series.analysis.or.calibration == "Marine") 
+                | (AGE_NORM >= 200 & Data.pertinent.for.time.series.analysis.or.calibration == "Terrestrial")) %>%
   subset(AGE_NORM <= 12000)
 ```
 
