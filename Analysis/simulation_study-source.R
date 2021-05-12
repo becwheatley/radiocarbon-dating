@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 4 May 2021
+# Last modified 12 May 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------
@@ -15,23 +15,42 @@
 ## @param timeRange  = the time range we are interested in sampling over
 ## @param no_sites   = the number of sites we want in our data set
 ## @param no_samples = the number of samples we want to take per site
-## @param pull       = pull of the recent (logical)
-get_available_evidence <- function(timeRange, no_sites, no_samples, pull)
+## @param pop_trend  = the underlying trend in the population we want to mimic
+## @param taph_loss  = taphonomic loss (logical)
+get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend, taph_loss)
 {
   
-  ## Generate the real occupation period for each site
-  ## (year max, year min in cal BP) - at the moment this is just uniform distribution but really it could be more sophisticated, 
-  ## e.g. have fewer sites have earlier occupations
+  ## Generate the real occupation period for each site (year max, year min in cal BP) using:
+  ## 1. A uniform distribution (implies a stable population over time)
+  ## 2. An exponential distribution (implies exponential population growth over time)
+  ## 3. A triangular distribution (with values below the mode discarded - implies steady population growth over time)
+  ## 4. Something to simulate a population decrease
   occupation_history <- matrix(data = NA, nrow = no_sites, ncol = 2)
   for (s in 1:no_sites){
-    temp <- extraDistr::rdunif(2, min = timeRange[2], max = timeRange[1])
-    if (temp[1] < temp[2]) {
-      occupation_history[s,1] <- temp[1]
-      occupation_history[s,2] <- temp[2]
-    } else if (temp[1] > temp[2]) {
-      occupation_history[s,1] <- temp[2]
-      occupation_history[s,2] <- temp[1]
+  
+    if (pop_trend == "no change"){
+      temp <- extraDistr::rdunif(no_sites, min = timeRange[2]-3000, max = timeRange[1]+3000)
+      
+    } else if (pop_trend == "steady growth"){
+      samples <- round(EnvStats::rtri(100, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = timeRange[2]))
+      samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-3000){return(x)}}))
+      temp <- samples2[1:2]
+    
+    } else if (pop_trend == "exponential growth"){
+      temp <- round(truncdist::rtrunc(n = 2, spec = "exp", a = timeRange[2]-3000, b = timeRange[1]+3000, rate = 0.3/500))
+    
+    } else if (pop_trend == "growth then decline"){
+       temp <- round(EnvStats::rtri(2, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = (timeRange[1] - timeRange[2])/2))
     }
+    
+    occupation_history[s,1] = min(temp)
+    occupation_history[s,2] = max(temp)
+    
+    ## if the minimum and maximum values fall outside of our timeRange:
+    if (occupation_history[s,1] < timeRange[2]) { occupation_history[s, 1] = timeRange[2] }
+    if (occupation_history[s,2] > timeRange[1]) { occupation_history[s, 2] = timeRange[1] }
+    if (occupation_history[s,2] < timeRange[2]) { occupation_history[s, 2] = timeRange[1] }
+    if (occupation_history[s,1] > timeRange[1]) { occupation_history[s, 1] = timeRange[2] }
   }
   
   # For each site, generate some evidence of human occupation that could be sampled from
@@ -39,15 +58,15 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pull)
   names(evidence) <- c("site", "sample", "age", "error")
   for (s in 1:no_sites){
     
-    ## if pull of the recent is set to TRUE, draw from a truncated exponential distribution
-    if (pull){
+    ## if taphonomic loss is set to TRUE, draw from a truncated exponential distribution
+    if (taph_loss){
       
       ## note that our rate is informed by the results from the taphonomic loss dynamic occupancy model on AustArch
-      temp <- round(rtrunc(n = no_samples, spec = "exp", a = timeRange[2], b = timeRange[1], rate = 0.04/500))
+      temp <- round(truncdist::rtrunc(n = no_samples, spec = "exp", a = occupation_history[s,1], b = occupation_history[s,2], rate = 0.04/500))
       
     ## if pull of the recent is set to FALSE, draw from a discrete uniform distribution
     } else {
-      temp <- rdunif(no_samples, occupation_history[s,1], occupation_history[s,2])
+      temp <- extraDistr::rdunif(no_samples, occupation_history[s,1], occupation_history[s,2])
     }
     
     for (i in 1:no_samples)
