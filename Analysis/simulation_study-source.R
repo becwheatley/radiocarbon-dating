@@ -54,8 +54,8 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend, t
   }
   
   # For each site, generate some evidence of human occupation that could be sampled from
-  evidence <- data.frame(matrix(data = NA, nrow = no_samples * no_sites, ncol = 4))
-  names(evidence) <- c("site", "sample", "age", "error")
+  evidence <- data.frame(matrix(data = NA, nrow = no_samples * no_sites, ncol = 5))
+  names(evidence) <- c("site", "sample", "age", "error", "Open.Closed")
   for (s in 1:no_sites){
     
     ## if taphonomic loss is set to TRUE, draw from a truncated exponential distribution
@@ -79,6 +79,9 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend, t
   
   ## construct normally distributed errors (mean = 100, sd = 50)
   evidence$error <- round(rtnorm(no_sites * no_samples, mean = 100, sd = 50, a = 0, b = 500))
+  
+  ## set all sites to open
+  evidence$Open.Closed <- "Open"
   
   ## return evidence
   return(evidence)
@@ -533,21 +536,21 @@ generate_multiple_frequency_dists <- function(data, calibrated_data, timeRange, 
     ## Else if we want to count all radiocarbon dates
     } else {
       
-#      ## Apply taphonomic correction to open sites
-#      if (taphCorrect){
-#        open.sites                     <- samples %>% subset(Open.Closed == "Open")
-#        count.bins.open                <- as.data.frame(table(open.sites$bin))
-#        count.bins.open$corrected.freq <- count.bins.open$Freq/(2.107 * 10^7*(median.bin.age + 2754)^(-1.526))
-#        closed.sites                   <- samples %>% subset(Open.Closed == "Closed")
-#        count.bins.closed              <- as.data.frame(as.data.frame(table(closed.sites$bin)))
+      ## Apply taphonomic correction to open sites
+      if (taphCorrect){
+        open.sites                     <- data[[s]] %>% subset(Open.Closed == "Open")
+        count.bins.open                <- as.data.frame(table(open.sites$bin))
+        count.bins.open$corrected.freq <- count.bins.open$Freq/(2.107 * 10^7*(median.bin.age + 2754)^(-1.526))
+        closed.sites                   <- data[[s]] %>% subset(Open.Closed == "Closed")
+        count.bins.closed              <- as.data.frame(as.data.frame(table(closed.sites$bin)))
     
-#        ## Combine taphonomically corrected open site counts to non-corrected closed site counts to get the corrected frequency distribution in bins
-#        count.bins                     <- count.bins.open$corrected.freq + count.bins.closed$Freq
-#      } else {
+        ## Combine taphonomically corrected open site counts to non-corrected closed site counts to get the corrected frequency distribution in bins
+        count.bins                     <- count.bins.open$corrected.freq + count.bins.closed$Freq
+     } else {
     
-        ## Get uncorrected frequency distribution in bins
-        count.bins                     <- as.data.frame(table(data[[s]]$bin))$Freq
-#      }
+      ## Get uncorrected frequency distribution in bins
+      count.bins                     <- as.data.frame(table(data[[s]]$bin))$Freq
+      }
     }
     
     ## Save to frequency matrix
