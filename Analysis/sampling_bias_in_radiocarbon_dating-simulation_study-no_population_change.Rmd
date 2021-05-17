@@ -1,5 +1,5 @@
 ---
-title: "Sampling bias in radiocarbon dating project: simulation study"
+title: "Sampling bias in radiocarbon dating project: simulation study (no population change)"
 author: "Rebecca Wheatley"
 date: "13 May 2021"
 output: html_document
@@ -20,6 +20,7 @@ library(EnvStats)
 library(truncdist)
 library(data.table)
 library(tidyverse)
+library(ggpubr)
 ```
 
 Specify path for source functions:
@@ -32,14 +33,15 @@ source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation
 Data for our analysis is simulated in two steps.  
 
 1. Each site in our simulated data set (`no_sites`) has an occupation range: the minimum and maximum ages the site was occupied (in years BP). How these occupation ranges are generated depends on the underlying population trend (`pop_trend`) we aim to simulate.  
-+ "no change" simulates a steady population over time (values drawn from a uniform distribution bounded within the specified `timeRange`)  
-+ "steady growth" simulates linear population growth (values drawn from a triangular distribution with minimum = 0, maximum = `timeRange[1]`, mode = 0.1, and then all values below `timeRange[2]` discarded)  
-+ "exponential growth" simulates exponential population growth (values drawn from an exponential distribution)  
-+ "growth then decline" simulates an intial steady population growth followed by a population decrease (values drawn from a triangular distribution with minimum = `timeRange[2]`, maximum = `timeRange[1]`, and mode = (`timeRange[1]` - `timeRange[2]`)/2)   
++ "no change" simulates a steady population over time (values drawn from a uniform distribution).  
++ "steady growth" simulates linear population growth (values drawn from an approximately linear distribution).  
++ "exponential growth" simulates exponential population growth (values drawn from an exponential distribution).  
++ "growth then decline" simulates an intial steady population growth followed by a population decrease (values drawn from a triangular distribution with the mode at the midpoint between the upper and lower `timeRange` bounds).   
+(see `simulation_study-source.R` for specific implementation of each case)
 
 2. Within this occupation range, each site has some evidence (`no_samples`) that our imaginary archaeologist can sample from. These samples are generated in one of two ways depending on whether we want to simulate taphonomic loss or not:  
-+ `taph_loss` = FALSE; we do not wish to simulate taphonomic loss, so samples are pulled from a uniform distribution bounded by the site's occupation range  
-+ `taph_loss` = TRUE; we wish to simulate taphonomic loss, so samples are pulled from an exponential distribution with a rate of 0.04/500 (informed by our other study using dynamic occupancy modelling to tease apart population growth and taphonomic loss - more on this later) and bounded by the site's occupation range  
++ `taph_loss` = FALSE; we do not wish to simulate taphonomic loss, so samples are pulled from a uniform distribution bounded by the site's occupation range.  
++ `taph_loss` = TRUE; we wish to simulate taphonomic loss, so samples are pulled from an exponential distribution with a rate of 0.04/500 (informed by our other study using dynamic occupancy modelling to tease apart population growth and taphonomic loss - more on this later) and bounded by the site's occupation range.  
 These samples then form our full data set.
 
 Set the parameters we want for our simulated data:
@@ -72,7 +74,7 @@ There are, therefore, two new parameters for subsampling the baseline data: `per
 percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
 sampling_effort = 5    ## the number of samples we want to take using the uniform sampling method
-nsim            = 20   ## the number of replicates to make when sampling
+nsim            = 2   ## the number of replicates to make when sampling
 ```
 
 Using these parameters, generate nsim replicates of the data using the sampling method specified:
@@ -183,64 +185,65 @@ Plot the resulting summed probability distributions:
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE, message = TRUE}
 # Uniform
-ggplot(NULL) +
-  geom_ribbon(aes(x = spd.uniform$baseline$calBP, ymin = spd.uniform$envelope[[1]][,1], 
+u <- ggplot(NULL) +
+     geom_ribbon(aes(x = spd.uniform$baseline$calBP, ymin = spd.uniform$envelope[[1]][,1], 
                   ymax = spd.uniform$envelope[[1]][,3]), fill = "#66C2A5", alpha = 0.3) +
-  geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$envelope[[1]][,2]), lwd = 1, color = "#66C2A5") +
-  geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$baseline$PrDens), lwd = 1, colour = "black", 
-            linetype = "dashed") +
-  labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("5 uniformly selected samples from 50% sites") +
-  scale_x_reverse(limits=timeRange) +
-  theme_bw()
+     geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$envelope[[1]][,2]), lwd = 1, color = "#66C2A5") +
+     geom_line(aes(x = spd.uniform$baseline$calBP, y = spd.uniform$baseline$PrDens), lwd = 1, colour = "black", 
+               linetype = "dashed") +
+     labs(x = "Years cal BP", y = "Probability") +
+     scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
+     theme_bw()
 
 # Singleton ancient
-ggplot(NULL) +
-  geom_ribbon(aes(x = spd.singleton.ancient$baseline$calBP, ymin = spd.singleton.ancient$envelope[[1]][,1], 
-                  ymax = spd.singleton.ancient$envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
-  geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$envelope[[1]][,2]), lwd = 1, color = "#FC8D62") +
-  geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$baseline$PrDens), lwd = 1, colour = "black", 
-            linetype = "dashed") +
-  labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("Only the most ancient sample from 50% sites") +
-  scale_x_reverse(limits=timeRange) +
-  theme_bw()
+san <- ggplot(NULL) +
+       geom_ribbon(aes(x = spd.singleton.ancient$baseline$calBP, ymin = spd.singleton.ancient$envelope[[1]][,1], 
+                       ymax = spd.singleton.ancient$envelope[[1]][,3]), fill = "#FC8D62", alpha = 0.3) +
+       geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$envelope[[1]][,2]), lwd = 1, 
+                 color = "#FC8D62") +
+       geom_line(aes(x = spd.singleton.ancient$baseline$calBP, y = spd.singleton.ancient$baseline$PrDens), lwd = 1, colour = "black", 
+                 linetype = "dashed") +
+       labs(x = "Years cal BP", y = "Probability") +
+       scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
+       theme_bw()
 
 # Singleton recent
-ggplot(NULL) +
-  geom_ribbon(aes(x = spd.singleton.recent$baseline$calBP, ymin = spd.singleton.recent$envelope[[1]][,1], 
-                  ymax = spd.singleton.recent$envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
-  geom_line(aes(x = spd.singleton.recent$baseline$calBP, y = spd.singleton.recent$envelope[[1]][,2]), lwd = 1, color = "#8DA0CB") +
-  geom_line(aes(x = spd.singleton.recent$baseline$calBP, y = spd.singleton.recent$baseline$PrDens), lwd = 1, colour = "black", 
-            linetype = "dashed") +
-  labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("Only the most recent sample from 50% sites") +
-  scale_x_reverse(limits=timeRange) +
-  theme_bw()
+sre <- ggplot(NULL) +
+       geom_ribbon(aes(x = spd.singleton.recent$baseline$calBP, ymin = spd.singleton.recent$envelope[[1]][,1], 
+                       ymax = spd.singleton.recent$envelope[[1]][,3]), fill = "#8DA0CB", alpha = 0.3) +
+       geom_line(aes(x = spd.singleton.recent$baseline$calBP, y = spd.singleton.recent$envelope[[1]][,2]), lwd = 1, color = "#8DA0CB") +
+       geom_line(aes(x = spd.singleton.recent$baseline$calBP, y = spd.singleton.recent$baseline$PrDens), lwd = 1, colour = "black", 
+                 linetype = "dashed") +
+       labs(x = "Years cal BP", y = "Probability") +
+       scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
+       theme_bw()
 
 # Singleton random
-ggplot(NULL) +
-  geom_ribbon(aes(x = spd.singleton.random$baseline$calBP, ymin = spd.singleton.random$envelope[[1]][,1], 
-                  ymax = spd.singleton.random$envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
-  geom_line(aes(x = spd.singleton.random$baseline$calBP, y = spd.singleton.random$envelope[[1]][,2]), lwd = 1, color = "#E78AC3") +
-  geom_line(aes(x = spd.singleton.random$baseline$calBP, y = spd.singleton.random$baseline$PrDens), lwd = 1, colour = "black", 
-            linetype = "dashed") +
-  labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("One random sample from 50% sites") +
-  scale_x_reverse(limits=timeRange) +
-  theme_bw()
+sra <- ggplot(NULL) +
+       geom_ribbon(aes(x = spd.singleton.random$baseline$calBP, ymin = spd.singleton.random$envelope[[1]][,1], 
+                       ymax = spd.singleton.random$envelope[[1]][,3]), fill = "#E78AC3", alpha = 0.3) +
+       geom_line(aes(x = spd.singleton.random$baseline$calBP, y = spd.singleton.random$envelope[[1]][,2]), lwd = 1, color = "#E78AC3") +
+       geom_line(aes(x = spd.singleton.random$baseline$calBP, y = spd.singleton.random$baseline$PrDens), lwd = 1, colour = "black", 
+                 linetype = "dashed") +
+       labs(x = "Years cal BP", y = "Probability") +
+       scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
+       theme_bw()
 
 # Bracketed
-ggplot(NULL) +
-  geom_ribbon(aes(x = spd.bracketed$baseline$calBP, ymin = spd.bracketed$envelope[[1]][,1], 
-                  ymax = spd.bracketed$envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
-  geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$envelope[[1]][,2]), lwd = 1, color = "#A6D854") +
-  geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$baseline$PrDens), lwd = 1, colour = "black", 
-            linetype = "dashed") +
-  labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("Only most ancient and most recent sample from 50% sites (bracketed)") +
-  scale_x_reverse(limits=timeRange) +
-  theme_bw()
+b <- ggplot(NULL) +
+     geom_ribbon(aes(x = spd.bracketed$baseline$calBP, ymin = spd.bracketed$envelope[[1]][,1], 
+                     ymax = spd.bracketed$envelope[[1]][,3]), fill = "#A6D854", alpha = 0.3) +
+     geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$envelope[[1]][,2]), lwd = 1, color = "#A6D854") +
+     geom_line(aes(x = spd.bracketed$baseline$calBP, y = spd.bracketed$baseline$PrDens), lwd = 1, colour = "black",   
+               linetype = "dashed") +
+     labs(x = "Years cal BP", y = "Probability") +
+     scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
+     theme_bw()
+
+# Multi-panelled plot
+ggarrange(u, sre, san, sra, b,
+          labels = c("Uniform", "Singleton recent", "Singleton ancient", "Singelton random", "Bracketed"),
+          ncol = 2, nrow = 3)
 
 
 # Combined
@@ -264,7 +267,7 @@ ggplot(NULL) +
             linetype = "dashed") +
   labs(x = "Years cal BP", y = "Probability") +
   ggtitle("All subsets combined") +
-  scale_x_reverse(limits=timeRange) +
+  scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```
 
@@ -272,9 +275,12 @@ ggplot(NULL) +
 
 Calculate the frequency distribution for each sample, and then compare the mean frequency distribution over the samples to the baseline frequency distribution:
 ```{r}
-taphCorrect = FALSE    ## whether to taphonomically correct the open sites - not currently as haven't specified whether sites are open
+taphCorrect = TRUE    ## whether to taphonomically correct the open sites - not currently as haven't specified whether sites are open
 correctForSite = FALSE ## per bin: number of sites with at least one date in them, or number of dates within the bin total
 binSize = 100          ## the size of the bins to use (years) - use a bin size that actually fits the timeRange specified
+
+# Get median bin age for x axis (same for all plots)
+median.bin.age   <- seq(timeRange[2] + binSize/2, timeRange[1] - binSize/2, by = binSize)
 
 fd.uniform           <- compare_frequency_dists(evidence = baseline.data, 
                                                 samples = sample.uniform, 
@@ -614,7 +620,7 @@ There are, therefore, two new parameters for subsampling the baseline data: `per
 percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
 sampling_effort = 5    ## the number of samples we want to take using the uniform sampling method
-nsim            = 20   ## the number of replicates to make when sampling
+nsim            = 2   ## the number of replicates to make when sampling
 ```
 
 Using these parameters, generate nsim replicates of the data using the sampling method specified and calibrate:

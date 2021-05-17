@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 12 May 2021
+# Last modified 17 May 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------
@@ -16,18 +16,22 @@
 ## @param no_sites   = the number of sites we want in our data set
 ## @param no_samples = the number of samples we want to take per site
 ## @param pop_trend  = the underlying trend in the population we want to mimic
-## @param taph_loss  = taphonomic loss (logical)
-get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend, taph_loss)
+get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend)
 {
-  
   ## Generate the real occupation period for each site (year max, year min in cal BP) using:
   ## 1. A uniform distribution (implies a stable population over time)
   ## 2. An exponential distribution (implies exponential population growth over time)
   ## 3. A triangular distribution (with values below the mode discarded - implies steady population growth over time)
-  ## 4. Something to simulate a population decrease
+  ## 4. A triangular distribution (implies population growth then decline)
   occupation_history <- matrix(data = NA, nrow = no_sites, ncol = 2)
+  evidence.taphloss  <- data.frame(matrix(data = NA, nrow = no_samples * no_sites, ncol = 5))
+  evidence.noloss    <- evidence.taphloss
+  names(evidence.taphloss) <- names(evidence.noloss) <- c("site", "sample", "age", "error", "Open.Closed")
+  
+  # For each site:
   for (s in 1:no_sites){
   
+    # Establish the occupation range:
     if (pop_trend == "no change"){
       temp <- extraDistr::rdunif(no_sites, min = timeRange[2]-3000, max = timeRange[1]+3000)
       
@@ -51,40 +55,42 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend, t
     if (occupation_history[s,2] > timeRange[1]) { occupation_history[s, 2] = timeRange[1] }
     if (occupation_history[s,2] < timeRange[2]) { occupation_history[s, 2] = timeRange[1] }
     if (occupation_history[s,1] > timeRange[1]) { occupation_history[s, 1] = timeRange[2] }
-  }
-  
-  # For each site, generate some evidence of human occupation that could be sampled from
-  evidence <- data.frame(matrix(data = NA, nrow = no_samples * no_sites, ncol = 5))
-  names(evidence) <- c("site", "sample", "age", "error", "Open.Closed")
-  for (s in 1:no_sites){
     
-    ## if taphonomic loss is set to TRUE, draw from a truncated exponential distribution
-    if (taph_loss){
-      
-      ## note that our rate is informed by the results from the taphonomic loss dynamic occupancy model on AustArch
-      temp <- round(truncdist::rtrunc(n = no_samples, spec = "exp", a = occupation_history[s,1], b = occupation_history[s,2], rate = 0.04/500))
-      
-    ## if pull of the recent is set to FALSE, draw from a discrete uniform distribution
-    } else {
-      temp <- extraDistr::rdunif(no_samples, occupation_history[s,1], occupation_history[s,2])
-    }
+    # Generate some evidence that our hypothetical archaeologist can sample from:
+    
+    ## draw an excess of samples from the occupation history following a discrete uniform distribution
+    temp <- extraDistr::rdunif(no_samples*5, occupation_history[s,1], occupation_history[s,2])
+    
+    ## if simulating taphonomic loss, sample from the temp data using weights from an exponential distribution
+    ### note that our rate is informed by the results from the taphonomic loss dynamic occupancy model on AustArch
+    weights.taphloss <- dexp(temp, rate = 0.04/500)
+    data.taphloss    <- sample(x = temp, size = no_samples, replace = FALSE, prob = weights.taphloss)
+    
+    ## if not simulating taphonomic loss, sample from the temp data uniformly
+    weights.noloss <- dunif(temp, min = timeRange[2], max = timeRange[1])
+    data.noloss    <- sample(x = temp, size = no_samples, replace = FALSE, prob = weights.noloss)
     
     for (i in 1:no_samples)
     {
-      evidence[(s-1)*no_samples+i, 1] <- s
-      evidence[(s-1)*no_samples+i, 2] <- i
-      evidence[(s-1)*no_samples+i, 3] <- temp[i]
+      evidence.noloss[(s-1)*no_samples+i, 1] <- s
+      evidence.noloss[(s-1)*no_samples+i, 2] <- i
+      evidence.noloss[(s-1)*no_samples+i, 3] <- data.noloss[i]
+      
+      evidence.taphloss[(s-1)*no_samples+i, 1] <- s
+      evidence.taphloss[(s-1)*no_samples+i, 2] <- i
+      evidence.taphloss[(s-1)*no_samples+i, 3] <- data.taphloss[i]
     }
   }
   
   ## construct normally distributed errors (mean = 100, sd = 50)
-  evidence$error <- round(rtnorm(no_sites * no_samples, mean = 100, sd = 50, a = 0, b = 500))
+  evidence.noloss$error   <- round(rtnorm(no_sites * no_samples, mean = 100, sd = 50, a = 0, b = 500))
+  evidence.taphloss$error <- round(rtnorm(no_sites * no_samples, mean = 100, sd = 50, a = 0, b = 500))
   
   ## set all sites to open
-  evidence$Open.Closed <- "Open"
+  evidence.noloss$Open.Closed <- evidence.taphloss$Open.Closed <- "Open"
   
   ## return evidence
-  return(evidence)
+  return(list(evidence.noloss, evidence.taphloss))
 }
 
 #--------------------------------------------------------------------------------------------------------------------------------
@@ -412,26 +418,15 @@ generate_multiple_spds <- function(calibrated_samples, timeRange, runm, normalis
 }
 
 #--------------------------------------------------------------------------------------------------------------------------------
-# VI. COMPARE SAMPLE SPDS TO BASELINE SPD
+# VI. COMPARE SAMPLE SPDS
 #--------------------------------------------------------------------------------------------------------------------------------
 
-## Generate and compare the mean SPD to the baseline SPD
-## @param calibrated_evidence = our full calibrated simulated data set
+## Generate and compare the mean SPD
 ## @param calibrated_samples = our calibrated sample data
 ## @param timeRange          = the time range we are interested in sampling over
 ## @param runm               = the running mean to be used when creating the SPD
 ## @param normalised         = logical for normalising the calibration curves and SPD (TRUE or FALSE)
-compare_spds <- function(calibrated_evidence, calibrated_samples, timeRange, runm, normalised){
-  
-  #-----------------------
-  # Get baseline SPD
-  #-----------------------
-  
-  # Create an SPD of the calibrated data
-  tmpSPD <- spd(calibrated_evidence, timeRange, runm = runm, spdnormalised = normalised)
-  
-  # Save to SPD vector
-  baseline.SPD <- tmpSPD[[2]]
+compare_spds <- function(calibrated_samples, timeRange, runm, normalised){
   
   #-----------------------
   # Get subsampled SPDs
@@ -454,47 +449,8 @@ compare_spds <- function(calibrated_evidence, calibrated_samples, timeRange, run
                                    apply(subsampled.spds[[x]], 1, quantile, prob = c(0.975)))
   }
   
-  
-  # COMPUTE GLOBAL P-VALUE
-  pValueList <- numeric(length = length(subsampled.spds))
-  
-  # For each subsample type:
-  for (x in 1:length(subsampled.spds)) {
-    
-    ## Create Vector of Means
-    zscoreMean <- apply(subsampled.spds[[x]], 1, mean)
-    
-    ## Create Vector of SDs
-    zscoreSD <- apply(subsampled.spds[[x]], 1, sd)
-    
-    ## Z-Transform baseline and sub-sampled spds
-    tmp.subsampled   <- t(apply(subsampled.spds[[x]], 1, function(p){ return((p - mean(p))/sd(p)) }))
-    tmp.baseline     <- baseline.SPD$PrDens
-    tmp.baseline     <- (tmp.baseline - zscoreMean)/zscoreSD
-    
-    ## Compute CI
-    tmp.ci <- t(apply(tmp.subsampled, 1, quantile, prob = c(0.025, 0.975), na.rm = TRUE))
-    
-    ## Compute expected statistic
-    expected.statistic <- abs(apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a<0); return(sum(a[i])) }, y = tmp.ci[,1])) +
-                              apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a>0); return(sum(a[i])) }, y = tmp.ci[,2])
-    
-    ## Compute observed statistic
-    lower    <- tmp.baseline - tmp.ci[,1]
-    indexLow <- which(tmp.baseline < tmp.ci[,1])
-    higher   <- tmp.baseline - tmp.ci[,2]
-    indexHi  <- which(tmp.baseline > tmp.ci[,2])
-    observed.statistic <- sum(abs(lower[indexLow])) + sum(higher[indexHi])
-    
-    ## Calculate p-value
-    pValueList[[x]] <- 1
-    if (observed.statistic > 0) {    
-      pValueList[[x]] <- c(length(expected.statistic[expected.statistic > observed.statistic]) + 1)/c(nsim + 1)    
-      }
-  } 
-  
   # RETURN OUTPUT
-  return(list(baseline = baseline.SPD, envelope = subsampledCIlist, raw = subsampled.spds, pValueList = pValueList))
+  return(list(envelope = subsampledCIlist, raw = subsampled.spds))
   
 }
 
@@ -576,17 +532,8 @@ generate_multiple_frequency_dists <- function(data, calibrated_data, timeRange, 
 ## @param taphCorrect         = logical specifying whether to taphonomically correct open sites using Williams (2013) (TRUE or FALSE)
 ## @param correctForSite      = logical specifying whether to count all radiocarbon dates within a bin or only one per site (TRUE OR FALSE) - note, presently taphCorrect does nothing if this is TRUE
 ## @param binSize             = size of bin to sort dates into for frequency distribution (200 years used in Williams 2013)
-compare_frequency_dists <- function(evidence, samples, calibrated_evidence, calibrated_samples, timeRange, taphCorrect, correctForSite, 
+compare_frequency_dists <- function(samples, calibrated_samples, timeRange, taphCorrect, correctForSite, 
                                     binSize){
-  
-  # Get frequency distribution for baseline data set
-  ev2         <- vector("list", length = 1)
-  ev2[[1]]    <- evidence
-  cal.ev      <- vector("list", length = 1)
-  cal.ev[[1]] <- calibrated_evidence
-  baseline_freq <- generate_multiple_frequency_dists(data = ev2, calibrated_data = cal.ev, timeRange = timeRange, 
-                                                     taphCorrect = taphCorrect, correctForSite = correctForSite,
-                                                     binSize = binSize)
   
   # Get frequency distributions for sub-samples
   sample_freq <- generate_multiple_frequency_dists(data = samples, calibrated_data = calibrated_samples, timeRange = timeRange,
@@ -595,13 +542,8 @@ compare_frequency_dists <- function(evidence, samples, calibrated_evidence, cali
   # Combine subsampled frequency distributions into a list
   sample.freq.dists <- list(sample_freq)
   
-  # Standardise the baseline and subsampled frequency distributions
+  # Standardise the subsampled frequency distributions
   ## (calculate a new standardised variable that expresses the frequencies as a proportion of the total subsample frequency count)
-  standardised_baseline_freq <- matrix(nrow = nrow(baseline_freq), ncol = ncol(baseline_freq))
-  for (i in 1:ncol(standardised_baseline_freq)){
-    standardised_baseline_freq[,i] = baseline_freq[,i]/sum(baseline_freq[,i])
-  }
-  
   standardised_sample_freq <- matrix(nrow = nrow(sample_freq), ncol = ncol(sample_freq))
   for (i in 1:ncol(standardised_sample_freq)){
     standardised_sample_freq[,i] = sample_freq[,i]/sum(sample_freq[,i])
@@ -625,7 +567,6 @@ compare_frequency_dists <- function(evidence, samples, calibrated_evidence, cali
   }
   
   # RETURN OUTPUT
-  return(list(baseline = baseline_freq, standardised.baseline = standardised_baseline_freq, 
-              envelope = sample.CI.list, standardised.envelope = standardised.sample.CI.list,
+  return(list(envelope = sample.CI.list, standardised.envelope = standardised.sample.CI.list,
               raw = sample.freq.dists, standardised.raw = standardised.sample.freq.dists))
 }
