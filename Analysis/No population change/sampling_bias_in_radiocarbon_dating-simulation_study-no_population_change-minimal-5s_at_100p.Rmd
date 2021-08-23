@@ -1,7 +1,7 @@
 ---
 title: "Sampling bias in radiocarbon dating project: simulation study (no population change) - 5 samples at 100%"
 author: "Rebecca Wheatley"
-date: "19 August 2021"
+date: "23 August 2021"
 output: html_document
 ---
 

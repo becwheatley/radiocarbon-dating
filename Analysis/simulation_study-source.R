@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 29 July 2021
+# Last modified 23 August 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------
@@ -33,52 +33,49 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend)
   
     # Establish the occupation range:
     if (pop_trend == "no change"){
-      temp <- extraDistr::rdunif(2, min = timeRange[2]-3000, max = timeRange[1]+3000)
+      #temp <- extraDistr::rdunif(2, min = timeRange[2]-3000, max = timeRange[1]+3000)
+      temp <- extraDistr::rdunif(no_samples*10, min = timeRange[2]-3000, max = timeRange[1]+3000)
       
     } else if (pop_trend == "steady growth"){
-      samples <- round(EnvStats::rtri(100, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = timeRange[2]))
+      samples <- round(EnvStats::rtri(no_samples*100, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = timeRange[2]))
       samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-3000){return(x)}}))
-      temp <- samples2[1:2]
+      temp <- samples2[1:(no_samples*10)]
     
     } else if (pop_trend == "exponential growth"){
-      temp <- round(truncdist::rtrunc(n = 2, spec = "exp", a = timeRange[2]-3000, b = timeRange[1]+3000, rate = 0.3/500))
+      temp <- round(truncdist::rtrunc(n = no_samples*10, spec = "exp", a = timeRange[2]-3000, b = timeRange[1]+3000, rate = 0.3/500))
     
     } else if (pop_trend == "growth then decline"){
-      temp <- round(EnvStats::rtri(2, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = (timeRange[1] - timeRange[2])/2))
+      temp <- round(EnvStats::rtri(no_samples*10, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = (timeRange[1] - timeRange[2])/2))
     
-    } else if (pop_trend == "growth decline growth"){
-      samples <- round(EnvStats::rtri(100, min = timeRange[2] - (timeRange[1] - timeRange[2])/3 - 1000, max = timeRange[2] + (timeRange[1] - timeRange[2])/3 - 1000, mode = timeRange[2]))
-      samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-1000){return(x)}}))
-      temp1 <- samples2[1:2] 
-      temp2 <- round(EnvStats::rtri(2, min = timeRange[2] + (timeRange[1] - timeRange[2])/3, max = timeRange[2] + (timeRange[1] - timeRange[2]) + 1000, mode = timeRange[1] - (timeRange[1] - timeRange[2])/3))
-      temp <- sample(c(temp1, temp2), size = 2, replace = FALSE)
+    #} else if (pop_trend == "growth decline growth"){
+      #samples <- round(EnvStats::rtri(100, min = timeRange[2] - (timeRange[1] - timeRange[2])/3 - 1000, max = timeRange[2] + (timeRange[1] - timeRange[2])/3 - 1000, mode = timeRange[2]))
+      #samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-1000){return(x)}}))
+      #temp1 <- samples2[1:2] 
+      #temp2 <- round(EnvStats::rtri(2, min = timeRange[2] + (timeRange[1] - timeRange[2])/3, max = timeRange[2] + (timeRange[1] - timeRange[2]) + 1000, mode = timeRange[1] - (timeRange[1] - timeRange[2])/3))
+      #temp <- sample(c(temp1, temp2), size = 2, replace = FALSE)
       
     #} else if (pop_trend == "growth then plateau"){
        
     }
     
-    occupation_history[s,1] = min(temp)
-    occupation_history[s,2] = max(temp)
+    # Get rid of samples that are outside the bounds of the region of interest
+    samples1 <- unlist(lapply(temp, function(x) {if(x >= timeRange[2] && x <= timeRange[1]){return(x)}}))
     
-    ## if the minimum and maximum values fall outside of our timeRange:
-    if (occupation_history[s,1] < timeRange[2]) { occupation_history[s, 1] = timeRange[2] }
-    if (occupation_history[s,2] > timeRange[1]) { occupation_history[s, 2] = timeRange[1] }
-    if (occupation_history[s,2] < timeRange[2]) { occupation_history[s, 2] = timeRange[1] }
-    if (occupation_history[s,1] > timeRange[1]) { occupation_history[s, 1] = timeRange[2] }
+    # Retain only the number of samples desired (including a buffer for taphonomic loss)
+    samples <- samples1[1:no_samples*5]
     
-    # Generate some evidence that our hypothetical archaeologist can sample from:
-    
-    ## draw an excess of samples from the occupation history following a discrete uniform distribution
-    temp <- extraDistr::rdunif(no_samples*5, occupation_history[s,1], occupation_history[s,2])
+    # Get the occupation history for the site
+    occupation_history[s,1] = min(samples)
+    occupation_history[s,2] = max(samples)
     
     ## if simulating taphonomic loss, sample from the temp data using weights from an exponential distribution
     ### note that our rate is informed by the results from the taphonomic loss dynamic occupancy model on AustArch
-    weights.taphloss <- dexp(temp, rate = 0.04/500)
-    data.taphloss    <- sample(x = temp, size = no_samples, replace = FALSE, prob = weights.taphloss)
+    weights.taphloss <- dexp(samples, rate = 0.04/500)
+    data.taphloss    <- sample(x = samples, size = no_samples, replace = FALSE, prob = weights.taphloss)
     
     ## if not simulating taphonomic loss, sample from the temp data uniformly
-    weights.noloss <- dunif(temp, min = timeRange[2], max = timeRange[1])
-    data.noloss    <- sample(x = temp, size = no_samples, replace = FALSE, prob = weights.noloss)
+    weights.noloss <- dunif(samples, min = timeRange[2], max = timeRange[1])
+    data.noloss    <- sample(x = samples, size = no_samples, replace = FALSE, prob = weights.noloss)
     
     for (i in 1:no_samples)
     {
