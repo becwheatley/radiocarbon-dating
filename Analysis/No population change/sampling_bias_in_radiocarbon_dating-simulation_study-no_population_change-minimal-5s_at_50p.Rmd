@@ -1,7 +1,7 @@
 ---
-title: "Sampling bias in radiocarbon dating project: simulation study (no population change)"
+title: "Sampling bias in radiocarbon dating project: simulation study (no population change) - 5 samples at 50%"
 author: "Rebecca Wheatley"
-date: "17 May 2021"
+date: "19 August 2021"
 output: html_document
 ---
 
@@ -22,27 +22,27 @@ library(tidyverse)
 source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation_study-source.R")
 ```
 
-## Simulating no change in population growth over time (without taphonomic loss)
+## Simulating no change in population growth over time (_without_ taphonomic loss)
 
 Data for our analysis is simulated in two steps.  
 
 1. Each site in our simulated data set (`no_sites`) has an occupation range: the minimum and maximum ages the site was occupied (in years BP). How these occupation ranges are generated depends on the underlying population trend (`pop_trend`) we aim to simulate.  
-+ "no change" simulates a steady population over time (values drawn from a uniform distribution).  
-+ "steady growth" simulates linear population growth (values drawn from an approximately linear distribution).  
-+ "exponential growth" simulates exponential population growth (values drawn from an exponential distribution).  
-+ "growth then decline" simulates an intial steady population growth followed by a population decrease (values drawn from a triangular distribution with the mode at the midpoint between the upper and lower `timeRange` bounds).   
+  + "no change" simulates a steady population over time (values drawn from a uniform distribution).  
+  + "steady growth" simulates linear population growth (values drawn from an approximately linear distribution).  
+  + "exponential growth" simulates exponential population growth (values drawn from an exponential distribution).  
+  + "growth then decline" simulates an intial steady population growth followed by a population decrease (values drawn from a triangular distribution with the mode at the midpoint between the upper and lower `timeRange` bounds).   
 (see `simulation_study-source.R` for specific implementation of each case)
 
 2. Within this occupation range, each site has some evidence that our imaginary archaeologist can sample from. A subset (`no_samples`) of this evidence is then pulled in one of two ways depending on whether we want to simulate taphonomic loss or not:  
-+ if we do not wish to simulate taphonomic loss, samples are pulled from the evidence using a uniform distribution
-+ if we do wish to simulate taphonomic loss, samples are pulled from the evidence using an exponential distribution with a rate of 0.04/500 (informed by our other study using dynamic occupancy modelling to tease apart population growth and taphonomic loss - more on this later)
+  + if we do not wish to simulate taphonomic loss, samples are pulled from the evidence using a uniform distribution
+  + if we do wish to simulate taphonomic loss, samples are pulled from the evidence using an exponential distribution with a rate of 0.04/500 (informed by our other study using dynamic occupancy modelling to tease apart population growth and taphonomic loss - more on this later)
 These samples then form our full data set/s, with and without taphonomic loss.
 
 Set the parameters we want for our simulated data:
 ```{r, message = FALSE}
 timeRange  = c(12000, 200)   ## for Holocene sites
 no_sites   = 100             ## the number of sites we want in our simulated data set
-no_samples = 20              ## the number of samples we want each site to have
+no_samples = 5               ## the number of samples we want each site to have
 pop_trend  = "no change"     ## the underlying population trend we want to mimic
 ```
 
@@ -50,15 +50,15 @@ pop_trend  = "no change"     ## the underlying population trend we want to mimic
 ```{r, echo = FALSE}
 baseline.data <- get_available_evidence(timeRange = timeRange, no_sites = no_sites, no_samples = no_samples, 
                                         pop_trend = pop_trend)
-glimpse(baseline.data[[1]])
+#glimpse(baseline.data[[1]])
 ```
 
 We will run several sampling methods on this data set to investigate different potential biases in radiocarbon dating sampling. These sampling methods are:  
 1. **Uniform**. For each site (or some % of sites), choose a number of samples (`sampling_effort`) from a uniform distribution  
 2. **Singleton**. For each site (or some % of sites), choose one sample. There are three methods of choosing which sample to use:  
-+ the most **ancient** sample  
-+ the most **recent** sample  
-+ a **random** sample  
+  + the most **ancient** sample  
+  + the most **recent** sample  
+  + a **random** sample  
 3. **Bracketed**. For each site (or some % of sites), choose the most recent and the most ancient sample  
 
 There are, therefore, two new parameters for subsampling the baseline data: `percent_sites` and `sampling_effort`. These determine the percent of sites we apply the sampling methods to and the number of samples we want to select if using a uniform sampling method.
@@ -66,7 +66,7 @@ There are, therefore, two new parameters for subsampling the baseline data: `per
 ```{r}
 percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
-sampling_effort = 5    ## the number of samples we want to take using the uniform sampling method
+sampling_effort = 3    ## the number of samples we want to take using the uniform sampling method
 nsim            = 20   ## the number of replicates to make when sampling
 ```
 
@@ -170,11 +170,11 @@ spd.bracketed         <- compare_spds(calibrated_samples = cal.bracketed,
 Plot the resulting summed probability distributions:  
 * dashed black line is the SPD for the full data set  
 * solid coloured line is the median SPD for the sampled data set  
-+ teal = 5 uniformly selected samples from 50% of sites  
-+ orange = only the most ancient sample from 50% of sites  
-+ blue = only the most recent sample from 50% of sites  
-+ pink = one random sample from 50% of sites  
-+ green = only the most recent and most ancient sample from 50% of sites (bracketed)  
+  + teal = 5 uniformly selected samples from 50% of sites  
+  + orange = only the most ancient sample from 50% of sites  
+  + blue = only the most recent sample from 50% of sites  
+  + pink = one random sample from 50% of sites  
+  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE, message = TRUE}
 # Combined
@@ -265,11 +265,11 @@ fd.bracketed         <- compare_frequency_dists(samples = sample.bracketed,
 Plot the resulting frequency distributions:  
 * dashed black line is a smoothed spline of the frequency distribution for the full data set  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-+ teal = 5 uniformly selected samples from 50% of sites  
-+ orange = only the most ancient sample from 50% of sites  
-+ blue = only the most recent sample from 50% of sites  
-+ pink = one random sample from 50% of sites  
-+ green = only the most recent and most ancient sample from 50% of sites (bracketed)  
+  + teal = 5 uniformly selected samples from 50% of sites  
+  + orange = only the most ancient sample from 50% of sites  
+  + blue = only the most recent sample from 50% of sites  
+  + pink = one random sample from 50% of sites  
+  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}
 # All
@@ -364,11 +364,11 @@ fd.bracketed.sites         <- compare_frequency_dists(samples = sample.bracketed
 Plot the resulting frequency distributions:  
 * dashed black line is a smoothed spline of the frequency distribution for the full data set  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set   
-+ teal = 5 uniformly selected samples from 50% of sites  
-+ orange = only the most ancient sample from 50% of sites  
-+ blue = only the most recent sample from 50% of sites  
-+ pink = one random sample from 50% of sites  
-+ green = only the most recent and most ancient sample from 50% of sites (bracketed)  
+  + teal = 5 uniformly selected samples from 50% of sites  
+  + orange = only the most ancient sample from 50% of sites  
+  + blue = only the most recent sample from 50% of sites  
+  + pink = one random sample from 50% of sites  
+  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}
 # All
@@ -401,20 +401,22 @@ ggplot(NULL) +
   theme_bw()
 ```
 
-## Simulating no change in population growth over time (with taphonomic loss)
+***
+
+## Simulating no change in population growth over time (_with_ taphonomic loss)
 
 Set the parameters we want for our simulated data:
 ```{r, message = FALSE}
 timeRange  = c(12000, 200) ## for Holocene sites
 no_sites   = 100           ## the number of sites we want in our simulated data set
-no_samples = 20            ## the number of samples we want each site to have
+no_samples = 5            ## the number of samples we want each site to have
 pop_trend  = "no change"   ## the underlying population trend we want to mimic
 ```
 
 ```{r, echo = FALSE}
 percent_sites   = 50   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
-sampling_effort = 5    ## the number of samples we want to take using the uniform sampling method
+sampling_effort = 3    ## the number of samples we want to take using the uniform sampling method
 nsim            = 20   ## the number of replicates to make when sampling
 ```
 
@@ -517,11 +519,11 @@ spd.bracketed         <- compare_spds(calibrated_samples = cal.bracketed,
 Plot the resulting summed probability distributions:  
 * solid black line is the SPD for the full data set including taphonomic loss  
 * solid coloured line is the median SPD for the sampled data set  
-+ teal = 5 uniformly selected samples from 50% of sites  
-+ orange = only the most ancient sample from 50% of sites  
-+ blue = only the most recent sample from 50% of sites  
-+ pink = one random sample from 50% of sites  
-+ green = only the most recent and most ancient sample from 50% of sites (bracketed)  
+  + teal = 5 uniformly selected samples from 50% of sites  
+  + orange = only the most ancient sample from 50% of sites  
+  + blue = only the most recent sample from 50% of sites  
+  + pink = one random sample from 50% of sites  
+  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
 * dashed black line is the SPD for the full data set WITHOUT taphonomic loss  
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE, message = TRUE}
@@ -610,11 +612,11 @@ fd.bracketed         <- compare_frequency_dists(samples = sample.bracketed,
 Plot the resulting frequency distributions with an applied taphonomic correction (as in Williams ):  
 * solid black line is a smoothed spline of the frequency distribution for the full data set including taphonomic loss  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-+ teal = 5 uniformly selected samples from 50% of sites  
-+ orange = only the most ancient sample from 50% of sites  
-+ blue = only the most recent sample from 50% of sites  
-+ pink = one random sample from 50% of sites  
-+ green = only the most recent and most ancient sample from 50% of sites (bracketed) 
+  + teal = 5 uniformly selected samples from 50% of sites  
+  + orange = only the most ancient sample from 50% of sites   
+  + blue = only the most recent sample from 50% of sites  
+  + pink = one random sample from 50% of sites  
+  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
 * dashed black line is a smoothed spline of the frequency distribution of the full data set WITHOUT taphonomic loss  
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}
@@ -794,11 +796,11 @@ fd.bracketed.sites         <- compare_frequency_dists(samples = sample.bracketed
 Plot the resulting frequency distributions:  
 * solid black line is a smoothed spline of the frequency distribution for the full data set including taphonomic loss  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-+ teal = 5 uniformly selected samples from 50% of sites  
-+ orange = only the most ancient sample from 50% of sites  
-+ blue = only the most recent sample from 50% of sites  
-+ pink = one random sample from 50% of sites  
-+ green = only the most recent and most ancient sample from 50% of sites (bracketed) 
+  + teal = 5 uniformly selected samples from 50% of sites  
+  + orange = only the most ancient sample from 50% of sites  
+  + blue = only the most recent sample from 50% of sites  
+  + pink = one random sample from 50% of sites  
+  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
 * dashed black line is a smoothed spline of the frequency distribution of the full data set WITHOUT taphonomic loss  
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}

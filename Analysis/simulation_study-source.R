@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 17 May 2021
+# Last modified 29 July 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 #------------------------------------------------
@@ -33,7 +33,7 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend)
   
     # Establish the occupation range:
     if (pop_trend == "no change"){
-      temp <- extraDistr::rdunif(no_sites, min = timeRange[2]-3000, max = timeRange[1]+3000)
+      temp <- extraDistr::rdunif(2, min = timeRange[2]-3000, max = timeRange[1]+3000)
       
     } else if (pop_trend == "steady growth"){
       samples <- round(EnvStats::rtri(100, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = timeRange[2]))
@@ -44,7 +44,17 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend)
       temp <- round(truncdist::rtrunc(n = 2, spec = "exp", a = timeRange[2]-3000, b = timeRange[1]+3000, rate = 0.3/500))
     
     } else if (pop_trend == "growth then decline"){
-       temp <- round(EnvStats::rtri(2, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = (timeRange[1] - timeRange[2])/2))
+      temp <- round(EnvStats::rtri(2, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = (timeRange[1] - timeRange[2])/2))
+    
+    } else if (pop_trend == "growth decline growth"){
+      samples <- round(EnvStats::rtri(100, min = timeRange[2] - (timeRange[1] - timeRange[2])/3 - 1000, max = timeRange[2] + (timeRange[1] - timeRange[2])/3 - 1000, mode = timeRange[2]))
+      samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-1000){return(x)}}))
+      temp1 <- samples2[1:2] 
+      temp2 <- round(EnvStats::rtri(2, min = timeRange[2] + (timeRange[1] - timeRange[2])/3, max = timeRange[2] + (timeRange[1] - timeRange[2]) + 1000, mode = timeRange[1] - (timeRange[1] - timeRange[2])/3))
+      temp <- sample(c(temp1, temp2), size = 2, replace = FALSE)
+      
+    #} else if (pop_trend == "growth then plateau"){
+       
     }
     
     occupation_history[s,1] = min(temp)
