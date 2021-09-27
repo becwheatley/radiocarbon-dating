@@ -1,5 +1,5 @@
 ---
-title: "Sampling bias in radiocarbon dating project: simulation study (no population change) - 10 samples at 100%"
+title: "Sampling bias in radiocarbon dating project: simulation study (no population change) - 10 samples at 75%"
 author: "Rebecca Wheatley"
 date: "26 August 2021"
 output: html_document
@@ -64,7 +64,7 @@ We will run several sampling methods on this data set to investigate different p
 There are, therefore, two new parameters for subsampling the baseline data: `percent_sites` and `sampling_effort`. These determine the percent of sites we apply the sampling methods to and the number of samples we want to select if using a uniform sampling method.
 
 ```{r}
-percent_sites   = 100  ## the number of sites we want to apply the sampling method across (the remainder will be 
+percent_sites   = 75   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
 sampling_effort = 3    ## the number of samples we want to take using the uniform sampling method
 nsim            = 20   ## the number of replicates to make when sampling
@@ -414,7 +414,7 @@ pop_trend  = "no change"   ## the underlying population trend we want to mimic
 ```
 
 ```{r, echo = FALSE}
-percent_sites   = 100  ## the number of sites we want to apply the sampling method across (the remainder will be 
+percent_sites   = 75   ## the number of sites we want to apply the sampling method across (the remainder will be 
                        ## exhaustively sampled)
 sampling_effort = 3    ## the number of samples we want to take using the uniform sampling method
 nsim            = 20   ## the number of replicates to make when sampling

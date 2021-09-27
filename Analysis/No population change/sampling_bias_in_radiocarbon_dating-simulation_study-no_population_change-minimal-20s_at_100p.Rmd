@@ -1,7 +1,7 @@
 ---
 title: "Sampling bias in radiocarbon dating project: simulation study (no population change) - 20 samples at 100%"
 author: "Rebecca Wheatley"
-date: "19 August 2021"
+date: "26 August 2021"
 output: html_document
 ---
 
@@ -26,14 +26,14 @@ source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation
 
 Data for our analysis is simulated in two steps.  
 
-1. Each site in our simulated data set (`no_sites`) has an occupation range: the minimum and maximum ages the site was occupied (in years BP). How these occupation ranges are generated depends on the underlying population trend (`pop_trend`) we aim to simulate.  
+1. Each site in our simulated data set (`no_sites`) has an excess of samples drawn from a distribution that describes the underlying population trend we are aiming to model, bounded between the upper and lower `timeRange` bounds (+-3000 years).  
   + "no change" simulates a steady population over time (values drawn from a uniform distribution).  
   + "steady growth" simulates linear population growth (values drawn from an approximately linear distribution).  
   + "exponential growth" simulates exponential population growth (values drawn from an exponential distribution).  
   + "growth then decline" simulates an intial steady population growth followed by a population decrease (values drawn from a triangular distribution with the mode at the midpoint between the upper and lower `timeRange` bounds).   
 (see `simulation_study-source.R` for specific implementation of each case)
 
-2. Within this occupation range, each site has some evidence that our imaginary archaeologist can sample from. A subset (`no_samples`) of this evidence is then pulled in one of two ways depending on whether we want to simulate taphonomic loss or not:  
+2. A subset (`no_samples`) of this evidence is then pulled in one of two ways depending on whether we want to simulate taphonomic loss or not:  
   + if we do not wish to simulate taphonomic loss, samples are pulled from the evidence using a uniform distribution
   + if we do wish to simulate taphonomic loss, samples are pulled from the evidence using an exponential distribution with a rate of 0.04/500 (informed by our other study using dynamic occupancy modelling to tease apart population growth and taphonomic loss - more on this later)
 These samples then form our full data set/s, with and without taphonomic loss.
@@ -169,13 +169,12 @@ spd.bracketed         <- compare_spds(calibrated_samples = cal.bracketed,
 
 Plot the resulting summed probability distributions:  
 * dashed black line is the SPD for the full data set  
-* solid coloured line is the median SPD for the sampled data set  
-  + teal = 5 uniformly selected samples from 50% of sites  
-  + orange = only the most ancient sample from 50% of sites  
-  + blue = only the most recent sample from 50% of sites  
-  + pink = one random sample from 50% of sites  
-  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
-* ribbon is the 95% confidence interval for the sampled data set  
+  + teal = 3 uniformly selected samples from 100% of sites  
+  + orange = only the most ancient sample from 100% of sites  
+  + blue = only the most recent sample from 100% of sites  
+  + pink = one random sample from 100% of sites  
+  + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
+* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)  
 ```{r, echo = FALSE, message = TRUE}
 # Combined
 ggplot(NULL) +
@@ -265,12 +264,12 @@ fd.bracketed         <- compare_frequency_dists(samples = sample.bracketed,
 Plot the resulting frequency distributions:  
 * dashed black line is a smoothed spline of the frequency distribution for the full data set  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-  + teal = 5 uniformly selected samples from 50% of sites  
-  + orange = only the most ancient sample from 50% of sites  
-  + blue = only the most recent sample from 50% of sites  
-  + pink = one random sample from 50% of sites  
-  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
-* ribbon is the 95% confidence interval for the sampled data set  
+  + teal = 3 uniformly selected samples from 100% of sites  
+  + orange = only the most ancient sample from 100% of sites  
+  + blue = only the most recent sample from 100% of sites  
+  + pink = one random sample from 100% of sites  
+  + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
+* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)  
 ```{r, echo = FALSE}
 # All
 ggplot(NULL) +
@@ -364,12 +363,12 @@ fd.bracketed.sites         <- compare_frequency_dists(samples = sample.bracketed
 Plot the resulting frequency distributions:  
 * dashed black line is a smoothed spline of the frequency distribution for the full data set  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set   
-  + teal = 5 uniformly selected samples from 50% of sites  
-  + orange = only the most ancient sample from 50% of sites  
-  + blue = only the most recent sample from 50% of sites  
-  + pink = one random sample from 50% of sites  
-  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
-* ribbon is the 95% confidence interval for the sampled data set  
+  + teal = 3 uniformly selected samples from 100% of sites  
+  + orange = only the most ancient sample from 100% of sites  
+  + blue = only the most recent sample from 100% of sites  
+  + pink = one random sample from 100% of sites  
+  + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
+* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)  
 ```{r, echo = FALSE}
 # All
 ggplot(NULL) +
@@ -519,13 +518,13 @@ spd.bracketed         <- compare_spds(calibrated_samples = cal.bracketed,
 Plot the resulting summed probability distributions:  
 * solid black line is the SPD for the full data set including taphonomic loss  
 * solid coloured line is the median SPD for the sampled data set  
-  + teal = 5 uniformly selected samples from 50% of sites  
-  + orange = only the most ancient sample from 50% of sites  
-  + blue = only the most recent sample from 50% of sites  
-  + pink = one random sample from 50% of sites  
-  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
-* dashed black line is the SPD for the full data set WITHOUT taphonomic loss  
-* ribbon is the 95% confidence interval for the sampled data set  
+  + teal = 3 uniformly selected samples from 100% of sites  
+  + orange = only the most ancient sample from 100% of sites  
+  + blue = only the most recent sample from 100% of sites  
+  + pink = one random sample from 100% of sites  
+  + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
+* dashed black line is the SPD for the full data set WITHOUT taphonomic loss   
+* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)  
 ```{r, echo = FALSE, message = TRUE}
 # Combined
 ggplot(NULL) +
@@ -612,13 +611,13 @@ fd.bracketed         <- compare_frequency_dists(samples = sample.bracketed,
 Plot the resulting frequency distributions with an applied taphonomic correction (as in Williams ):  
 * solid black line is a smoothed spline of the frequency distribution for the full data set including taphonomic loss  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-  + teal = 5 uniformly selected samples from 50% of sites  
-  + orange = only the most ancient sample from 50% of sites   
-  + blue = only the most recent sample from 50% of sites  
-  + pink = one random sample from 50% of sites  
-  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
+  + teal = 3 uniformly selected samples from 100% of sites  
+  + orange = only the most ancient sample from 100% of sites   
+  + blue = only the most recent sample from 100% of sites  
+  + pink = one random sample from 100% of sites  
+  + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
 * dashed black line is a smoothed spline of the frequency distribution of the full data set WITHOUT taphonomic loss  
-* ribbon is the 95% confidence interval for the sampled data set  
+* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)  
 ```{r, echo = FALSE}
 ggplot(NULL) +
   geom_ribbon(aes(x = median.bin.age, ymin = fd.uniform$standardised.envelope[[1]][,1], 
@@ -796,11 +795,11 @@ fd.bracketed.sites         <- compare_frequency_dists(samples = sample.bracketed
 Plot the resulting frequency distributions:  
 * solid black line is a smoothed spline of the frequency distribution for the full data set including taphonomic loss  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-  + teal = 5 uniformly selected samples from 50% of sites  
-  + orange = only the most ancient sample from 50% of sites  
-  + blue = only the most recent sample from 50% of sites  
-  + pink = one random sample from 50% of sites  
-  + green = only the most recent and most ancient sample from 50% of sites (bracketed)  
+  + teal = 3 uniformly selected samples from 100% of sites  
+  + orange = only the most ancient sample from 100% of sites  
+  + blue = only the most recent sample from 100% of sites  
+  + pink = one random sample from 100% of sites  
+  + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
 * dashed black line is a smoothed spline of the frequency distribution of the full data set WITHOUT taphonomic loss  
 * ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}

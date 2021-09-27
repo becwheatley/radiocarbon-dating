@@ -1,7 +1,7 @@
 ---
-title: "Sampling bias in radiocarbon dating project: simulation study (no population change) - 10 samples at 100%"
+title: "Sampling bias in radiocarbon dating project: simulation study (growth then decline) - 20 samples at 100%"
 author: "Rebecca Wheatley"
-date: "26 August 2021"
+date: "31 August 2021"
 output: html_document
 ---
 
@@ -22,7 +22,7 @@ library(tidyverse)
 source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation_study-source.R")
 ```
 
-## Simulating no change in population growth over time (_without_ taphonomic loss)
+## Simulating growth then decline over time (_without_ taphonomic loss)
 
 Data for our analysis is simulated in two steps.  
 
@@ -42,8 +42,8 @@ Set the parameters we want for our simulated data:
 ```{r, message = FALSE}
 timeRange  = c(12000, 200)   ## for Holocene sites
 no_sites   = 100             ## the number of sites we want in our simulated data set
-no_samples = 10              ## the number of samples we want each site to have
-pop_trend  = "no change"     ## the underlying population trend we want to mimic
+no_samples = 20              ## the number of samples we want each site to have
+pop_trend  = "growth then decline" ## the underlying population trend we want to mimic
 ```
 
 
@@ -170,12 +170,12 @@ spd.bracketed         <- compare_spds(calibrated_samples = cal.bracketed,
 Plot the resulting summed probability distributions:  
 * dashed black line is the SPD for the full data set  
 * solid coloured line is the median SPD for the sampled data set  
-  + teal = 3 uniformly selected samples from 100% of sites  
+  + teal = 5 uniformly selected samples from 100% of sites  
   + orange = only the most ancient sample from 100% of sites  
   + blue = only the most recent sample from 100% of sites  
   + pink = one random sample from 100% of sites  
   + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
-* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)   
+* ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE, message = TRUE}
 # Combined
 ggplot(NULL) +
@@ -197,7 +197,7 @@ ggplot(NULL) +
   geom_line(aes(x = spd.baseline.noloss$grid$calBP, y = spd.baseline.noloss$grid$PrDens), lwd = 1, colour = "black", 
             linetype = "dashed") +
   labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("SPD, no population change") +
+  ggtitle("SPD, growth then decline") +
   scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```
@@ -265,12 +265,12 @@ fd.bracketed         <- compare_frequency_dists(samples = sample.bracketed,
 Plot the resulting frequency distributions:  
 * dashed black line is a smoothed spline of the frequency distribution for the full data set  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-  + teal = 3 uniformly selected samples from 100% of sites  
+  + teal = 5 uniformly selected samples from 100% of sites  
   + orange = only the most ancient sample from 100% of sites  
   + blue = only the most recent sample from 100% of sites  
   + pink = one random sample from 100% of sites  
   + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
-* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)   
+* ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}
 # All
 ggplot(NULL) +
@@ -297,7 +297,7 @@ ggplot(NULL) +
   geom_spline(aes(x = median.bin.age, y = standardised.baseline.freq.noloss), lwd = 1, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("Freq dist of dates in bins, no pop change") +
+  ggtitle("Freq dist of dates in bins, growth then decline") +
   scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```
@@ -364,12 +364,12 @@ fd.bracketed.sites         <- compare_frequency_dists(samples = sample.bracketed
 Plot the resulting frequency distributions:  
 * dashed black line is a smoothed spline of the frequency distribution for the full data set  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set   
-  + teal = 3 uniformly selected samples from 100% of sites  
+  + teal = 5 uniformly selected samples from 100% of sites  
   + orange = only the most ancient sample from 100% of sites  
   + blue = only the most recent sample from 100% of sites  
   + pink = one random sample from 100% of sites  
   + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
-* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)   
+* ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}
 # All
 ggplot(NULL) +
@@ -396,21 +396,21 @@ ggplot(NULL) +
   geom_spline(aes(x = median.bin.age, y = standardised.baseline.freq.noloss.sites), lwd = 1, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("Freq dist of sites in bins, no pop change") +
+  ggtitle("Freq dist of sites in bins, growth then decline") +
   scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```
 
 ***
 
-## Simulating no change in population growth over time (_with_ taphonomic loss)
+## Simulating growth then decline over time (_with_ taphonomic loss)
 
 Set the parameters we want for our simulated data:
 ```{r, message = FALSE}
-timeRange  = c(12000, 200) ## for Holocene sites
-no_sites   = 100           ## the number of sites we want in our simulated data set
-no_samples = 10            ## the number of samples we want each site to have
-pop_trend  = "no change"   ## the underlying population trend we want to mimic
+timeRange  = c(12000, 200)   ## for Holocene sites
+no_sites   = 100             ## the number of sites we want in our simulated data set
+no_samples = 20              ## the number of samples we want each site to have
+pop_trend  = "growth then decline" ## the underlying population trend we want to mimic
 ```
 
 ```{r, echo = FALSE}
@@ -519,13 +519,13 @@ spd.bracketed         <- compare_spds(calibrated_samples = cal.bracketed,
 Plot the resulting summed probability distributions:  
 * solid black line is the SPD for the full data set including taphonomic loss  
 * solid coloured line is the median SPD for the sampled data set  
-  + teal = 3 uniformly selected samples from 100% of sites  
+  + teal = 5 uniformly selected samples from 100% of sites  
   + orange = only the most ancient sample from 100% of sites  
   + blue = only the most recent sample from 100% of sites  
   + pink = one random sample from 100% of sites  
   + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
-* dashed black line is the SPD for the full data set WITHOUT taphonomic loss   
-* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)  
+* dashed black line is the SPD for the full data set WITHOUT taphonomic loss  
+* ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE, message = TRUE}
 # Combined
 ggplot(NULL) +
@@ -548,7 +548,7 @@ ggplot(NULL) +
   geom_line(aes(x = spd.baseline.taphloss$grid$calBP, y = spd.baseline.noloss$grid$PrDens), lwd = 0.5, colour = "black", 
             linetype = "dashed") +
   labs(x = "Years cal BP", y = "Probability") +
-  ggtitle("SPD, no pop change + taphonomic loss") +
+  ggtitle("SPD, growth then decline + taphonomic loss") +
   scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```
@@ -612,13 +612,13 @@ fd.bracketed         <- compare_frequency_dists(samples = sample.bracketed,
 Plot the resulting frequency distributions with an applied taphonomic correction (as in Williams ):  
 * solid black line is a smoothed spline of the frequency distribution for the full data set including taphonomic loss  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-  + teal = 3 uniformly selected samples from 100% of sites  
+  + teal = 5 uniformly selected samples from 100% of sites  
   + orange = only the most ancient sample from 100% of sites   
   + blue = only the most recent sample from 100% of sites  
   + pink = one random sample from 100% of sites  
   + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
 * dashed black line is a smoothed spline of the frequency distribution of the full data set WITHOUT taphonomic loss  
-* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals) 
+* ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}
 ggplot(NULL) +
   geom_ribbon(aes(x = median.bin.age, ymin = fd.uniform$standardised.envelope[[1]][,1], 
@@ -646,7 +646,7 @@ ggplot(NULL) +
     geom_spline(aes(x = median.bin.age, y = standardised.baseline.freq.noloss), lwd = 0.5, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("Freq dist of dates in bins, no pop change + taphonomic loss w. correction") +
+  ggtitle("Freq dist of dates in bins, growth then decline + taphonomic loss w. correction") +
   scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```
@@ -732,7 +732,7 @@ ggplot(NULL) +
     geom_spline(aes(x = median.bin.age, y = standardised.baseline.freq.noloss), lwd = 0.5, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("Freq dist of dates in bins, no pop change + taphonomic loss w/o correction") +
+  ggtitle("Freq dist of dates in bins, growth then decline + taphonomic loss w/o correction") +
   scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```
@@ -796,13 +796,13 @@ fd.bracketed.sites         <- compare_frequency_dists(samples = sample.bracketed
 Plot the resulting frequency distributions:  
 * solid black line is a smoothed spline of the frequency distribution for the full data set including taphonomic loss  
 * solid coloured line is a smoothed spline of the median frequency distribution for the sampled data set  
-  + teal = 3 uniformly selected samples from 100% of sites  
-  + orange = only the most ancient sample from 100% of sites   
+  + teal = 5 uniformly selected samples from 100% of sites  
+  + orange = only the most ancient sample from 100% of sites  
   + blue = only the most recent sample from 100% of sites  
   + pink = one random sample from 100% of sites  
   + green = only the most recent and most ancient sample from 100% of sites (bracketed)  
 * dashed black line is a smoothed spline of the frequency distribution of the full data set WITHOUT taphonomic loss  
-* ribbon is the 95% confidence interval for the sampled data set (note that when 100% of sites are sampled, some of the subsamples will not have confidence intervals)   
+* ribbon is the 95% confidence interval for the sampled data set  
 ```{r, echo = FALSE}
 # All
 ggplot(NULL) +
@@ -831,7 +831,7 @@ ggplot(NULL) +
     geom_spline(aes(x = median.bin.age, y = standardised.baseline.freq.noloss.sites), lwd = 0.5, 
               colour = "black", linetype = "dashed", df = 40) +
   labs(x = "Years cal BP", y = "Standardised frequency (frequency/sum(frequency) for each sample)") +
-  ggtitle("Freq dist of sites in bins, no pop change + taphonomic loss") +
+  ggtitle("Freq dist of sites in bins, growth then decline + taphonomic loss") +
   scale_x_reverse(breaks = seq(12200, 200, by = -6000), limits = c(12200, 200)) +
   theme_bw()
 ```

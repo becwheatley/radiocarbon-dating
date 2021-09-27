@@ -1,0 +1,92 @@
+---
+title: "Sampling bias in radiocarbon dating project: summarising the AustArch database"
+author: "Rebecca Wheatley"
+date: "8 September 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Set up
+
+Load required packages:
+```{r, message = FALSE}
+library(ggformula)
+library(plyr)
+library(tidyverse)
+library(data.table)
+library(rcarbon)
+library(parallel)
+```
+
+Load the AustArch data and make sure relevant columns read in correctly:
+```{r, message = FALSE}
+AustArch <- read.csv("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Data/Austarch_1-3_and_IDASQ_28Nov13-1.csv")
+AustArch$AGE_NORM     <- as.numeric(AustArch$AGE_NORM)
+AustArch$ERROR        <- as.numeric(AustArch$ERROR)
+AustArch$LATITUDE     <- as.numeric(AustArch$LATITUDE)
+AustArch$LONGITUDE    <- as.numeric(AustArch$LONGITUDE)
+AustArch$IBRA_REGION  <- as.factor(AustArch$IBRA_REGION)
+AustArch$SITE         <- as.factor(AustArch$SITE)
+```
+
+Get rid of:  
+* "unusable" samples 
+* samples missing an age and/or error estimate  
+* samples generated using any method that is not radiocarbon dating 
+* samples that fall outside of the calibration age range (this should be anything < 400 years BP for marine samples, and < 200 years for terrestrial samples) 
+* samples that fall outside of the age range we are interested in (in this case, we only want Holocene dates)
+```{r, message = FALSE, results = 'hide'}
+data <- AustArch %>%
+  dplyr::filter(Data.pertinent.for.time.series.analysis.or.calibration != "Unusuable") %>%
+  dplyr::filter(AGE_NORM != "NA") %>%
+  dplyr::filter(ERROR != "NA") %>%
+  dplyr::filter(METHOD == "Radiocarbon") %>%
+  dplyr::filter((AGE_NORM >= 400 & Data.pertinent.for.time.series.analysis.or.calibration == "Marine") 
+                | (AGE_NORM >= 200 & Data.pertinent.for.time.series.analysis.or.calibration == "Terrestrial")) %>%
+  subset(AGE_NORM <= 12000)
+```
+
+Create a new column that records the number of dated samples available for that site: NO_DATES_PER_SITE
+```{r, message = FALSE}
+data <- data %>%
+  dplyr::arrange(SITE) %>%
+  dplyr::group_by(SITE, .drop = TRUE) %>%
+  dplyr::mutate(DATES_PER_SITE = length(AGE_NORM))
+glimpse(data)
+```
+
+There are 1,529 sites in our Holocene data set.
+
+How many sites contain only one sample?
+```{r, message = FALSE}
+data.1sample = data %>% subset(DATES_PER_SITE == 1)
+glimpse(data.1sample)
+```
+There are 823 sites that contain only 1 sample (~54% of the total sites)
+
+How many sites contain 2 samples?
+```{r, message = FALSE}
+data.2samples <- data %>% 
+  subset(DATES_PER_SITE == 2)
+glimpse(data.2samples)
+```
+299 sites contain only 2 samples (~20% of sites)
+
+How many sites contain 3 samples?
+```{r, message = FALSE}
+data.3samples <- data %>% 
+  subset(DATES_PER_SITE == 3)
+glimpse(data.3samples)
+```
+129 sites contain only 3 samples (~8% of sites)
+
+How many sites contain 5 or more samples?
+```{r, message = FALSE}
+data.5samples <- data %>% 
+  subset(DATES_PER_SITE >= 5)
+glimpse(data.5samples)
+```
+181 sites contain 5 or more samples (~12% of sites)
