@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 24 September 2021
+# Last modified 28 September 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 # MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING BUT PLOTS THE MEDIAN BASELINE/SPD...
