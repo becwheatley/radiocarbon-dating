@@ -1,0 +1,2125 @@
+"","sample","median.bin.age","lowerCI","median","upperCI"
+"1","baseline (taphonomic loss) replicates",0.25,0.03225442685969,0.0537548138639281,0.0669378798247735
+"2","baseline (taphonomic loss) replicates",0.35,0.0465587044534413,0.066555611432403,0.0872303153236216
+"3","baseline (taphonomic loss) replicates",0.45,0.0424163643116304,0.0557791053619038,0.0767385330796872
+"4","baseline (taphonomic loss) replicates",0.55,0.0493939393939394,0.0765288485166535,0.0954502814258912
+"5","baseline (taphonomic loss) replicates",0.65,0.0526822888865165,0.0708502024291498,0.096887263424569
+"6","baseline (taphonomic loss) replicates",0.75,0.0383824839004923,0.0586451560135771,0.0741067249180839
+"7","baseline (taphonomic loss) replicates",0.85,0.0300804828973843,0.0489797958342184,0.0590124173002863
+"8","baseline (taphonomic loss) replicates",0.95,0.0152743228014525,0.0322914375554958,0.0437978118324971
+"9","baseline (taphonomic loss) replicates",1.05,0.0242145178764897,0.0354202608727723,0.0514481000926784
+"10","baseline (taphonomic loss) replicates",1.15,0.0232996710038094,0.0345880317255311,0.0444067237432693
+"11","baseline (taphonomic loss) replicates",1.25,0.0183303997988433,0.0343090934269585,0.0509713532081953
+"12","baseline (taphonomic loss) replicates",1.35,0.014020486159783,0.0294098285112406,0.0403697488575176
+"13","baseline (taphonomic loss) replicates",1.45,0.0150868782093918,0.0283688234472904,0.0378210552513688
+"14","baseline (taphonomic loss) replicates",1.55,0.00902008845096987,0.0194065356203831,0.0335820633471452
+"15","baseline (taphonomic loss) replicates",1.65,0.00904899194372879,0.0222897898514425,0.0355726382836899
+"16","baseline (taphonomic loss) replicates",1.75,0.0101616108203236,0.0201818196629168,0.0326442646023927
+"17","baseline (taphonomic loss) replicates",1.85,0.0121328671328671,0.0182186234817814,0.0257157464212679
+"18","baseline (taphonomic loss) replicates",1.95,0.00908467805107316,0.0171994098844357,0.0307845109378929
+"19","baseline (taphonomic loss) replicates",2.05,0.00499559212459594,0.0142132126189416,0.0235249834443292
+"20","baseline (taphonomic loss) replicates",2.15,0.000953815261044177,0.0141845282089185,0.024420736464347
+"21","baseline (taphonomic loss) replicates",2.25,0.00612640343920865,0.0161779740727109,0.022389757769521
+"22","baseline (taphonomic loss) replicates",2.35,0.00298368298368298,0.0101420295579474,0.0192291400223202
+"23","baseline (taphonomic loss) replicates",2.45,0.00287878787878788,0.0132199895680684,0.0181857881569335
+"24","baseline (taphonomic loss) replicates",2.55,0.00998252645470319,0.0152254755642043,0.0273835319609967
+"25","baseline (taphonomic loss) replicates",2.65,0.00202558701061916,0.00708536935901121,0.0161616161616162
+"26","baseline (taphonomic loss) replicates",2.75,0.00499559212459594,0.0111486917414508,0.0203264392874559
+"27","baseline (taphonomic loss) replicates",2.85,0.00501012145748988,0.012096823364429,0.0162898764521483
+"28","baseline (taphonomic loss) replicates",2.95,0.00190763052208835,0.0101112337954443,0.0215080971659919
+"29","baseline (taphonomic loss) replicates",3.05,0.000961538461538462,0.00813021564901264,0.0143783129512918
+"30","baseline (taphonomic loss) replicates",3.15,0.00203035587658108,0.00810537812779726,0.0195617264609118
+"31","baseline (taphonomic loss) replicates",3.25,0.00298410064130145,0.00709162953179198,0.0154514387815026
+"32","baseline (taphonomic loss) replicates",3.35,0.000965447154471545,0.00612870915237261,0.0141614318782257
+"33","baseline (taphonomic loss) replicates",3.45,0.00192307692307692,0.00813008130081301,0.0172726880784423
+"34","baseline (taphonomic loss) replicates",3.55,0.00298194495562917,0.00614777332185525,0.0122344007182403
+"35","baseline (taphonomic loss) replicates",3.65,0.000955734406438632,0.00610392190954025,0.0133540295849206
+"36","baseline (taphonomic loss) replicates",3.75,0.00203646092583375,0.00606674027726659,0.0122461984431422
+"37","baseline (taphonomic loss) replicates",3.85,0,0.00406505744372333,0.00616153310986022
+"38","baseline (taphonomic loss) replicates",3.95,0,0.00407333665173387,0.00922084642625567
+"39","baseline (taphonomic loss) replicates",4.05,0.00202178518264056,0.00404858299595142,0.00813008130081301
+"40","baseline (taphonomic loss) replicates",4.15,0,0.00203666832586693,0.0081231395895347
+"41","baseline (taphonomic loss) replicates",4.25,0,0.00405679513184584,0.00827351018355544
+"42","baseline (taphonomic loss) replicates",4.35,0,0.00403227445480967,0.00813877436126704
+"43","baseline (taphonomic loss) replicates",4.45,0,0.00405681182317896,0.0112592897401367
+"44","baseline (taphonomic loss) replicates",4.55,0,0.00304269690772758,0.012262053362459
+"45","baseline (taphonomic loss) replicates",4.65,0,0.00404858299595142,0.0102200634417129
+"46","baseline (taphonomic loss) replicates",4.75,0,0.00203875505012719,0.00918341895000701
+"47","baseline (taphonomic loss) replicates",4.85,0,0.00204082482642577,0.00813877436126704
+"48","baseline (taphonomic loss) replicates",4.95,0,0.00202843094900121,0.00714147867718915
+"49","baseline (taphonomic loss) replicates",5.05,0,0.00204498977505112,0.00820915899516305
+"50","baseline (taphonomic loss) replicates",5.15,0,0.00405268906389863,0.010135814889336
+"51","baseline (taphonomic loss) replicates",5.25,0,0.00202224675908886,0.0072565054684848
+"52","baseline (taphonomic loss) replicates",5.35,0,0.00203459010150183,0.00611132542714568
+"53","baseline (taphonomic loss) replicates",5.45,0,0.00202840591158948,0.00513746645262717
+"54","baseline (taphonomic loss) replicates",5.55,0,0.00302636206741426,0.00715058750773036
+"55","baseline (taphonomic loss) replicates",5.65,0,0.00203873810216551,0.00712703962703962
+"56","baseline (taphonomic loss) replicates",5.75,0,0.00203873810216551,0.00606704698809962
+"57","baseline (taphonomic loss) replicates",5.85,0,0.00202429149797571,0.00718240311237468
+"58","baseline (taphonomic loss) replicates",5.95,0,0.00203045894556309,0.00712703962703962
+"59","baseline (taphonomic loss) replicates",6.05,0,0.00203252032520325,0.00511271249076127
+"60","baseline (taphonomic loss) replicates",6.15,0,0.00100401606425703,0.00612621055920025
+"61","baseline (taphonomic loss) replicates",6.25,0,0.00201411707435804,0.00513099939561031
+"62","baseline (taphonomic loss) replicates",6.35,0,0.00202429149797571,0.00410768873990682
+"63","baseline (taphonomic loss) replicates",6.45,0,0.00203045894556309,0.00408601477400776
+"64","baseline (taphonomic loss) replicates",6.55,0,0.00201818196629168,0.00608230467883805
+"65","baseline (taphonomic loss) replicates",6.65,0,0.00100603621730382,0.00404900936341099
+"66","baseline (taphonomic loss) replicates",6.75,0,0.00101214574898785,0.00416119962511715
+"67","baseline (taphonomic loss) replicates",6.85,0,0.00202429149797571,0.00407375145180023
+"68","baseline (taphonomic loss) replicates",6.95,0,0.00201005228156085,0.00404996168456769
+"69","baseline (taphonomic loss) replicates",7.05,0,0.00101214574898785,0.00519016296671094
+"70","baseline (taphonomic loss) replicates",7.15,0,0,0.00511915341825483
+"71","baseline (taphonomic loss) replicates",7.25,0,0.00100401606425703,0.00405333826065533
+"72","baseline (taphonomic loss) replicates",7.35,0,0.00100401606425703,0.00406112402909019
+"73","baseline (taphonomic loss) replicates",7.45,0,0,0.00512955305023898
+"74","baseline (taphonomic loss) replicates",7.55,0,0,0.00204103307385703
+"75","baseline (taphonomic loss) replicates",7.65,0,0,0.00405768479088235
+"76","baseline (taphonomic loss) replicates",7.75,0,0,0.00310353409656545
+"77","baseline (taphonomic loss) replicates",7.85,0,0.00100603621730382,0.00513746645262717
+"78","baseline (taphonomic loss) replicates",7.95,0,0,0.00308665927568366
+"79","baseline (taphonomic loss) replicates",8.05,0,0,0.00205186198190616
+"80","baseline (taphonomic loss) replicates",8.15,0,0,0.00309095322734604
+"81","baseline (taphonomic loss) replicates",8.25,0,0,0.00308008949829322
+"82","baseline (taphonomic loss) replicates",8.35,0,0,0.00414923162377337
+"83","baseline (taphonomic loss) replicates",8.45,0,0,0.00203469359031676
+"84","baseline (taphonomic loss) replicates",8.55,0,0,0.002026447183648
+"85","baseline (taphonomic loss) replicates",8.65,0,0,0.00311787431498939
+"86","baseline (taphonomic loss) replicates",8.75,0,0,0.0020351580934403
+"87","baseline (taphonomic loss) replicates",8.85,0,0,0.00202234899603321
+"88","baseline (taphonomic loss) replicates",8.95,0,0,0.00105633802816901
+"89","baseline (taphonomic loss) replicates",9.05,0,0,0.00202429149797571
+"90","baseline (taphonomic loss) replicates",9.15,0,0,0.00105633802816901
+"91","baseline (taphonomic loss) replicates",9.25,0,0,0.00203056201454509
+"92","baseline (taphonomic loss) replicates",9.35,0,0,0.00203078489738368
+"93","baseline (taphonomic loss) replicates",9.45,0,0,0.00203906678637339
+"94","baseline (taphonomic loss) replicates",9.55,0,0,0.00202666913032767
+"95","baseline (taphonomic loss) replicates",9.65,0,0,0.00204792138127567
+"96","baseline (taphonomic loss) replicates",9.75,0,0,0
+"97","baseline (taphonomic loss) replicates",9.85,0,0,0.00201848744287588
+"98","baseline (taphonomic loss) replicates",9.95,0,0,0.00202666913032767
+"99","baseline (taphonomic loss) replicates",10.05,0,0,0.00202861163227017
+"100","baseline (taphonomic loss) replicates",10.15,0,0,0
+"101","baseline (taphonomic loss) replicates",10.25,0,0,0.00105633802816901
+"102","baseline (taphonomic loss) replicates",10.35,0,0,0.00311662701890572
+"103","baseline (taphonomic loss) replicates",10.45,0,0,0
+"104","baseline (taphonomic loss) replicates",10.55,0,0,0
+"105","baseline (taphonomic loss) replicates",10.65,0,0,0
+"106","baseline (taphonomic loss) replicates",10.75,0,0,0
+"107","baseline (taphonomic loss) replicates",10.85,0,0,0.00106060606060606
+"108","baseline (taphonomic loss) replicates",10.95,0,0,0.00203252032520325
+"109","baseline (taphonomic loss) replicates",11.05,0,0,0.00107142857142857
+"110","baseline (taphonomic loss) replicates",11.15,0,0,0.00106924643584521
+"111","baseline (taphonomic loss) replicates",11.25,0,0,0.00203906678637339
+"112","baseline (taphonomic loss) replicates",11.35,0,0,0
+"113","baseline (taphonomic loss) replicates",11.45,0,0,0.00106490872210953
+"114","baseline (taphonomic loss) replicates",11.55,0,0,0.00202280757717034
+"115","baseline (taphonomic loss) replicates",11.65,0,0,0.00106924643584521
+"116","baseline (taphonomic loss) replicates",11.75,0,0,0
+"117","baseline (taphonomic loss) replicates",11.85,0,0,0.0010670731707317
+"118","baseline (taphonomic loss) replicates",11.95,0,0,0.00106275303643724
+"119","singleton ancient (50% sites)",0.25,0.0150167785234899,0.0252423332010657,0.0354497324505714
+"120","singleton ancient (50% sites)",0.35,0.0300810114568504,0.0405405405405405,0.0522588654090332
+"121","singleton ancient (50% sites)",0.45,0.0451931797569382,0.0604026845637584,0.0758610330128786
+"122","singleton ancient (50% sites)",0.55,0.0586409395973154,0.0642979844251031,0.0793771043771044
+"123","singleton ancient (50% sites)",0.65,0.0416199973064578,0.0573357448357448,0.0692520759868047
+"124","singleton ancient (50% sites)",0.75,0.0371621621621622,0.0471380471380471,0.0556253401052059
+"125","singleton ancient (50% sites)",0.85,0.0317953020134228,0.0472972972972973,0.0536912751677852
+"126","singleton ancient (50% sites)",0.95,0.00671140939597315,0.0134228187919463,0.0220439189189189
+"127","singleton ancient (50% sites)",1.05,0.0401977508922359,0.0454493923453655,0.0608460357183483
+"128","singleton ancient (50% sites)",1.15,0.0317227462361691,0.0420094007050529,0.0506756756756757
+"129","singleton ancient (50% sites)",1.25,0.018432001632505,0.0268908322599598,0.042115496846311
+"130","singleton ancient (50% sites)",1.35,0.0049496644295302,0.0100334448160535,0.013491900991901
+"131","singleton ancient (50% sites)",1.45,0.0183404974074656,0.0268908322599598,0.0373310810810811
+"132","singleton ancient (50% sites)",1.55,0.00669962514870598,0.0151460185017232,0.0220021157521157
+"133","singleton ancient (50% sites)",1.65,0.0132373571861462,0.0218801015780882,0.0336227741119045
+"134","singleton ancient (50% sites)",1.75,0.010049437723059,0.0168634543634544,0.0271268911386645
+"135","singleton ancient (50% sites)",1.85,0.0201342281879195,0.0236088361088361,0.0303084754217305
+"136","singleton ancient (50% sites)",1.95,0.0134442862630782,0.0201342281879195,0.0253651461722216
+"137","singleton ancient (50% sites)",2.05,0.00669962514870598,0.0134680134680135,0.0185941184473064
+"138","singleton ancient (50% sites)",2.15,0.0167490628717649,0.0236088361088361,0.0304054054054054
+"139","singleton ancient (50% sites)",2.25,0,0.00503367079454036,0.0085055738823797
+"140","singleton ancient (50% sites)",2.35,0.0100832146973087,0.0134454161299799,0.0169219537333944
+"141","singleton ancient (50% sites)",2.45,0.00671035888427193,0.0134228187919463,0.0151981831329657
+"142","singleton ancient (50% sites)",2.55,0.0233221476510067,0.0304054054054054,0.0369127516778524
+"143","singleton ancient (50% sites)",2.65,0.00335570469798658,0.00671140939597315,0.0100671140939597
+"144","singleton ancient (50% sites)",2.75,0.0134658987846907,0.0202702702702703,0.0253745222495222
+"145","singleton ancient (50% sites)",2.85,0.00336107156576955,0.00675675675675676,0.0101351351351351
+"146","singleton ancient (50% sites)",2.95,0.00338381814017407,0.0100671140939597,0.0136229140214039
+"147","singleton ancient (50% sites)",3.05,0.00671140939597315,0.0100840620974849,0.0135375629867155
+"148","singleton ancient (50% sites)",3.15,0.0168029128626955,0.0202361452361452,0.0236486486486486
+"149","singleton ancient (50% sites)",3.25,0.0100334448160535,0.0100840620974849,0.0101531722400366
+"150","singleton ancient (50% sites)",3.35,0.00669962514870598,0.0100671140939597,0.0118774883403481
+"151","singleton ancient (50% sites)",3.45,0.023489932885906,0.027027027027027,0.0303567772317772
+"152","singleton ancient (50% sites)",3.55,0,0.0100671140939597,0.0134704335207691
+"153","singleton ancient (50% sites)",3.65,0.00336647469617268,0.00675675675675676,0.013491900991901
+"154","singleton ancient (50% sites)",3.75,0.00668896321070234,0.00672270806498994,0.00676878149335776
+"155","singleton ancient (50% sites)",3.85,0,0,0
+"156","singleton ancient (50% sites)",3.95,0.00668896321070234,0.00672270806498994,0.00676878149335776
+"157","singleton ancient (50% sites)",4.05,0,0.00336135403249497,0.0067459504959505
+"158","singleton ancient (50% sites)",4.15,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"159","singleton ancient (50% sites)",4.25,0.00669962514870598,0.0100671140939597,0.0101531722400366
+"160","singleton ancient (50% sites)",4.35,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"161","singleton ancient (50% sites)",4.45,0.00668896321070234,0.00672270806498994,0.00676878149335776
+"162","singleton ancient (50% sites)",4.55,0.00669962514870598,0.0100671140939597,0.0101351351351351
+"163","singleton ancient (50% sites)",4.65,0.00668896321070234,0.0100671140939597,0.0101531722400366
+"164","singleton ancient (50% sites)",4.75,0.00831318358492272,0.0134454161299799,0.0168380419009614
+"165","singleton ancient (50% sites)",4.85,0.0100334448160535,0.0100840620974849,0.0101531722400366
+"166","singleton ancient (50% sites)",4.95,0,0,0
+"167","singleton ancient (50% sites)",5.05,0.00668896321070234,0.00675675675675676,0.0101531722400366
+"168","singleton ancient (50% sites)",5.15,0.00668896321070234,0.00672270806498994,0.00676878149335776
+"169","singleton ancient (50% sites)",5.25,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"170","singleton ancient (50% sites)",5.35,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"171","singleton ancient (50% sites)",5.45,0,0,0.00337297524797525
+"172","singleton ancient (50% sites)",5.55,0,0,0
+"173","singleton ancient (50% sites)",5.65,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"174","singleton ancient (50% sites)",5.75,0,0,0
+"175","singleton ancient (50% sites)",5.85,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"176","singleton ancient (50% sites)",5.95,0.00668896321070234,0.0100671140939597,0.0101531722400366
+"177","singleton ancient (50% sites)",6.05,0,0,0
+"178","singleton ancient (50% sites)",6.15,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"179","singleton ancient (50% sites)",6.25,0,0,0
+"180","singleton ancient (50% sites)",6.35,0,0,0
+"181","singleton ancient (50% sites)",6.45,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"182","singleton ancient (50% sites)",6.55,0,0,0
+"183","singleton ancient (50% sites)",6.65,0,0,0
+"184","singleton ancient (50% sites)",6.75,0,0,0
+"185","singleton ancient (50% sites)",6.85,0,0,0
+"186","singleton ancient (50% sites)",6.95,0,0.00167224080267559,0.00337837837837838
+"187","singleton ancient (50% sites)",7.05,0,0,0
+"188","singleton ancient (50% sites)",7.15,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"189","singleton ancient (50% sites)",7.25,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"190","singleton ancient (50% sites)",7.35,0,0,0
+"191","singleton ancient (50% sites)",7.45,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"192","singleton ancient (50% sites)",7.55,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"193","singleton ancient (50% sites)",7.65,0,0,0
+"194","singleton ancient (50% sites)",7.75,0,0,0
+"195","singleton ancient (50% sites)",7.85,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"196","singleton ancient (50% sites)",7.95,0,0,0
+"197","singleton ancient (50% sites)",8.05,0,0,0
+"198","singleton ancient (50% sites)",8.15,0.00335570469798658,0.00337837837837838,0.0067459504959505
+"199","singleton ancient (50% sites)",8.25,0,0,0
+"200","singleton ancient (50% sites)",8.35,0,0,0
+"201","singleton ancient (50% sites)",8.45,0,0,0
+"202","singleton ancient (50% sites)",8.55,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"203","singleton ancient (50% sites)",8.65,0,0,0
+"204","singleton ancient (50% sites)",8.75,0,0,0
+"205","singleton ancient (50% sites)",8.85,0,0,0
+"206","singleton ancient (50% sites)",8.95,0,0,0
+"207","singleton ancient (50% sites)",9.05,0,0,0
+"208","singleton ancient (50% sites)",9.15,0,0,0
+"209","singleton ancient (50% sites)",9.25,0,0,0
+"210","singleton ancient (50% sites)",9.35,0,0,0
+"211","singleton ancient (50% sites)",9.45,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"212","singleton ancient (50% sites)",9.55,0,0,0
+"213","singleton ancient (50% sites)",9.65,0,0,0
+"214","singleton ancient (50% sites)",9.75,0,0,0
+"215","singleton ancient (50% sites)",9.85,0.00334448160535117,0.00336135403249497,0.00338439074667888
+"216","singleton ancient (50% sites)",9.95,0,0,0
+"217","singleton ancient (50% sites)",10.05,0,0,0
+"218","singleton ancient (50% sites)",10.15,0,0,0
+"219","singleton ancient (50% sites)",10.25,0,0,0
+"220","singleton ancient (50% sites)",10.35,0,0,0
+"221","singleton ancient (50% sites)",10.45,0,0,0
+"222","singleton ancient (50% sites)",10.55,0,0,0
+"223","singleton ancient (50% sites)",10.65,0,0,0
+"224","singleton ancient (50% sites)",10.75,0,0,0
+"225","singleton ancient (50% sites)",10.85,0,0,0
+"226","singleton ancient (50% sites)",10.95,0,0,0
+"227","singleton ancient (50% sites)",11.05,0,0,0
+"228","singleton ancient (50% sites)",11.15,0,0,0
+"229","singleton ancient (50% sites)",11.25,0,0,0
+"230","singleton ancient (50% sites)",11.35,0,0,0
+"231","singleton ancient (50% sites)",11.45,0,0,0
+"232","singleton ancient (50% sites)",11.55,0,0,0
+"233","singleton ancient (50% sites)",11.65,0,0,0
+"234","singleton ancient (50% sites)",11.75,0,0,0
+"235","singleton ancient (50% sites)",11.85,0,0,0
+"236","singleton ancient (50% sites)",11.95,0,0,0
+"237","singleton ancient (75% sites)",0.25,0.00238693467336683,0.0201512613572915,0.038112726247244
+"238","singleton ancient (75% sites)",0.35,0.012546790072813,0.0276903553299492,0.0433461952620244
+"239","singleton ancient (75% sites)",0.45,0.0277144651830581,0.05,0.076010101010101
+"240","singleton ancient (75% sites)",0.55,0.0275748730964467,0.0429081632653061,0.063112913050099
+"241","singleton ancient (75% sites)",0.65,0.0275189393939394,0.05,0.0739293444650587
+"242","singleton ancient (75% sites)",0.75,0.0251199494949495,0.0327284263959391,0.0503844982488199
+"243","singleton ancient (75% sites)",0.85,0.0225348984771574,0.0378571428571429,0.0551451005025126
+"244","singleton ancient (75% sites)",0.95,0.0050761421319797,0.0126020408163265,0.0202020202020202
+"245","singleton ancient (75% sites)",1.05,0.0252525252525253,0.0404040404040404,0.0577562814070352
+"246","singleton ancient (75% sites)",1.15,0.0250596733668342,0.0376767676767677,0.0562545322697607
+"247","singleton ancient (75% sites)",1.25,0.0101499690785405,0.025,0.0377085427135678
+"248","singleton ancient (75% sites)",1.35,0.005,0.00755037815339323,0.0153061224489796
+"249","singleton ancient (75% sites)",1.45,0.0174545454545455,0.0277551020408163,0.0406204906204906
+"250","singleton ancient (75% sites)",1.55,0,0.0100502512562814,0.0229208326924063
+"251","singleton ancient (75% sites)",1.65,0.01,0.0150753768844221,0.0356808375634518
+"252","singleton ancient (75% sites)",1.75,0.00503718085376377,0.0151515151515152,0.0280264378478664
+"253","singleton ancient (75% sites)",1.85,0.025,0.0253166179562119,0.0352691487741739
+"254","singleton ancient (75% sites)",1.95,0.01,0.0200502512562814,0.027884983292095
+"255","singleton ancient (75% sites)",2.05,0.0100238693467337,0.0150753768844221,0.0229514533085962
+"256","singleton ancient (75% sites)",2.15,0.0150753768844221,0.025,0.0303837871096754
+"257","singleton ancient (75% sites)",2.25,0,0.00501256281407035,0.010076899649764
+"258","singleton ancient (75% sites)",2.35,0.0150753768844221,0.0201005025125628,0.0252525252525253
+"259","singleton ancient (75% sites)",2.45,0.01,0.0126020408163265,0.0203102453102453
+"260","singleton ancient (75% sites)",2.55,0.03,0.0351758793969849,0.0404152743412494
+"261","singleton ancient (75% sites)",2.65,0.005,0.00505050505050505,0.0127219387755102
+"262","singleton ancient (75% sites)",2.75,0.0201005025125628,0.0251256281407035,0.0303030303030303
+"263","singleton ancient (75% sites)",2.85,0.005,0.00505050505050505,0.012858049311095
+"264","singleton ancient (75% sites)",2.95,0.00501193467336683,0.00508909147415311,0.0177704081632653
+"265","singleton ancient (75% sites)",3.05,0.01,0.0101266471824847,0.0201598984771574
+"266","singleton ancient (75% sites)",3.15,0.025,0.03,0.0330081530099477
+"267","singleton ancient (75% sites)",3.25,0.015,0.0151134460179686,0.0153061224489796
+"268","singleton ancient (75% sites)",3.35,0.01,0.0101266471824847,0.015232683982684
+"269","singleton ancient (75% sites)",3.45,0.035,0.04,0.0431314736950056
+"270","singleton ancient (75% sites)",3.55,0,0.005,0.015119923857868
+"271","singleton ancient (75% sites)",3.65,0.005,0.0100502512562814,0.015
+"272","singleton ancient (75% sites)",3.75,0.01,0.0100756306786458,0.0102040816326531
+"273","singleton ancient (75% sites)",3.85,0,0,0
+"274","singleton ancient (75% sites)",3.95,0.01,0.0100756306786458,0.0102040816326531
+"275","singleton ancient (75% sites)",4.05,0,0.005,0.0101038185853123
+"276","singleton ancient (75% sites)",4.15,0.005,0.00503781533932288,0.00510204081632653
+"277","singleton ancient (75% sites)",4.25,0.01,0.0101525458668316,0.0152692168237854
+"278","singleton ancient (75% sites)",4.35,0.005,0.00503781533932288,0.00510204081632653
+"279","singleton ancient (75% sites)",4.45,0.01,0.0100756306786458,0.0102040816326531
+"280","singleton ancient (75% sites)",4.55,0.01,0.0101010101010101,0.0152692168237854
+"281","singleton ancient (75% sites)",4.65,0.01,0.0101010101010101,0.0150795454545455
+"282","singleton ancient (75% sites)",4.75,0.01,0.0150376884422111,0.0201537992995279
+"283","singleton ancient (75% sites)",4.85,0.015,0.0151134460179686,0.0153061224489796
+"284","singleton ancient (75% sites)",4.95,0,0,0
+"285","singleton ancient (75% sites)",5.05,0.01,0.0101010101010101,0.0153061224489796
+"286","singleton ancient (75% sites)",5.15,0.01,0.0100756306786458,0.0102040816326531
+"287","singleton ancient (75% sites)",5.25,0.005,0.00503781533932288,0.00510204081632653
+"288","singleton ancient (75% sites)",5.35,0.005,0.00503781533932288,0.00510204081632653
+"289","singleton ancient (75% sites)",5.45,0,0,0.00502651515151515
+"290","singleton ancient (75% sites)",5.55,0,0,0
+"291","singleton ancient (75% sites)",5.65,0.005,0.00503781533932288,0.00510204081632653
+"292","singleton ancient (75% sites)",5.75,0,0,0
+"293","singleton ancient (75% sites)",5.85,0.005,0.00503781533932288,0.00510204081632653
+"294","singleton ancient (75% sites)",5.95,0.0100238693467337,0.0101781829483062,0.0151918935548377
+"295","singleton ancient (75% sites)",6.05,0,0,0
+"296","singleton ancient (75% sites)",6.15,0.005,0.00503781533932288,0.00510204081632653
+"297","singleton ancient (75% sites)",6.25,0,0,0
+"298","singleton ancient (75% sites)",6.35,0,0,0
+"299","singleton ancient (75% sites)",6.45,0.005,0.00503781533932288,0.00510204081632653
+"300","singleton ancient (75% sites)",6.55,0,0,0
+"301","singleton ancient (75% sites)",6.65,0,0,0
+"302","singleton ancient (75% sites)",6.75,0,0,0
+"303","singleton ancient (75% sites)",6.85,0,0,0
+"304","singleton ancient (75% sites)",6.95,0,0,0.00505190929265617
+"305","singleton ancient (75% sites)",7.05,0,0,0
+"306","singleton ancient (75% sites)",7.15,0.005,0.00503781533932288,0.00510204081632653
+"307","singleton ancient (75% sites)",7.25,0.005,0.00503781533932288,0.00510204081632653
+"308","singleton ancient (75% sites)",7.35,0,0,0
+"309","singleton ancient (75% sites)",7.45,0.005,0.00503781533932288,0.00510204081632653
+"310","singleton ancient (75% sites)",7.55,0.005,0.00503781533932288,0.00510204081632653
+"311","singleton ancient (75% sites)",7.65,0,0,0
+"312","singleton ancient (75% sites)",7.75,0,0,0
+"313","singleton ancient (75% sites)",7.85,0.005,0.00503781533932288,0.00510204081632653
+"314","singleton ancient (75% sites)",7.95,0,0,0
+"315","singleton ancient (75% sites)",8.05,0,0,0
+"316","singleton ancient (75% sites)",8.15,0.005,0.00505050505050505,0.0101279290365585
+"317","singleton ancient (75% sites)",8.25,0,0,0
+"318","singleton ancient (75% sites)",8.35,0,0,0
+"319","singleton ancient (75% sites)",8.45,0,0,0
+"320","singleton ancient (75% sites)",8.55,0.005,0.00503781533932288,0.00510204081632653
+"321","singleton ancient (75% sites)",8.65,0,0,0
+"322","singleton ancient (75% sites)",8.75,0,0,0
+"323","singleton ancient (75% sites)",8.85,0,0,0
+"324","singleton ancient (75% sites)",8.95,0,0,0
+"325","singleton ancient (75% sites)",9.05,0,0,0
+"326","singleton ancient (75% sites)",9.15,0,0,0
+"327","singleton ancient (75% sites)",9.25,0,0,0
+"328","singleton ancient (75% sites)",9.35,0,0,0
+"329","singleton ancient (75% sites)",9.45,0.005,0.00503781533932288,0.00510204081632653
+"330","singleton ancient (75% sites)",9.55,0,0,0
+"331","singleton ancient (75% sites)",9.65,0,0,0
+"332","singleton ancient (75% sites)",9.75,0,0,0
+"333","singleton ancient (75% sites)",9.85,0.005,0.00503781533932288,0.00510204081632653
+"334","singleton ancient (75% sites)",9.95,0,0,0
+"335","singleton ancient (75% sites)",10.05,0,0,0
+"336","singleton ancient (75% sites)",10.15,0,0,0
+"337","singleton ancient (75% sites)",10.25,0,0,0
+"338","singleton ancient (75% sites)",10.35,0,0,0
+"339","singleton ancient (75% sites)",10.45,0,0,0
+"340","singleton ancient (75% sites)",10.55,0,0,0
+"341","singleton ancient (75% sites)",10.65,0,0,0
+"342","singleton ancient (75% sites)",10.75,0,0,0
+"343","singleton ancient (75% sites)",10.85,0,0,0
+"344","singleton ancient (75% sites)",10.95,0,0,0
+"345","singleton ancient (75% sites)",11.05,0,0,0
+"346","singleton ancient (75% sites)",11.15,0,0,0
+"347","singleton ancient (75% sites)",11.25,0,0,0
+"348","singleton ancient (75% sites)",11.35,0,0,0
+"349","singleton ancient (75% sites)",11.45,0,0,0
+"350","singleton ancient (75% sites)",11.55,0,0,0
+"351","singleton ancient (75% sites)",11.65,0,0,0
+"352","singleton ancient (75% sites)",11.75,0,0,0
+"353","singleton ancient (75% sites)",11.85,0,0,0
+"354","singleton ancient (75% sites)",11.95,0,0,0
+"355","singleton ancient (100% sites)",0.25,0,0,0
+"356","singleton ancient (100% sites)",0.35,0,0,0
+"357","singleton ancient (100% sites)",0.45,0,0,0
+"358","singleton ancient (100% sites)",0.55,0,0,0
+"359","singleton ancient (100% sites)",0.65,0,0,0
+"360","singleton ancient (100% sites)",0.75,0,0,0
+"361","singleton ancient (100% sites)",0.85,0,0,0
+"362","singleton ancient (100% sites)",0.95,0.01,0.01,0.01
+"363","singleton ancient (100% sites)",1.05,0.02,0.02,0.02
+"364","singleton ancient (100% sites)",1.15,0.02,0.02,0.02
+"365","singleton ancient (100% sites)",1.25,0.01,0.01,0.01
+"366","singleton ancient (100% sites)",1.35,0.01,0.01,0.01
+"367","singleton ancient (100% sites)",1.45,0.02,0.02,0.02
+"368","singleton ancient (100% sites)",1.55,0,0,0
+"369","singleton ancient (100% sites)",1.65,0.01,0.01,0.01
+"370","singleton ancient (100% sites)",1.75,0.01,0.01,0.01
+"371","singleton ancient (100% sites)",1.85,0.05,0.05,0.05
+"372","singleton ancient (100% sites)",1.95,0.02,0.02,0.02
+"373","singleton ancient (100% sites)",2.05,0.02,0.02,0.02
+"374","singleton ancient (100% sites)",2.15,0.02,0.02,0.02
+"375","singleton ancient (100% sites)",2.25,0,0,0
+"376","singleton ancient (100% sites)",2.35,0.03,0.03,0.03
+"377","singleton ancient (100% sites)",2.45,0.02,0.02,0.02
+"378","singleton ancient (100% sites)",2.55,0.06,0.06,0.06
+"379","singleton ancient (100% sites)",2.65,0.01,0.01,0.01
+"380","singleton ancient (100% sites)",2.75,0.04,0.04,0.04
+"381","singleton ancient (100% sites)",2.85,0.01,0.01,0.01
+"382","singleton ancient (100% sites)",2.95,0.01,0.01,0.01
+"383","singleton ancient (100% sites)",3.05,0.02,0.02,0.02
+"384","singleton ancient (100% sites)",3.15,0.05,0.05,0.05
+"385","singleton ancient (100% sites)",3.25,0.03,0.03,0.03
+"386","singleton ancient (100% sites)",3.35,0.02,0.02,0.02
+"387","singleton ancient (100% sites)",3.45,0.07,0.07,0.07
+"388","singleton ancient (100% sites)",3.55,0,0,0
+"389","singleton ancient (100% sites)",3.65,0.01,0.01,0.01
+"390","singleton ancient (100% sites)",3.75,0.02,0.02,0.02
+"391","singleton ancient (100% sites)",3.85,0,0,0
+"392","singleton ancient (100% sites)",3.95,0.02,0.02,0.02
+"393","singleton ancient (100% sites)",4.05,0,0,0
+"394","singleton ancient (100% sites)",4.15,0.01,0.01,0.01
+"395","singleton ancient (100% sites)",4.25,0.02,0.02,0.02
+"396","singleton ancient (100% sites)",4.35,0.01,0.01,0.01
+"397","singleton ancient (100% sites)",4.45,0.02,0.02,0.02
+"398","singleton ancient (100% sites)",4.55,0.02,0.02,0.02
+"399","singleton ancient (100% sites)",4.65,0.02,0.02,0.02
+"400","singleton ancient (100% sites)",4.75,0.02,0.02,0.02
+"401","singleton ancient (100% sites)",4.85,0.03,0.03,0.03
+"402","singleton ancient (100% sites)",4.95,0,0,0
+"403","singleton ancient (100% sites)",5.05,0.02,0.02,0.02
+"404","singleton ancient (100% sites)",5.15,0.02,0.02,0.02
+"405","singleton ancient (100% sites)",5.25,0.01,0.01,0.01
+"406","singleton ancient (100% sites)",5.35,0.01,0.01,0.01
+"407","singleton ancient (100% sites)",5.45,0,0,0
+"408","singleton ancient (100% sites)",5.55,0,0,0
+"409","singleton ancient (100% sites)",5.65,0.01,0.01,0.01
+"410","singleton ancient (100% sites)",5.75,0,0,0
+"411","singleton ancient (100% sites)",5.85,0.01,0.01,0.01
+"412","singleton ancient (100% sites)",5.95,0.02,0.02,0.02
+"413","singleton ancient (100% sites)",6.05,0,0,0
+"414","singleton ancient (100% sites)",6.15,0.01,0.01,0.01
+"415","singleton ancient (100% sites)",6.25,0,0,0
+"416","singleton ancient (100% sites)",6.35,0,0,0
+"417","singleton ancient (100% sites)",6.45,0.01,0.01,0.01
+"418","singleton ancient (100% sites)",6.55,0,0,0
+"419","singleton ancient (100% sites)",6.65,0,0,0
+"420","singleton ancient (100% sites)",6.75,0,0,0
+"421","singleton ancient (100% sites)",6.85,0,0,0
+"422","singleton ancient (100% sites)",6.95,0,0,0
+"423","singleton ancient (100% sites)",7.05,0,0,0
+"424","singleton ancient (100% sites)",7.15,0.01,0.01,0.01
+"425","singleton ancient (100% sites)",7.25,0.01,0.01,0.01
+"426","singleton ancient (100% sites)",7.35,0,0,0
+"427","singleton ancient (100% sites)",7.45,0.01,0.01,0.01
+"428","singleton ancient (100% sites)",7.55,0.01,0.01,0.01
+"429","singleton ancient (100% sites)",7.65,0,0,0
+"430","singleton ancient (100% sites)",7.75,0,0,0
+"431","singleton ancient (100% sites)",7.85,0.01,0.01,0.01
+"432","singleton ancient (100% sites)",7.95,0,0,0
+"433","singleton ancient (100% sites)",8.05,0,0,0
+"434","singleton ancient (100% sites)",8.15,0.01,0.01,0.01
+"435","singleton ancient (100% sites)",8.25,0,0,0
+"436","singleton ancient (100% sites)",8.35,0,0,0
+"437","singleton ancient (100% sites)",8.45,0,0,0
+"438","singleton ancient (100% sites)",8.55,0.01,0.01,0.01
+"439","singleton ancient (100% sites)",8.65,0,0,0
+"440","singleton ancient (100% sites)",8.75,0,0,0
+"441","singleton ancient (100% sites)",8.85,0,0,0
+"442","singleton ancient (100% sites)",8.95,0,0,0
+"443","singleton ancient (100% sites)",9.05,0,0,0
+"444","singleton ancient (100% sites)",9.15,0,0,0
+"445","singleton ancient (100% sites)",9.25,0,0,0
+"446","singleton ancient (100% sites)",9.35,0,0,0
+"447","singleton ancient (100% sites)",9.45,0.01,0.01,0.01
+"448","singleton ancient (100% sites)",9.55,0,0,0
+"449","singleton ancient (100% sites)",9.65,0,0,0
+"450","singleton ancient (100% sites)",9.75,0,0,0
+"451","singleton ancient (100% sites)",9.85,0.01,0.01,0.01
+"452","singleton ancient (100% sites)",9.95,0,0,0
+"453","singleton ancient (100% sites)",10.05,0,0,0
+"454","singleton ancient (100% sites)",10.15,0,0,0
+"455","singleton ancient (100% sites)",10.25,0,0,0
+"456","singleton ancient (100% sites)",10.35,0,0,0
+"457","singleton ancient (100% sites)",10.45,0,0,0
+"458","singleton ancient (100% sites)",10.55,0,0,0
+"459","singleton ancient (100% sites)",10.65,0,0,0
+"460","singleton ancient (100% sites)",10.75,0,0,0
+"461","singleton ancient (100% sites)",10.85,0,0,0
+"462","singleton ancient (100% sites)",10.95,0,0,0
+"463","singleton ancient (100% sites)",11.05,0,0,0
+"464","singleton ancient (100% sites)",11.15,0,0,0
+"465","singleton ancient (100% sites)",11.25,0,0,0
+"466","singleton ancient (100% sites)",11.35,0,0,0
+"467","singleton ancient (100% sites)",11.45,0,0,0
+"468","singleton ancient (100% sites)",11.55,0,0,0
+"469","singleton ancient (100% sites)",11.65,0,0,0
+"470","singleton ancient (100% sites)",11.75,0,0,0
+"471","singleton ancient (100% sites)",11.85,0,0,0
+"472","singleton ancient (100% sites)",11.95,0,0,0
+"473","singleton recent (50% sites)",0.25,0.0510204081632653,0.0510204081632653,0.0510204081632653
+"474","singleton recent (50% sites)",0.35,0.0594387755102041,0.0680272108843537,0.0714285714285714
+"475","singleton recent (50% sites)",0.45,0.093452380952381,0.105442176870748,0.114030612244898
+"476","singleton recent (50% sites)",0.55,0.0850340136054422,0.0986394557823129,0.109013605442177
+"477","singleton recent (50% sites)",0.65,0.0560374149659864,0.0714285714285714,0.0850340136054422
+"478","singleton recent (50% sites)",0.75,0.0408163265306122,0.0493197278911565,0.0579931972789116
+"479","singleton recent (50% sites)",0.85,0.0374149659863946,0.0510204081632653,0.059608843537415
+"480","singleton recent (50% sites)",0.95,0.00663265306122449,0.0136054421768707,0.0187925170068027
+"481","singleton recent (50% sites)",1.05,0.0374149659863946,0.0476190476190476,0.0630102040816326
+"482","singleton recent (50% sites)",1.15,0.0322278911564626,0.0408163265306122,0.0562074829931973
+"483","singleton recent (50% sites)",1.25,0.0204081632653061,0.0272108843537415,0.0392006802721088
+"484","singleton recent (50% sites)",1.35,0.00340136054421769,0.00850340136054422,0.015391156462585
+"485","singleton recent (50% sites)",1.45,0.0186224489795918,0.0272108843537415,0.0392006802721088
+"486","singleton recent (50% sites)",1.55,0.00680272108843537,0.0136054421768707,0.0238095238095238
+"487","singleton recent (50% sites)",1.65,0.0100340136054422,0.0238095238095238,0.0340136054421769
+"488","singleton recent (50% sites)",1.75,0.00841836734693878,0.0170068027210884,0.0238095238095238
+"489","singleton recent (50% sites)",1.85,0.00663265306122449,0.0170068027210884,0.0204081632653061
+"490","singleton recent (50% sites)",1.95,0.00841836734693878,0.0136054421768707,0.0238095238095238
+"491","singleton recent (50% sites)",2.05,0.00501700680272109,0.0102040816326531,0.015391156462585
+"492","singleton recent (50% sites)",2.15,0.0100340136054422,0.0204081632653061,0.0289965986394558
+"493","singleton recent (50% sites)",2.25,0.00340136054421769,0.00680272108843537,0.0102040816326531
+"494","singleton recent (50% sites)",2.35,0,0.00680272108843537,0.0136054421768707
+"495","singleton recent (50% sites)",2.45,0.00501700680272109,0.0102040816326531,0.015391156462585
+"496","singleton recent (50% sites)",2.55,0.0100340136054422,0.0238095238095238,0.0307823129251701
+"497","singleton recent (50% sites)",2.65,0,0.00340136054421769,0.0102040816326531
+"498","singleton recent (50% sites)",2.75,0.00680272108843537,0.0136054421768707,0.0221938775510204
+"499","singleton recent (50% sites)",2.85,0,0.00680272108843537,0.0102040816326531
+"500","singleton recent (50% sites)",2.95,0.00501700680272109,0.00680272108843537,0.0136054421768707
+"501","singleton recent (50% sites)",3.05,0.00340136054421769,0.00680272108843537,0.0119897959183673
+"502","singleton recent (50% sites)",3.15,0.00501700680272109,0.0102040816326531,0.0170068027210884
+"503","singleton recent (50% sites)",3.25,0,0.00680272108843537,0.00858843537414965
+"504","singleton recent (50% sites)",3.35,0.0016156462585034,0.00680272108843537,0.0119897959183673
+"505","singleton recent (50% sites)",3.45,0.00501700680272109,0.0170068027210884,0.0204081632653061
+"506","singleton recent (50% sites)",3.55,0,0.0102040816326531,0.0136054421768707
+"507","singleton recent (50% sites)",3.65,0.0016156462585034,0.00680272108843537,0.0102040816326531
+"508","singleton recent (50% sites)",3.75,0,0.00340136054421769,0.00680272108843537
+"509","singleton recent (50% sites)",3.85,0,0,0
+"510","singleton recent (50% sites)",3.95,0,0.00680272108843537,0.00680272108843537
+"511","singleton recent (50% sites)",4.05,0,0.00340136054421769,0.00680272108843537
+"512","singleton recent (50% sites)",4.15,0,0.00340136054421769,0.00340136054421769
+"513","singleton recent (50% sites)",4.25,0,0.00340136054421769,0.0102040816326531
+"514","singleton recent (50% sites)",4.35,0,0,0.00340136054421769
+"515","singleton recent (50% sites)",4.45,0,0.00340136054421769,0.00680272108843537
+"516","singleton recent (50% sites)",4.55,0,0.00340136054421769,0.00680272108843537
+"517","singleton recent (50% sites)",4.65,0,0.00680272108843537,0.00858843537414965
+"518","singleton recent (50% sites)",4.75,0.00340136054421769,0.00680272108843537,0.0170068027210884
+"519","singleton recent (50% sites)",4.85,0,0.00510204081632653,0.00858843537414965
+"520","singleton recent (50% sites)",4.95,0,0,0
+"521","singleton recent (50% sites)",5.05,0,0.00680272108843537,0.0102040816326531
+"522","singleton recent (50% sites)",5.15,0,0.00340136054421769,0.00680272108843537
+"523","singleton recent (50% sites)",5.25,0,0,0.00340136054421769
+"524","singleton recent (50% sites)",5.35,0,0,0.00340136054421769
+"525","singleton recent (50% sites)",5.45,0,0,0.00340136054421769
+"526","singleton recent (50% sites)",5.55,0,0,0
+"527","singleton recent (50% sites)",5.65,0,0.00170068027210884,0.00340136054421769
+"528","singleton recent (50% sites)",5.75,0,0,0
+"529","singleton recent (50% sites)",5.85,0,0.00340136054421769,0.00340136054421769
+"530","singleton recent (50% sites)",5.95,0.0016156462585034,0.00510204081632653,0.00858843537414965
+"531","singleton recent (50% sites)",6.05,0,0,0
+"532","singleton recent (50% sites)",6.15,0,0.00340136054421769,0.00340136054421769
+"533","singleton recent (50% sites)",6.25,0,0,0
+"534","singleton recent (50% sites)",6.35,0,0,0
+"535","singleton recent (50% sites)",6.45,0,0,0.00340136054421769
+"536","singleton recent (50% sites)",6.55,0,0,0
+"537","singleton recent (50% sites)",6.65,0,0,0
+"538","singleton recent (50% sites)",6.75,0,0,0
+"539","singleton recent (50% sites)",6.85,0,0,0
+"540","singleton recent (50% sites)",6.95,0,0,0.00340136054421769
+"541","singleton recent (50% sites)",7.05,0,0,0
+"542","singleton recent (50% sites)",7.15,0,0,0.00340136054421769
+"543","singleton recent (50% sites)",7.25,0,0,0.00340136054421769
+"544","singleton recent (50% sites)",7.35,0,0,0
+"545","singleton recent (50% sites)",7.45,0,0.00340136054421769,0.00340136054421769
+"546","singleton recent (50% sites)",7.55,0,0,0.00340136054421769
+"547","singleton recent (50% sites)",7.65,0,0,0
+"548","singleton recent (50% sites)",7.75,0,0,0
+"549","singleton recent (50% sites)",7.85,0,0,0.00340136054421769
+"550","singleton recent (50% sites)",7.95,0,0,0
+"551","singleton recent (50% sites)",8.05,0,0,0
+"552","singleton recent (50% sites)",8.15,0,0.00340136054421769,0.00680272108843537
+"553","singleton recent (50% sites)",8.25,0,0,0
+"554","singleton recent (50% sites)",8.35,0,0,0
+"555","singleton recent (50% sites)",8.45,0,0,0
+"556","singleton recent (50% sites)",8.55,0,0.00340136054421769,0.00340136054421769
+"557","singleton recent (50% sites)",8.65,0,0,0
+"558","singleton recent (50% sites)",8.75,0,0,0
+"559","singleton recent (50% sites)",8.85,0,0,0
+"560","singleton recent (50% sites)",8.95,0,0,0
+"561","singleton recent (50% sites)",9.05,0,0,0
+"562","singleton recent (50% sites)",9.15,0,0,0
+"563","singleton recent (50% sites)",9.25,0,0,0
+"564","singleton recent (50% sites)",9.35,0,0,0
+"565","singleton recent (50% sites)",9.45,0,0,0.00340136054421769
+"566","singleton recent (50% sites)",9.55,0,0,0
+"567","singleton recent (50% sites)",9.65,0,0,0
+"568","singleton recent (50% sites)",9.75,0,0,0
+"569","singleton recent (50% sites)",9.85,0,0,0.00340136054421769
+"570","singleton recent (50% sites)",9.95,0,0,0
+"571","singleton recent (50% sites)",10.05,0,0,0
+"572","singleton recent (50% sites)",10.15,0,0,0
+"573","singleton recent (50% sites)",10.25,0,0,0
+"574","singleton recent (50% sites)",10.35,0,0,0
+"575","singleton recent (50% sites)",10.45,0,0,0
+"576","singleton recent (50% sites)",10.55,0,0,0
+"577","singleton recent (50% sites)",10.65,0,0,0
+"578","singleton recent (50% sites)",10.75,0,0,0
+"579","singleton recent (50% sites)",10.85,0,0,0
+"580","singleton recent (50% sites)",10.95,0,0,0
+"581","singleton recent (50% sites)",11.05,0,0,0
+"582","singleton recent (50% sites)",11.15,0,0,0
+"583","singleton recent (50% sites)",11.25,0,0,0
+"584","singleton recent (50% sites)",11.35,0,0,0
+"585","singleton recent (50% sites)",11.45,0,0,0
+"586","singleton recent (50% sites)",11.55,0,0,0
+"587","singleton recent (50% sites)",11.65,0,0,0
+"588","singleton recent (50% sites)",11.75,0,0,0
+"589","singleton recent (50% sites)",11.85,0,0,0
+"590","singleton recent (50% sites)",11.95,0,0,0
+"591","singleton recent (75% sites)",0.25,0.077319587628866,0.077319587628866,0.077319587628866
+"592","singleton recent (75% sites)",0.35,0.0824742268041237,0.0927835051546392,0.100644329896907
+"593","singleton recent (75% sites)",0.45,0.123711340206186,0.134020618556701,0.154639175257732
+"594","singleton recent (75% sites)",0.55,0.108247422680412,0.121134020618557,0.144587628865979
+"595","singleton recent (75% sites)",0.65,0.0591494845360825,0.0798969072164948,0.0979381443298969
+"596","singleton recent (75% sites)",0.75,0.0230670103092784,0.0360824742268041,0.0672680412371134
+"597","singleton recent (75% sites)",0.85,0.0282216494845361,0.0463917525773196,0.0567010309278351
+"598","singleton recent (75% sites)",0.95,0.00515463917525773,0.0128865979381443,0.0260309278350515
+"599","singleton recent (75% sites)",1.05,0.0309278350515464,0.0438144329896907,0.0645618556701031
+"600","singleton recent (75% sites)",1.15,0.0206185567010309,0.0335051546391753,0.0594072164948454
+"601","singleton recent (75% sites)",1.25,0.0103092783505155,0.0257731958762887,0.0360824742268041
+"602","singleton recent (75% sites)",1.35,0,0.00515463917525773,0.0154639175257732
+"603","singleton recent (75% sites)",1.45,0.0127577319587629,0.0283505154639175,0.0360824742268041
+"604","singleton recent (75% sites)",1.55,0,0.0103092783505155,0.0206185567010309
+"605","singleton recent (75% sites)",1.65,0.00515463917525773,0.0206185567010309,0.0336340206185567
+"606","singleton recent (75% sites)",1.75,0.00515463917525773,0.0154639175257732,0.0260309278350515
+"607","singleton recent (75% sites)",1.85,0,0.0103092783505155,0.0181701030927835
+"608","singleton recent (75% sites)",1.95,0.00515463917525773,0.0103092783505155,0.0181701030927835
+"609","singleton recent (75% sites)",2.05,0,0.00515463917525773,0.0233247422680412
+"610","singleton recent (75% sites)",2.15,0.00515463917525773,0.0128865979381443,0.0206185567010309
+"611","singleton recent (75% sites)",2.25,0.00515463917525773,0.0103092783505155,0.0154639175257732
+"612","singleton recent (75% sites)",2.35,0,0.00515463917525773,0.0103092783505155
+"613","singleton recent (75% sites)",2.45,0,0.00515463917525773,0.0157216494845361
+"614","singleton recent (75% sites)",2.55,0.00515463917525773,0.0154639175257732,0.0257731958762887
+"615","singleton recent (75% sites)",2.65,0,0.00515463917525773,0.0130154639175258
+"616","singleton recent (75% sites)",2.75,0,0.0103092783505155,0.0206185567010309
+"617","singleton recent (75% sites)",2.85,0,0,0.0103092783505155
+"618","singleton recent (75% sites)",2.95,0,0.00515463917525773,0.0130154639175258
+"619","singleton recent (75% sites)",3.05,0,0.0103092783505155,0.0181701030927835
+"620","singleton recent (75% sites)",3.15,0,0.00515463917525773,0.0130154639175258
+"621","singleton recent (75% sites)",3.25,0,0.00515463917525773,0.0103092783505155
+"622","singleton recent (75% sites)",3.35,0,0.00515463917525773,0.0181701030927835
+"623","singleton recent (75% sites)",3.45,0.00515463917525773,0.0103092783505155,0.0206185567010309
+"624","singleton recent (75% sites)",3.55,0,0.00515463917525773,0.0181701030927835
+"625","singleton recent (75% sites)",3.65,0,0.00515463917525773,0.0103092783505155
+"626","singleton recent (75% sites)",3.75,0,0,0.00515463917525773
+"627","singleton recent (75% sites)",3.85,0,0,0
+"628","singleton recent (75% sites)",3.95,0,0,0.0103092783505155
+"629","singleton recent (75% sites)",4.05,0,0,0.00515463917525773
+"630","singleton recent (75% sites)",4.15,0,0,0.00515463917525773
+"631","singleton recent (75% sites)",4.25,0,0.00515463917525773,0.00515463917525773
+"632","singleton recent (75% sites)",4.35,0,0,0.00515463917525773
+"633","singleton recent (75% sites)",4.45,0,0,0.00786082474226803
+"634","singleton recent (75% sites)",4.55,0,0.00257731958762887,0.0103092783505155
+"635","singleton recent (75% sites)",4.65,0,0.00515463917525773,0.0103092783505155
+"636","singleton recent (75% sites)",4.75,0,0.0077319587628866,0.0154639175257732
+"637","singleton recent (75% sites)",4.85,0,0.00515463917525773,0.0130154639175258
+"638","singleton recent (75% sites)",4.95,0,0,0
+"639","singleton recent (75% sites)",5.05,0,0.00515463917525773,0.0103092783505155
+"640","singleton recent (75% sites)",5.15,0,0,0.0103092783505155
+"641","singleton recent (75% sites)",5.25,0,0,0.00515463917525773
+"642","singleton recent (75% sites)",5.35,0,0,0.00515463917525773
+"643","singleton recent (75% sites)",5.45,0,0,0.00515463917525773
+"644","singleton recent (75% sites)",5.55,0,0,0
+"645","singleton recent (75% sites)",5.65,0,0,0.00515463917525773
+"646","singleton recent (75% sites)",5.75,0,0,0
+"647","singleton recent (75% sites)",5.85,0,0,0.00515463917525773
+"648","singleton recent (75% sites)",5.95,0,0.00515463917525773,0.0103092783505155
+"649","singleton recent (75% sites)",6.05,0,0,0
+"650","singleton recent (75% sites)",6.15,0,0,0.00515463917525773
+"651","singleton recent (75% sites)",6.25,0,0,0
+"652","singleton recent (75% sites)",6.35,0,0,0
+"653","singleton recent (75% sites)",6.45,0,0,0.00515463917525773
+"654","singleton recent (75% sites)",6.55,0,0,0
+"655","singleton recent (75% sites)",6.65,0,0,0
+"656","singleton recent (75% sites)",6.75,0,0,0
+"657","singleton recent (75% sites)",6.85,0,0,0
+"658","singleton recent (75% sites)",6.95,0,0,0.00515463917525773
+"659","singleton recent (75% sites)",7.05,0,0,0
+"660","singleton recent (75% sites)",7.15,0,0,0.00515463917525773
+"661","singleton recent (75% sites)",7.25,0,0,0.00515463917525773
+"662","singleton recent (75% sites)",7.35,0,0,0
+"663","singleton recent (75% sites)",7.45,0,0,0.00515463917525773
+"664","singleton recent (75% sites)",7.55,0,0,0.00515463917525773
+"665","singleton recent (75% sites)",7.65,0,0,0
+"666","singleton recent (75% sites)",7.75,0,0,0
+"667","singleton recent (75% sites)",7.85,0,0,0.00515463917525773
+"668","singleton recent (75% sites)",7.95,0,0,0
+"669","singleton recent (75% sites)",8.05,0,0,0
+"670","singleton recent (75% sites)",8.15,0,0.00515463917525773,0.0103092783505155
+"671","singleton recent (75% sites)",8.25,0,0,0
+"672","singleton recent (75% sites)",8.35,0,0,0
+"673","singleton recent (75% sites)",8.45,0,0,0
+"674","singleton recent (75% sites)",8.55,0,0,0.00515463917525773
+"675","singleton recent (75% sites)",8.65,0,0,0
+"676","singleton recent (75% sites)",8.75,0,0,0
+"677","singleton recent (75% sites)",8.85,0,0,0
+"678","singleton recent (75% sites)",8.95,0,0,0
+"679","singleton recent (75% sites)",9.05,0,0,0
+"680","singleton recent (75% sites)",9.15,0,0,0
+"681","singleton recent (75% sites)",9.25,0,0,0
+"682","singleton recent (75% sites)",9.35,0,0,0
+"683","singleton recent (75% sites)",9.45,0,0,0.00515463917525773
+"684","singleton recent (75% sites)",9.55,0,0,0
+"685","singleton recent (75% sites)",9.65,0,0,0
+"686","singleton recent (75% sites)",9.75,0,0,0
+"687","singleton recent (75% sites)",9.85,0,0,0.00515463917525773
+"688","singleton recent (75% sites)",9.95,0,0,0
+"689","singleton recent (75% sites)",10.05,0,0,0
+"690","singleton recent (75% sites)",10.15,0,0,0
+"691","singleton recent (75% sites)",10.25,0,0,0
+"692","singleton recent (75% sites)",10.35,0,0,0
+"693","singleton recent (75% sites)",10.45,0,0,0
+"694","singleton recent (75% sites)",10.55,0,0,0
+"695","singleton recent (75% sites)",10.65,0,0,0
+"696","singleton recent (75% sites)",10.75,0,0,0
+"697","singleton recent (75% sites)",10.85,0,0,0
+"698","singleton recent (75% sites)",10.95,0,0,0
+"699","singleton recent (75% sites)",11.05,0,0,0
+"700","singleton recent (75% sites)",11.15,0,0,0
+"701","singleton recent (75% sites)",11.25,0,0,0
+"702","singleton recent (75% sites)",11.35,0,0,0
+"703","singleton recent (75% sites)",11.45,0,0,0
+"704","singleton recent (75% sites)",11.55,0,0,0
+"705","singleton recent (75% sites)",11.65,0,0,0
+"706","singleton recent (75% sites)",11.75,0,0,0
+"707","singleton recent (75% sites)",11.85,0,0,0
+"708","singleton recent (75% sites)",11.95,0,0,0
+"709","singleton recent (100% sites)",0.25,0.159574468085106,0.159574468085106,0.159574468085106
+"710","singleton recent (100% sites)",0.35,0.170212765957447,0.170212765957447,0.170212765957447
+"711","singleton recent (100% sites)",0.45,0.24468085106383,0.24468085106383,0.24468085106383
+"712","singleton recent (100% sites)",0.55,0.191489361702128,0.191489361702128,0.191489361702128
+"713","singleton recent (100% sites)",0.65,0.0957446808510638,0.0957446808510638,0.0957446808510638
+"714","singleton recent (100% sites)",0.75,0.0106382978723404,0.0106382978723404,0.0106382978723404
+"715","singleton recent (100% sites)",0.85,0.0319148936170213,0.0319148936170213,0.0319148936170213
+"716","singleton recent (100% sites)",0.95,0.0106382978723404,0.0106382978723404,0.0106382978723404
+"717","singleton recent (100% sites)",1.05,0.0319148936170213,0.0319148936170213,0.0319148936170213
+"718","singleton recent (100% sites)",1.15,0.0106382978723404,0.0106382978723404,0.0106382978723404
+"719","singleton recent (100% sites)",1.25,0.0106382978723404,0.0106382978723404,0.0106382978723404
+"720","singleton recent (100% sites)",1.35,0,0,0
+"721","singleton recent (100% sites)",1.45,0.0106382978723404,0.0106382978723404,0.0106382978723404
+"722","singleton recent (100% sites)",1.55,0,0,0
+"723","singleton recent (100% sites)",1.65,0.0106382978723404,0.0106382978723404,0.0106382978723404
+"724","singleton recent (100% sites)",1.75,0,0,0
+"725","singleton recent (100% sites)",1.85,0,0,0
+"726","singleton recent (100% sites)",1.95,0,0,0
+"727","singleton recent (100% sites)",2.05,0,0,0
+"728","singleton recent (100% sites)",2.15,0,0,0
+"729","singleton recent (100% sites)",2.25,0.0106382978723404,0.0106382978723404,0.0106382978723404
+"730","singleton recent (100% sites)",2.35,0,0,0
+"731","singleton recent (100% sites)",2.45,0,0,0
+"732","singleton recent (100% sites)",2.55,0,0,0
+"733","singleton recent (100% sites)",2.65,0,0,0
+"734","singleton recent (100% sites)",2.75,0,0,0
+"735","singleton recent (100% sites)",2.85,0,0,0
+"736","singleton recent (100% sites)",2.95,0,0,0
+"737","singleton recent (100% sites)",3.05,0,0,0
+"738","singleton recent (100% sites)",3.15,0,0,0
+"739","singleton recent (100% sites)",3.25,0,0,0
+"740","singleton recent (100% sites)",3.35,0,0,0
+"741","singleton recent (100% sites)",3.45,0,0,0
+"742","singleton recent (100% sites)",3.55,0,0,0
+"743","singleton recent (100% sites)",3.65,0,0,0
+"744","singleton recent (100% sites)",3.75,0,0,0
+"745","singleton recent (100% sites)",3.85,0,0,0
+"746","singleton recent (100% sites)",3.95,0,0,0
+"747","singleton recent (100% sites)",4.05,0,0,0
+"748","singleton recent (100% sites)",4.15,0,0,0
+"749","singleton recent (100% sites)",4.25,0,0,0
+"750","singleton recent (100% sites)",4.35,0,0,0
+"751","singleton recent (100% sites)",4.45,0,0,0
+"752","singleton recent (100% sites)",4.55,0,0,0
+"753","singleton recent (100% sites)",4.65,0,0,0
+"754","singleton recent (100% sites)",4.75,0,0,0
+"755","singleton recent (100% sites)",4.85,0,0,0
+"756","singleton recent (100% sites)",4.95,0,0,0
+"757","singleton recent (100% sites)",5.05,0,0,0
+"758","singleton recent (100% sites)",5.15,0,0,0
+"759","singleton recent (100% sites)",5.25,0,0,0
+"760","singleton recent (100% sites)",5.35,0,0,0
+"761","singleton recent (100% sites)",5.45,0,0,0
+"762","singleton recent (100% sites)",5.55,0,0,0
+"763","singleton recent (100% sites)",5.65,0,0,0
+"764","singleton recent (100% sites)",5.75,0,0,0
+"765","singleton recent (100% sites)",5.85,0,0,0
+"766","singleton recent (100% sites)",5.95,0,0,0
+"767","singleton recent (100% sites)",6.05,0,0,0
+"768","singleton recent (100% sites)",6.15,0,0,0
+"769","singleton recent (100% sites)",6.25,0,0,0
+"770","singleton recent (100% sites)",6.35,0,0,0
+"771","singleton recent (100% sites)",6.45,0,0,0
+"772","singleton recent (100% sites)",6.55,0,0,0
+"773","singleton recent (100% sites)",6.65,0,0,0
+"774","singleton recent (100% sites)",6.75,0,0,0
+"775","singleton recent (100% sites)",6.85,0,0,0
+"776","singleton recent (100% sites)",6.95,0,0,0
+"777","singleton recent (100% sites)",7.05,0,0,0
+"778","singleton recent (100% sites)",7.15,0,0,0
+"779","singleton recent (100% sites)",7.25,0,0,0
+"780","singleton recent (100% sites)",7.35,0,0,0
+"781","singleton recent (100% sites)",7.45,0,0,0
+"782","singleton recent (100% sites)",7.55,0,0,0
+"783","singleton recent (100% sites)",7.65,0,0,0
+"784","singleton recent (100% sites)",7.75,0,0,0
+"785","singleton recent (100% sites)",7.85,0,0,0
+"786","singleton recent (100% sites)",7.95,0,0,0
+"787","singleton recent (100% sites)",8.05,0,0,0
+"788","singleton recent (100% sites)",8.15,0,0,0
+"789","singleton recent (100% sites)",8.25,0,0,0
+"790","singleton recent (100% sites)",8.35,0,0,0
+"791","singleton recent (100% sites)",8.45,0,0,0
+"792","singleton recent (100% sites)",8.55,0,0,0
+"793","singleton recent (100% sites)",8.65,0,0,0
+"794","singleton recent (100% sites)",8.75,0,0,0
+"795","singleton recent (100% sites)",8.85,0,0,0
+"796","singleton recent (100% sites)",8.95,0,0,0
+"797","singleton recent (100% sites)",9.05,0,0,0
+"798","singleton recent (100% sites)",9.15,0,0,0
+"799","singleton recent (100% sites)",9.25,0,0,0
+"800","singleton recent (100% sites)",9.35,0,0,0
+"801","singleton recent (100% sites)",9.45,0,0,0
+"802","singleton recent (100% sites)",9.55,0,0,0
+"803","singleton recent (100% sites)",9.65,0,0,0
+"804","singleton recent (100% sites)",9.75,0,0,0
+"805","singleton recent (100% sites)",9.85,0,0,0
+"806","singleton recent (100% sites)",9.95,0,0,0
+"807","singleton recent (100% sites)",10.05,0,0,0
+"808","singleton recent (100% sites)",10.15,0,0,0
+"809","singleton recent (100% sites)",10.25,0,0,0
+"810","singleton recent (100% sites)",10.35,0,0,0
+"811","singleton recent (100% sites)",10.45,0,0,0
+"812","singleton recent (100% sites)",10.55,0,0,0
+"813","singleton recent (100% sites)",10.65,0,0,0
+"814","singleton recent (100% sites)",10.75,0,0,0
+"815","singleton recent (100% sites)",10.85,0,0,0
+"816","singleton recent (100% sites)",10.95,0,0,0
+"817","singleton recent (100% sites)",11.05,0,0,0
+"818","singleton recent (100% sites)",11.15,0,0,0
+"819","singleton recent (100% sites)",11.25,0,0,0
+"820","singleton recent (100% sites)",11.35,0,0,0
+"821","singleton recent (100% sites)",11.45,0,0,0
+"822","singleton recent (100% sites)",11.55,0,0,0
+"823","singleton recent (100% sites)",11.65,0,0,0
+"824","singleton recent (100% sites)",11.75,0,0,0
+"825","singleton recent (100% sites)",11.85,0,0,0
+"826","singleton recent (100% sites)",11.95,0,0,0
+"827","singleton random (50% sites)",0.25,0.0269360269360269,0.0303542178542179,0.0372282982134677
+"828","singleton random (50% sites)",0.35,0.0354486371965186,0.0507615666513972,0.0608108108108108
+"829","singleton random (50% sites)",0.45,0.0605392324142324,0.0744502977553825,0.0881427508016491
+"830","singleton random (50% sites)",0.55,0.0657939189189189,0.0829076958314246,0.103288192853871
+"831","singleton random (50% sites)",0.65,0.0573309104559105,0.0708265083265083,0.0828547297297297
+"832","singleton random (50% sites)",0.75,0.047213690963691,0.0591165896250642,0.0729973087494274
+"833","singleton random (50% sites)",0.85,0.0369885293614107,0.0507615666513972,0.0608217770929635
+"834","singleton random (50% sites)",0.95,0.00673400673400673,0.0134681661527299,0.0203389830508475
+"835","singleton random (50% sites)",1.05,0.0386376519136586,0.0472978371283456,0.059006734006734
+"836","singleton random (50% sites)",1.15,0.0336209553158706,0.0456029218741083,0.0540540540540541
+"837","singleton random (50% sites)",1.25,0.0166990854490855,0.0336700336700337,0.0456925675675676
+"838","singleton random (50% sites)",1.35,0.0033724064974065,0.0101351351351351,0.0152790618044855
+"839","singleton random (50% sites)",1.45,0.0201314131928539,0.0320892541231524,0.0423794663307375
+"840","singleton random (50% sites)",1.55,0.0117182523432523,0.0168918918918919,0.0288547869903802
+"841","singleton random (50% sites)",1.65,0.0169190907008704,0.026981526981527,0.0322881355932203
+"842","singleton random (50% sites)",1.75,0.00996621621621622,0.0202361452361452,0.0270751259734311
+"843","singleton random (50% sites)",1.85,0.00834954272454273,0.0168918918918919,0.02873706063019
+"844","singleton random (50% sites)",1.95,0.0135113850368088,0.0185416903651462,0.0254603756298672
+"845","singleton random (50% sites)",2.05,0.0083573018318781,0.0134454161299799,0.0186385248885249
+"846","singleton random (50% sites)",2.15,0.0168323734808634,0.0236887311039853,0.0337297524797525
+"847","singleton random (50% sites)",2.25,0,0.00675675675675676,0.0101531722400366
+"848","singleton random (50% sites)",2.35,0.00337191445796838,0.00844033555897963,0.0135593220338983
+"849","singleton random (50% sites)",2.45,0.00160472972972973,0.0101180726180726,0.0135593220338983
+"850","singleton random (50% sites)",2.55,0.0168620324870325,0.0235690235690236,0.0305146055146055
+"851","singleton random (50% sites)",2.65,0,0.00674538174538175,0.0101531722400366
+"852","singleton random (50% sites)",2.75,0.0099566284312047,0.0168918918918919,0.0236907352267522
+"853","singleton random (50% sites)",2.85,0,0.00338983050847458,0.0101531722400366
+"854","singleton random (50% sites)",2.95,0.0033724064974065,0.0101180726180726,0.0135593220338983
+"855","singleton random (50% sites)",3.05,0,0.00675675675675676,0.0134680134680135
+"856","singleton random (50% sites)",3.15,0.0101010101010101,0.0135593220338983,0.0221186440677966
+"857","singleton random (50% sites)",3.25,0.0015993265993266,0.00675675675675676,0.0101531722400366
+"858","singleton random (50% sites)",3.35,0.0015993265993266,0.00675675675675676,0.0119491525423729
+"859","singleton random (50% sites)",3.45,0.0101172194922195,0.0135364177737059,0.0254603756298672
+"860","singleton random (50% sites)",3.55,0.0015993265993266,0.0101010101010101,0.0135375629867155
+"861","singleton random (50% sites)",3.65,0,0.00675675675675676,0.0119012155452833
+"862","singleton random (50% sites)",3.75,0,0.00337837837837838,0.00676878149335776
+"863","singleton random (50% sites)",3.85,0,0,0
+"864","singleton random (50% sites)",3.95,0.0015993265993266,0.00505061995222386,0.00677966101694915
+"865","singleton random (50% sites)",4.05,0,0.00337837837837838,0.00677966101694915
+"866","singleton random (50% sites)",4.15,0,0.00336700336700337,0.00338983050847458
+"867","singleton random (50% sites)",4.25,0.00336107156576955,0.00674538174538175,0.0101531722400366
+"868","singleton random (50% sites)",4.35,0,0.00168350168350168,0.00338983050847458
+"869","singleton random (50% sites)",4.45,0,0.00338410444342648,0.00677966101694915
+"870","singleton random (50% sites)",4.55,0.0033724064974065,0.00673400673400673,0.0101694915254237
+"871","singleton random (50% sites)",4.65,0,0.00673408307636496,0.0101189257439257
+"872","singleton random (50% sites)",4.75,0,0.0101010101010101,0.0169219537333944
+"873","singleton random (50% sites)",4.85,0.0015993265993266,0.00673400673400673,0.0101531722400366
+"874","singleton random (50% sites)",4.95,0,0,0
+"875","singleton random (50% sites)",5.05,0,0.00675675675675676,0.0101531722400366
+"876","singleton random (50% sites)",5.15,0,0.00337837837837838,0.00676878149335776
+"877","singleton random (50% sites)",5.25,0,0.00336700336700337,0.00338983050847458
+"878","singleton random (50% sites)",5.35,0,0.00336135403249497,0.00338983050847458
+"879","singleton random (50% sites)",5.45,0,0.00336700336700337,0.00338983050847458
+"880","singleton random (50% sites)",5.55,0,0,0
+"881","singleton random (50% sites)",5.65,0,0.00336135403249497,0.00338983050847458
+"882","singleton random (50% sites)",5.75,0,0,0
+"883","singleton random (50% sites)",5.85,0,0.00336700336700337,0.00338983050847458
+"884","singleton random (50% sites)",5.95,0.0015993265993266,0.00674538174538175,0.0101010101010101
+"885","singleton random (50% sites)",6.05,0,0,0
+"886","singleton random (50% sites)",6.15,0,0.00168350168350168,0.00338983050847458
+"887","singleton random (50% sites)",6.25,0,0,0
+"888","singleton random (50% sites)",6.35,0,0,0
+"889","singleton random (50% sites)",6.45,0,0.00336700336700337,0.00338983050847458
+"890","singleton random (50% sites)",6.55,0,0,0
+"891","singleton random (50% sites)",6.65,0,0,0
+"892","singleton random (50% sites)",6.75,0,0,0
+"893","singleton random (50% sites)",6.85,0,0,0
+"894","singleton random (50% sites)",6.95,0,0.00336700336700337,0.00338983050847458
+"895","singleton random (50% sites)",7.05,0,0,0
+"896","singleton random (50% sites)",7.15,0,0.00337269087269087,0.00338983050847458
+"897","singleton random (50% sites)",7.25,0,0.00337269087269087,0.00338983050847458
+"898","singleton random (50% sites)",7.35,0,0,0
+"899","singleton random (50% sites)",7.45,0,0.00336700336700337,0.00338983050847458
+"900","singleton random (50% sites)",7.55,0,0.00336700336700337,0.00338983050847458
+"901","singleton random (50% sites)",7.65,0,0,0
+"902","singleton random (50% sites)",7.75,0,0,0
+"903","singleton random (50% sites)",7.85,0,0.00336700336700337,0.00338983050847458
+"904","singleton random (50% sites)",7.95,0,0,0
+"905","singleton random (50% sites)",8.05,0,0,0
+"906","singleton random (50% sites)",8.15,0,0.00338983050847458,0.00676878149335776
+"907","singleton random (50% sites)",8.25,0,0,0
+"908","singleton random (50% sites)",8.35,0,0,0
+"909","singleton random (50% sites)",8.45,0,0,0
+"910","singleton random (50% sites)",8.55,0,0,0.00338439074667888
+"911","singleton random (50% sites)",8.65,0,0,0
+"912","singleton random (50% sites)",8.75,0,0,0
+"913","singleton random (50% sites)",8.85,0,0,0
+"914","singleton random (50% sites)",8.95,0,0,0
+"915","singleton random (50% sites)",9.05,0,0,0
+"916","singleton random (50% sites)",9.15,0,0,0
+"917","singleton random (50% sites)",9.25,0,0,0
+"918","singleton random (50% sites)",9.35,0,0,0
+"919","singleton random (50% sites)",9.45,0,0,0.00338439074667888
+"920","singleton random (50% sites)",9.55,0,0,0
+"921","singleton random (50% sites)",9.65,0,0,0
+"922","singleton random (50% sites)",9.75,0,0,0
+"923","singleton random (50% sites)",9.85,0,0.00336700336700337,0.00338983050847458
+"924","singleton random (50% sites)",9.95,0,0,0
+"925","singleton random (50% sites)",10.05,0,0,0
+"926","singleton random (50% sites)",10.15,0,0,0
+"927","singleton random (50% sites)",10.25,0,0,0
+"928","singleton random (50% sites)",10.35,0,0,0
+"929","singleton random (50% sites)",10.45,0,0,0
+"930","singleton random (50% sites)",10.55,0,0,0
+"931","singleton random (50% sites)",10.65,0,0,0
+"932","singleton random (50% sites)",10.75,0,0,0
+"933","singleton random (50% sites)",10.85,0,0,0
+"934","singleton random (50% sites)",10.95,0,0,0
+"935","singleton random (50% sites)",11.05,0,0,0
+"936","singleton random (50% sites)",11.15,0,0,0
+"937","singleton random (50% sites)",11.25,0,0,0
+"938","singleton random (50% sites)",11.35,0,0,0
+"939","singleton random (50% sites)",11.45,0,0,0
+"940","singleton random (50% sites)",11.55,0,0,0
+"941","singleton random (50% sites)",11.65,0,0,0
+"942","singleton random (50% sites)",11.75,0,0,0
+"943","singleton random (50% sites)",11.85,0,0,0
+"944","singleton random (50% sites)",11.95,0,0,0
+"945","singleton random (75% sites)",0.25,0.017494923857868,0.0303038032803612,0.0458216783216783
+"946","singleton random (75% sites)",0.35,0.0303699620551738,0.0480769230769231,0.0657644282016141
+"947","singleton random (75% sites)",0.45,0.0551583675955535,0.0761421319796954,0.102532051282051
+"948","singleton random (75% sites)",0.55,0.0603535353535354,0.0835298943698082,0.106343254883864
+"949","singleton random (75% sites)",0.65,0.0504935846746422,0.0661581891639905,0.095995127150906
+"950","singleton random (75% sites)",0.75,0.0375628140703518,0.0555555555555556,0.0735290724503923
+"951","singleton random (75% sites)",0.85,0.0376592558753363,0.0552763819095477,0.072822864321608
+"952","singleton random (75% sites)",0.95,0.00742538449824882,0.0177033124807712,0.027884983292095
+"953","singleton random (75% sites)",1.05,0.0327799712849964,0.0512820512820513,0.0686548223350254
+"954","singleton random (75% sites)",1.15,0.0255043602759339,0.040506588729939,0.0640228426395939
+"955","singleton random (75% sites)",1.25,0.0125365328411014,0.0304568527918782,0.0432513914656772
+"956","singleton random (75% sites)",1.35,0.00238693467336683,0.0101266471824847,0.0203045685279188
+"957","singleton random (75% sites)",1.45,0.0101233206850579,0.0303038032803612,0.0407303807303807
+"958","singleton random (75% sites)",1.55,0.00741497461928934,0.017664464454251,0.0304754541940472
+"959","singleton random (75% sites)",1.65,0.00507498453927025,0.0277143292218669,0.0430330586944877
+"960","singleton random (75% sites)",1.75,0.00742538449824882,0.0202020202020202,0.03327020695041
+"961","singleton random (75% sites)",1.85,0.00744949494949495,0.0201005025125628,0.0304568527918782
+"962","singleton random (75% sites)",1.95,0.0050239898989899,0.017664464454251,0.0306208512299883
+"963","singleton random (75% sites)",2.05,0.00504935846746422,0.0151515151515152,0.0231364468864469
+"964","singleton random (75% sites)",2.15,0.00503718085376377,0.0203045685279188,0.0331218274111675
+"965","singleton random (75% sites)",2.25,0,0.00511512297226583,0.0151918935548377
+"966","singleton random (75% sites)",2.35,0.00741497461928934,0.0150753768844221,0.0203045685279188
+"967","singleton random (75% sites)",2.45,0,0.0101010101010101,0.0177335025380711
+"968","singleton random (75% sites)",2.55,0.0125454194047159,0.0253166179562119,0.0355329949238579
+"969","singleton random (75% sites)",2.65,0,0.00505050505050505,0.0127615116398318
+"970","singleton random (75% sites)",2.75,0.00744230769230769,0.0202532943649695,0.0303837871096754
+"971","singleton random (75% sites)",2.85,0,0.00503781533932288,0.0128667187296629
+"972","singleton random (75% sites)",2.95,0.0023989898989899,0.0101010101010101,0.0203045685279188
+"973","singleton random (75% sites)",3.05,0,0.00510204081632653,0.0151918935548377
+"974","singleton random (75% sites)",3.15,0.00501193467336683,0.0151134460179686,0.0278437642759251
+"975","singleton random (75% sites)",3.25,0,0.0050761421319797,0.0128263403263403
+"976","singleton random (75% sites)",3.35,0,0.00508909147415311,0.0151918935548377
+"977","singleton random (75% sites)",3.45,0.00238693467336683,0.0203045685279188,0.0303930366116296
+"978","singleton random (75% sites)",3.55,0,0.0100502512562814,0.0129238618524333
+"979","singleton random (75% sites)",3.65,0,0.00512820512820513,0.0152692168237854
+"980","singleton random (75% sites)",3.75,0,0.00505050505050505,0.0102040816326531
+"981","singleton random (75% sites)",3.85,0,0,0
+"982","singleton random (75% sites)",3.95,0,0,0.010076899649764
+"983","singleton random (75% sites)",4.05,0,0.00503781533932288,0.00769985129730283
+"984","singleton random (75% sites)",4.15,0,0,0.00510347520499805
+"985","singleton random (75% sites)",4.25,0,0.00510217363009241,0.0128826530612245
+"986","singleton random (75% sites)",4.35,0,0,0.00510347520499805
+"987","singleton random (75% sites)",4.45,0,0.0050761421319797,0.0102069504099961
+"988","singleton random (75% sites)",4.55,0,0.0050761421319797,0.0153104256149941
+"989","singleton random (75% sites)",4.65,0,0.00503781533932288,0.0128826530612245
+"990","singleton random (75% sites)",4.75,0.002375,0.0101266471824847,0.0153061224489796
+"991","singleton random (75% sites)",4.85,0.002375,0.0050761421319797,0.0128014842300557
+"992","singleton random (75% sites)",4.95,0,0,0
+"993","singleton random (75% sites)",5.05,0,0.0050761421319797,0.0102564102564103
+"994","singleton random (75% sites)",5.15,0,0.00506332359124237,0.0101522842639594
+"995","singleton random (75% sites)",5.25,0,0,0.00508973894126178
+"996","singleton random (75% sites)",5.35,0,0,0.00508973894126178
+"997","singleton random (75% sites)",5.45,0,0,0.00510347520499805
+"998","singleton random (75% sites)",5.55,0,0,0
+"999","singleton random (75% sites)",5.65,0,0,0.00510347520499805
+"1000","singleton random (75% sites)",5.75,0,0,0
+"1001","singleton random (75% sites)",5.85,0,0,0.0050761421319797
+"1002","singleton random (75% sites)",5.95,0,0.0050761421319797,0.0102069504099961
+"1003","singleton random (75% sites)",6.05,0,0,0
+"1004","singleton random (75% sites)",6.15,0,0,0.00506396451827924
+"1005","singleton random (75% sites)",6.25,0,0,0
+"1006","singleton random (75% sites)",6.35,0,0,0
+"1007","singleton random (75% sites)",6.45,0,0.00251256281407035,0.00511577708006279
+"1008","singleton random (75% sites)",6.55,0,0,0
+"1009","singleton random (75% sites)",6.65,0,0,0
+"1010","singleton random (75% sites)",6.75,0,0,0
+"1011","singleton random (75% sites)",6.85,0,0,0
+"1012","singleton random (75% sites)",6.95,0,0,0.00511577708006279
+"1013","singleton random (75% sites)",7.05,0,0,0
+"1014","singleton random (75% sites)",7.15,0,0,0.00508973894126178
+"1015","singleton random (75% sites)",7.25,0,0.0050251256281407,0.00511577708006279
+"1016","singleton random (75% sites)",7.35,0,0,0
+"1017","singleton random (75% sites)",7.45,0,0.00251256281407035,0.00511577708006279
+"1018","singleton random (75% sites)",7.55,0,0,0.0050761421319797
+"1019","singleton random (75% sites)",7.65,0,0,0
+"1020","singleton random (75% sites)",7.75,0,0,0
+"1021","singleton random (75% sites)",7.85,0,0,0.00510347520499805
+"1022","singleton random (75% sites)",7.95,0,0,0
+"1023","singleton random (75% sites)",8.05,0,0,0
+"1024","singleton random (75% sites)",8.15,0,0.00501256281407035,0.00771227934544517
+"1025","singleton random (75% sites)",8.25,0,0,0
+"1026","singleton random (75% sites)",8.35,0,0,0
+"1027","singleton random (75% sites)",8.45,0,0,0
+"1028","singleton random (75% sites)",8.55,0,0,0.00508973894126178
+"1029","singleton random (75% sites)",8.65,0,0,0
+"1030","singleton random (75% sites)",8.75,0,0,0
+"1031","singleton random (75% sites)",8.85,0,0,0
+"1032","singleton random (75% sites)",8.95,0,0,0
+"1033","singleton random (75% sites)",9.05,0,0,0
+"1034","singleton random (75% sites)",9.15,0,0,0
+"1035","singleton random (75% sites)",9.25,0,0,0
+"1036","singleton random (75% sites)",9.35,0,0,0
+"1037","singleton random (75% sites)",9.45,0,0.0050251256281407,0.00512820512820513
+"1038","singleton random (75% sites)",9.55,0,0,0
+"1039","singleton random (75% sites)",9.65,0,0,0
+"1040","singleton random (75% sites)",9.75,0,0,0
+"1041","singleton random (75% sites)",9.85,0,0,0.00511577708006279
+"1042","singleton random (75% sites)",9.95,0,0,0
+"1043","singleton random (75% sites)",10.05,0,0,0
+"1044","singleton random (75% sites)",10.15,0,0,0
+"1045","singleton random (75% sites)",10.25,0,0,0
+"1046","singleton random (75% sites)",10.35,0,0,0
+"1047","singleton random (75% sites)",10.45,0,0,0
+"1048","singleton random (75% sites)",10.55,0,0,0
+"1049","singleton random (75% sites)",10.65,0,0,0
+"1050","singleton random (75% sites)",10.75,0,0,0
+"1051","singleton random (75% sites)",10.85,0,0,0
+"1052","singleton random (75% sites)",10.95,0,0,0
+"1053","singleton random (75% sites)",11.05,0,0,0
+"1054","singleton random (75% sites)",11.15,0,0,0
+"1055","singleton random (75% sites)",11.25,0,0,0
+"1056","singleton random (75% sites)",11.35,0,0,0
+"1057","singleton random (75% sites)",11.45,0,0,0
+"1058","singleton random (75% sites)",11.55,0,0,0
+"1059","singleton random (75% sites)",11.65,0,0,0
+"1060","singleton random (75% sites)",11.75,0,0,0
+"1061","singleton random (75% sites)",11.85,0,0,0
+"1062","singleton random (75% sites)",11.95,0,0,0
+"1063","singleton random (100% sites)",0.25,0.0195,0.0406101834673263,0.0612244897959184
+"1064","singleton random (100% sites)",0.35,0.0201938775510204,0.0502525252525253,0.0914613402061856
+"1065","singleton random (100% sites)",0.45,0.050239898989899,0.0804040404040404,0.130689393939394
+"1066","singleton random (100% sites)",0.55,0.05475,0.0816326530612245,0.142107142857143
+"1067","singleton random (100% sites)",0.65,0.0148571428571429,0.055813234384663,0.106622448979592
+"1068","singleton random (100% sites)",0.75,0.03,0.0555102040816327,0.0865027829313543
+"1069","singleton random (100% sites)",0.85,0.0248560606060606,0.06,0.0973124098124098
+"1070","singleton random (100% sites)",0.95,0,0.0100505050505051,0.0255438144329897
+"1071","singleton random (100% sites)",1.05,0.0205081001472754,0.0502525252525253,0.07525
+"1072","singleton random (100% sites)",1.15,0.0149531024531025,0.0406101834673263,0.0764430014430014
+"1073","singleton random (100% sites)",1.25,0,0.0252040816326531,0.0512965495476541
+"1074","singleton random (100% sites)",1.35,0,0.01,0.0357529375386518
+"1075","singleton random (100% sites)",1.45,0.00475,0.0254607935020306,0.0510204081632653
+"1076","singleton random (100% sites)",1.55,0,0.0201010101010101,0.0355408163265306
+"1077","singleton random (100% sites)",1.65,0,0.0307700399747528,0.0507756132756133
+"1078","singleton random (100% sites)",1.75,0,0.0151546391752577,0.0361903008626131
+"1079","singleton random (100% sites)",1.85,0.00475,0.0102040816326531,0.035969387755102
+"1080","singleton random (100% sites)",1.95,0,0.0151546391752577,0.0361192930780559
+"1081","singleton random (100% sites)",2.05,0,0.0101525458668316,0.0410372396381233
+"1082","singleton random (100% sites)",2.15,0,0.02,0.0506919191919192
+"1083","singleton random (100% sites)",2.25,0,0.01,0.0156111929307805
+"1084","singleton random (100% sites)",2.35,0,0.0100505050505051,0.0256029684601113
+"1085","singleton random (100% sites)",2.45,0,0.0101020408163265,0.0307779297285925
+"1086","singleton random (100% sites)",2.55,0.00475,0.0204081632653061,0.0457070707070707
+"1087","singleton random (100% sites)",2.65,0,0,0.0204207018640008
+"1088","singleton random (100% sites)",2.75,0,0.0103092783505155,0.0408163265306122
+"1089","singleton random (100% sites)",2.85,0,0.0100505050505051,0.0205186198190616
+"1090","singleton random (100% sites)",2.95,0,0.01,0.0309059987631416
+"1091","singleton random (100% sites)",3.05,0,0.0101525458668316,0.0204081632653061
+"1092","singleton random (100% sites)",3.15,0,0.0102566799915843,0.03
+"1093","singleton random (100% sites)",3.25,0,0,0.0203102453102453
+"1094","singleton random (100% sites)",3.35,0,0.005,0.0254438775510204
+"1095","singleton random (100% sites)",3.45,0.00475,0.0202020202020202,0.0361903008626131
+"1096","singleton random (100% sites)",3.55,0,0.01,0.0206185567010309
+"1097","singleton random (100% sites)",3.65,0,0.0101010101010101,0.0206185567010309
+"1098","singleton random (100% sites)",3.75,0,0,0.0103092783505155
+"1099","singleton random (100% sites)",3.85,0,0,0
+"1100","singleton random (100% sites)",3.95,0,0.005,0.0102593099095308
+"1101","singleton random (100% sites)",4.05,0,0,0.0153469387755102
+"1102","singleton random (100% sites)",4.15,0,0,0.0102593099095308
+"1103","singleton random (100% sites)",4.25,0,0,0.0156111929307805
+"1104","singleton random (100% sites)",4.35,0,0,0.0101551226551227
+"1105","singleton random (100% sites)",4.45,0,0,0.0102593099095308
+"1106","singleton random (100% sites)",4.55,0,0,0.0102593099095308
+"1107","singleton random (100% sites)",4.65,0,0,0.0201060606060606
+"1108","singleton random (100% sites)",4.75,0,0.0102040816326531,0.0206185567010309
+"1109","singleton random (100% sites)",4.85,0,0.0101010101010101,0.0205186198190616
+"1110","singleton random (100% sites)",4.95,0,0,0
+"1111","singleton random (100% sites)",5.05,0,0.005,0.0201060606060606
+"1112","singleton random (100% sites)",5.15,0,0.01,0.0102593099095308
+"1113","singleton random (100% sites)",5.25,0,0,0.0102040816326531
+"1114","singleton random (100% sites)",5.35,0,0,0.0101551226551227
+"1115","singleton random (100% sites)",5.45,0,0,0.0102040816326531
+"1116","singleton random (100% sites)",5.55,0,0,0
+"1117","singleton random (100% sites)",5.65,0,0,0.0102593099095308
+"1118","singleton random (100% sites)",5.75,0,0,0
+"1119","singleton random (100% sites)",5.85,0,0,0.0102040816326531
+"1120","singleton random (100% sites)",5.95,0,0,0.0202142857142857
+"1121","singleton random (100% sites)",6.05,0,0,0
+"1122","singleton random (100% sites)",6.15,0,0,0.0103092783505155
+"1123","singleton random (100% sites)",6.25,0,0,0
+"1124","singleton random (100% sites)",6.35,0,0,0
+"1125","singleton random (100% sites)",6.45,0,0,0.01
+"1126","singleton random (100% sites)",6.55,0,0,0
+"1127","singleton random (100% sites)",6.65,0,0,0
+"1128","singleton random (100% sites)",6.75,0,0,0
+"1129","singleton random (100% sites)",6.85,0,0,0
+"1130","singleton random (100% sites)",6.95,0,0,0.0101551226551227
+"1131","singleton random (100% sites)",7.05,0,0,0
+"1132","singleton random (100% sites)",7.15,0,0,0.0101551226551227
+"1133","singleton random (100% sites)",7.25,0,0,0.0102040816326531
+"1134","singleton random (100% sites)",7.35,0,0,0
+"1135","singleton random (100% sites)",7.45,0,0,0.0100530303030303
+"1136","singleton random (100% sites)",7.55,0,0,0.0102103509320004
+"1137","singleton random (100% sites)",7.65,0,0,0
+"1138","singleton random (100% sites)",7.75,0,0,0
+"1139","singleton random (100% sites)",7.85,0,0,0.0102593099095308
+"1140","singleton random (100% sites)",7.95,0,0,0
+"1141","singleton random (100% sites)",8.05,0,0,0
+"1142","singleton random (100% sites)",8.15,0,0,0.0102593099095308
+"1143","singleton random (100% sites)",8.25,0,0,0
+"1144","singleton random (100% sites)",8.35,0,0,0
+"1145","singleton random (100% sites)",8.45,0,0,0
+"1146","singleton random (100% sites)",8.55,0,0,0.0102593099095308
+"1147","singleton random (100% sites)",8.65,0,0,0
+"1148","singleton random (100% sites)",8.75,0,0,0
+"1149","singleton random (100% sites)",8.85,0,0,0
+"1150","singleton random (100% sites)",8.95,0,0,0
+"1151","singleton random (100% sites)",9.05,0,0,0
+"1152","singleton random (100% sites)",9.15,0,0,0
+"1153","singleton random (100% sites)",9.25,0,0,0
+"1154","singleton random (100% sites)",9.35,0,0,0
+"1155","singleton random (100% sites)",9.45,0,0,0.0102593099095308
+"1156","singleton random (100% sites)",9.55,0,0,0
+"1157","singleton random (100% sites)",9.65,0,0,0
+"1158","singleton random (100% sites)",9.75,0,0,0
+"1159","singleton random (100% sites)",9.85,0,0,0.0102040816326531
+"1160","singleton random (100% sites)",9.95,0,0,0
+"1161","singleton random (100% sites)",10.05,0,0,0
+"1162","singleton random (100% sites)",10.15,0,0,0
+"1163","singleton random (100% sites)",10.25,0,0,0
+"1164","singleton random (100% sites)",10.35,0,0,0
+"1165","singleton random (100% sites)",10.45,0,0,0
+"1166","singleton random (100% sites)",10.55,0,0,0
+"1167","singleton random (100% sites)",10.65,0,0,0
+"1168","singleton random (100% sites)",10.75,0,0,0
+"1169","singleton random (100% sites)",10.85,0,0,0
+"1170","singleton random (100% sites)",10.95,0,0,0
+"1171","singleton random (100% sites)",11.05,0,0,0
+"1172","singleton random (100% sites)",11.15,0,0,0
+"1173","singleton random (100% sites)",11.25,0,0,0
+"1174","singleton random (100% sites)",11.35,0,0,0
+"1175","singleton random (100% sites)",11.45,0,0,0
+"1176","singleton random (100% sites)",11.55,0,0,0
+"1177","singleton random (100% sites)",11.65,0,0,0
+"1178","singleton random (100% sites)",11.75,0,0,0
+"1179","singleton random (100% sites)",11.85,0,0,0
+"1180","singleton random (100% sites)",11.95,0,0,0
+"1181","bracketed (50% sites)",0.25,0.0436046511627907,0.0436046511627907,0.0436046511627907
+"1182","bracketed (50% sites)",0.35,0.0494186046511628,0.0552325581395349,0.0596656976744186
+"1183","bracketed (50% sites)",0.45,0.0843023255813953,0.0915697674418605,0.101889534883721
+"1184","bracketed (50% sites)",0.55,0.0769622093023256,0.0872093023255814,0.0916424418604651
+"1185","bracketed (50% sites)",0.65,0.0507994186046512,0.061046511627907,0.0712936046511628
+"1186","bracketed (50% sites)",0.75,0.0362645348837209,0.0406976744186047,0.0538517441860465
+"1187","bracketed (50% sites)",0.85,0.0333575581395349,0.0421511627906977,0.0523255813953488
+"1188","bracketed (50% sites)",0.95,0.0116279069767442,0.0145348837209302,0.0203488372093023
+"1189","bracketed (50% sites)",1.05,0.0318313953488372,0.0436046511627907,0.0524709302325581
+"1190","bracketed (50% sites)",1.15,0.0231104651162791,0.0348837209302326,0.0495639534883721
+"1191","bracketed (50% sites)",1.25,0.0203488372093023,0.0261627906976744,0.0319767441860465
+"1192","bracketed (50% sites)",1.35,0.00428779069767442,0.00872093023255814,0.0131540697674419
+"1193","bracketed (50% sites)",1.45,0.0188226744186047,0.0261627906976744,0.0365552325581395
+"1194","bracketed (50% sites)",1.55,0.00872093023255814,0.0145348837209302,0.0174418604651163
+"1195","bracketed (50% sites)",1.65,0.0159156976744186,0.0232558139534884,0.0276889534883721
+"1196","bracketed (50% sites)",1.75,0.00872093023255814,0.0145348837209302,0.021875
+"1197","bracketed (50% sites)",1.85,0.0145348837209302,0.0203488372093023,0.0261627906976744
+"1198","bracketed (50% sites)",1.95,0.00872093023255814,0.0159883720930233,0.021875
+"1199","bracketed (50% sites)",2.05,0.00872093023255814,0.0116279069767442,0.0174418604651163
+"1200","bracketed (50% sites)",2.15,0.0130087209302326,0.0203488372093023,0.0261627906976744
+"1201","bracketed (50% sites)",2.25,0.00290697674418605,0.00581395348837209,0.00872093023255814
+"1202","bracketed (50% sites)",2.35,0.00872093023255814,0.0116279069767442,0.0145348837209302
+"1203","bracketed (50% sites)",2.45,0.00581395348837209,0.0116279069767442,0.0145348837209302
+"1204","bracketed (50% sites)",2.55,0.0203488372093023,0.0261627906976744,0.0305959302325581
+"1205","bracketed (50% sites)",2.65,0.00290697674418605,0.00581395348837209,0.00872093023255814
+"1206","bracketed (50% sites)",2.75,0.0130087209302326,0.0174418604651163,0.021875
+"1207","bracketed (50% sites)",2.85,0.00290697674418605,0.00581395348837209,0.00872093023255814
+"1208","bracketed (50% sites)",2.95,0.00581395348837209,0.00872093023255814,0.0116279069767442
+"1209","bracketed (50% sites)",3.05,0.00581395348837209,0.00872093023255814,0.0116279069767442
+"1210","bracketed (50% sites)",3.15,0.0145348837209302,0.0174418604651163,0.0203488372093023
+"1211","bracketed (50% sites)",3.25,0.00872093023255814,0.00872093023255814,0.00872093023255814
+"1212","bracketed (50% sites)",3.35,0.00581395348837209,0.00872093023255814,0.0116279069767442
+"1213","bracketed (50% sites)",3.45,0.0203488372093023,0.0232558139534884,0.0261627906976744
+"1214","bracketed (50% sites)",3.55,0,0.00581395348837209,0.00872093023255814
+"1215","bracketed (50% sites)",3.65,0.00290697674418605,0.00726744186046512,0.0116279069767442
+"1216","bracketed (50% sites)",3.75,0.00581395348837209,0.00581395348837209,0.00581395348837209
+"1217","bracketed (50% sites)",3.85,0,0,0
+"1218","bracketed (50% sites)",3.95,0.00581395348837209,0.00581395348837209,0.00581395348837209
+"1219","bracketed (50% sites)",4.05,0,0.00290697674418605,0.00581395348837209
+"1220","bracketed (50% sites)",4.15,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1221","bracketed (50% sites)",4.25,0.00581395348837209,0.00581395348837209,0.00872093023255814
+"1222","bracketed (50% sites)",4.35,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1223","bracketed (50% sites)",4.45,0.00581395348837209,0.00581395348837209,0.00581395348837209
+"1224","bracketed (50% sites)",4.55,0.00581395348837209,0.00581395348837209,0.00872093023255814
+"1225","bracketed (50% sites)",4.65,0.00581395348837209,0.00872093023255814,0.00872093023255814
+"1226","bracketed (50% sites)",4.75,0.00581395348837209,0.0101744186046512,0.0145348837209302
+"1227","bracketed (50% sites)",4.85,0.00872093023255814,0.00872093023255814,0.00872093023255814
+"1228","bracketed (50% sites)",4.95,0,0,0
+"1229","bracketed (50% sites)",5.05,0.00581395348837209,0.00872093023255814,0.00872093023255814
+"1230","bracketed (50% sites)",5.15,0.00581395348837209,0.00581395348837209,0.00581395348837209
+"1231","bracketed (50% sites)",5.25,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1232","bracketed (50% sites)",5.35,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1233","bracketed (50% sites)",5.45,0,0.00290697674418605,0.00290697674418605
+"1234","bracketed (50% sites)",5.55,0,0,0
+"1235","bracketed (50% sites)",5.65,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1236","bracketed (50% sites)",5.75,0,0,0
+"1237","bracketed (50% sites)",5.85,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1238","bracketed (50% sites)",5.95,0.00581395348837209,0.00872093023255814,0.00872093023255814
+"1239","bracketed (50% sites)",6.05,0,0,0
+"1240","bracketed (50% sites)",6.15,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1241","bracketed (50% sites)",6.25,0,0,0
+"1242","bracketed (50% sites)",6.35,0,0,0
+"1243","bracketed (50% sites)",6.45,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1244","bracketed (50% sites)",6.55,0,0,0
+"1245","bracketed (50% sites)",6.65,0,0,0
+"1246","bracketed (50% sites)",6.75,0,0,0
+"1247","bracketed (50% sites)",6.85,0,0,0
+"1248","bracketed (50% sites)",6.95,0,0,0.00290697674418605
+"1249","bracketed (50% sites)",7.05,0,0,0
+"1250","bracketed (50% sites)",7.15,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1251","bracketed (50% sites)",7.25,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1252","bracketed (50% sites)",7.35,0,0,0
+"1253","bracketed (50% sites)",7.45,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1254","bracketed (50% sites)",7.55,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1255","bracketed (50% sites)",7.65,0,0,0
+"1256","bracketed (50% sites)",7.75,0,0,0
+"1257","bracketed (50% sites)",7.85,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1258","bracketed (50% sites)",7.95,0,0,0
+"1259","bracketed (50% sites)",8.05,0,0,0
+"1260","bracketed (50% sites)",8.15,0.00290697674418605,0.00290697674418605,0.00581395348837209
+"1261","bracketed (50% sites)",8.25,0,0,0
+"1262","bracketed (50% sites)",8.35,0,0,0
+"1263","bracketed (50% sites)",8.45,0,0,0
+"1264","bracketed (50% sites)",8.55,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1265","bracketed (50% sites)",8.65,0,0,0
+"1266","bracketed (50% sites)",8.75,0,0,0
+"1267","bracketed (50% sites)",8.85,0,0,0
+"1268","bracketed (50% sites)",8.95,0,0,0
+"1269","bracketed (50% sites)",9.05,0,0,0
+"1270","bracketed (50% sites)",9.15,0,0,0
+"1271","bracketed (50% sites)",9.25,0,0,0
+"1272","bracketed (50% sites)",9.35,0,0,0
+"1273","bracketed (50% sites)",9.45,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1274","bracketed (50% sites)",9.55,0,0,0
+"1275","bracketed (50% sites)",9.65,0,0,0
+"1276","bracketed (50% sites)",9.75,0,0,0
+"1277","bracketed (50% sites)",9.85,0.00290697674418605,0.00290697674418605,0.00290697674418605
+"1278","bracketed (50% sites)",9.95,0,0,0
+"1279","bracketed (50% sites)",10.05,0,0,0
+"1280","bracketed (50% sites)",10.15,0,0,0
+"1281","bracketed (50% sites)",10.25,0,0,0
+"1282","bracketed (50% sites)",10.35,0,0,0
+"1283","bracketed (50% sites)",10.45,0,0,0
+"1284","bracketed (50% sites)",10.55,0,0,0
+"1285","bracketed (50% sites)",10.65,0,0,0
+"1286","bracketed (50% sites)",10.75,0,0,0
+"1287","bracketed (50% sites)",10.85,0,0,0
+"1288","bracketed (50% sites)",10.95,0,0,0
+"1289","bracketed (50% sites)",11.05,0,0,0
+"1290","bracketed (50% sites)",11.15,0,0,0
+"1291","bracketed (50% sites)",11.25,0,0,0
+"1292","bracketed (50% sites)",11.35,0,0,0
+"1293","bracketed (50% sites)",11.45,0,0,0
+"1294","bracketed (50% sites)",11.55,0,0,0
+"1295","bracketed (50% sites)",11.65,0,0,0
+"1296","bracketed (50% sites)",11.75,0,0,0
+"1297","bracketed (50% sites)",11.85,0,0,0
+"1298","bracketed (50% sites)",11.95,0,0,0
+"1299","bracketed (75% sites)",0.25,0.0557620817843866,0.0557620817843866,0.0557620817843866
+"1300","bracketed (75% sites)",0.35,0.0594795539033457,0.0669144981412639,0.0706319702602231
+"1301","bracketed (75% sites)",0.45,0.0909851301115241,0.104089219330855,0.117193308550186
+"1302","bracketed (75% sites)",0.55,0.0741635687732342,0.0892193308550186,0.104089219330855
+"1303","bracketed (75% sites)",0.65,0.0426579925650558,0.0594795539033457,0.0725836431226766
+"1304","bracketed (75% sites)",0.75,0.0185873605947955,0.0315985130111524,0.0465613382899628
+"1305","bracketed (75% sites)",0.85,0.016635687732342,0.0315985130111524,0.0485130111524163
+"1306","bracketed (75% sites)",0.95,0.00743494423791822,0.0111524163568773,0.0205390334572491
+"1307","bracketed (75% sites)",1.05,0.0260223048327138,0.0371747211895911,0.0502788104089219
+"1308","bracketed (75% sites)",1.15,0.0185873605947955,0.0297397769516729,0.0428438661710037
+"1309","bracketed (75% sites)",1.25,0.0111524163568773,0.0223048327137546,0.0338289962825279
+"1310","bracketed (75% sites)",1.35,0.00371747211895911,0.00743494423791822,0.0111524163568773
+"1311","bracketed (75% sites)",1.45,0.0148698884758364,0.0204460966542751,0.0279739776951673
+"1312","bracketed (75% sites)",1.55,0.00176579925650558,0.00743494423791822,0.0148698884758364
+"1313","bracketed (75% sites)",1.65,0.00920074349442379,0.0185873605947955,0.0223048327137546
+"1314","bracketed (75% sites)",1.75,0.00743494423791822,0.0111524163568773,0.0205390334572491
+"1315","bracketed (75% sites)",1.85,0.0185873605947955,0.0223048327137546,0.0297397769516729
+"1316","bracketed (75% sites)",1.95,0.00743494423791822,0.0111524163568773,0.0185873605947955
+"1317","bracketed (75% sites)",2.05,0.00743494423791822,0.0111524163568773,0.0148698884758364
+"1318","bracketed (75% sites)",2.15,0.0111524163568773,0.0148698884758364,0.0262081784386617
+"1319","bracketed (75% sites)",2.25,0.00371747211895911,0.00371747211895911,0.00938661710037174
+"1320","bracketed (75% sites)",2.35,0.0111524163568773,0.0130111524163569,0.01682156133829
+"1321","bracketed (75% sites)",2.45,0.00743494423791822,0.00743494423791822,0.0148698884758364
+"1322","bracketed (75% sites)",2.55,0.0223048327137546,0.0260223048327138,0.0297397769516729
+"1323","bracketed (75% sites)",2.65,0.00371747211895911,0.00371747211895911,0.00938661710037174
+"1324","bracketed (75% sites)",2.75,0.0148698884758364,0.0185873605947955,0.0260223048327138
+"1325","bracketed (75% sites)",2.85,0.00371747211895911,0.00371747211895911,0.00743494423791822
+"1326","bracketed (75% sites)",2.95,0.00371747211895911,0.00557620817843866,0.0111524163568773
+"1327","bracketed (75% sites)",3.05,0.00743494423791822,0.00743494423791822,0.0111524163568773
+"1328","bracketed (75% sites)",3.15,0.0185873605947955,0.0185873605947955,0.0223048327137546
+"1329","bracketed (75% sites)",3.25,0.0111524163568773,0.0111524163568773,0.0111524163568773
+"1330","bracketed (75% sites)",3.35,0.00743494423791822,0.00929368029739777,0.0111524163568773
+"1331","bracketed (75% sites)",3.45,0.0260223048327138,0.0278810408921933,0.0316914498141264
+"1332","bracketed (75% sites)",3.55,0,0,0.00938661710037174
+"1333","bracketed (75% sites)",3.65,0.00371747211895911,0.00371747211895911,0.0111524163568773
+"1334","bracketed (75% sites)",3.75,0.00743494423791822,0.00743494423791822,0.00743494423791822
+"1335","bracketed (75% sites)",3.85,0,0,0
+"1336","bracketed (75% sites)",3.95,0.00743494423791822,0.00743494423791822,0.00743494423791822
+"1337","bracketed (75% sites)",4.05,0,0.00371747211895911,0.00566914498141263
+"1338","bracketed (75% sites)",4.15,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1339","bracketed (75% sites)",4.25,0.00743494423791822,0.00743494423791822,0.0111524163568773
+"1340","bracketed (75% sites)",4.35,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1341","bracketed (75% sites)",4.45,0.00743494423791822,0.00743494423791822,0.00743494423791822
+"1342","bracketed (75% sites)",4.55,0.00743494423791822,0.00743494423791822,0.0111524163568773
+"1343","bracketed (75% sites)",4.65,0.00743494423791822,0.00743494423791822,0.0111524163568773
+"1344","bracketed (75% sites)",4.75,0.00743494423791822,0.0111524163568773,0.0148698884758364
+"1345","bracketed (75% sites)",4.85,0.0111524163568773,0.0111524163568773,0.0111524163568773
+"1346","bracketed (75% sites)",4.95,0,0,0
+"1347","bracketed (75% sites)",5.05,0.00743494423791822,0.00743494423791822,0.0111524163568773
+"1348","bracketed (75% sites)",5.15,0.00743494423791822,0.00743494423791822,0.00743494423791822
+"1349","bracketed (75% sites)",5.25,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1350","bracketed (75% sites)",5.35,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1351","bracketed (75% sites)",5.45,0,0,0.00371747211895911
+"1352","bracketed (75% sites)",5.55,0,0,0
+"1353","bracketed (75% sites)",5.65,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1354","bracketed (75% sites)",5.75,0,0,0
+"1355","bracketed (75% sites)",5.85,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1356","bracketed (75% sites)",5.95,0.00743494423791822,0.00743494423791822,0.00743494423791822
+"1357","bracketed (75% sites)",6.05,0,0,0
+"1358","bracketed (75% sites)",6.15,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1359","bracketed (75% sites)",6.25,0,0,0
+"1360","bracketed (75% sites)",6.35,0,0,0
+"1361","bracketed (75% sites)",6.45,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1362","bracketed (75% sites)",6.55,0,0,0
+"1363","bracketed (75% sites)",6.65,0,0,0
+"1364","bracketed (75% sites)",6.75,0,0,0
+"1365","bracketed (75% sites)",6.85,0,0,0
+"1366","bracketed (75% sites)",6.95,0,0,0.00371747211895911
+"1367","bracketed (75% sites)",7.05,0,0,0
+"1368","bracketed (75% sites)",7.15,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1369","bracketed (75% sites)",7.25,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1370","bracketed (75% sites)",7.35,0,0,0
+"1371","bracketed (75% sites)",7.45,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1372","bracketed (75% sites)",7.55,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1373","bracketed (75% sites)",7.65,0,0,0
+"1374","bracketed (75% sites)",7.75,0,0,0
+"1375","bracketed (75% sites)",7.85,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1376","bracketed (75% sites)",7.95,0,0,0
+"1377","bracketed (75% sites)",8.05,0,0,0
+"1378","bracketed (75% sites)",8.15,0.00371747211895911,0.00371747211895911,0.00743494423791822
+"1379","bracketed (75% sites)",8.25,0,0,0
+"1380","bracketed (75% sites)",8.35,0,0,0
+"1381","bracketed (75% sites)",8.45,0,0,0
+"1382","bracketed (75% sites)",8.55,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1383","bracketed (75% sites)",8.65,0,0,0
+"1384","bracketed (75% sites)",8.75,0,0,0
+"1385","bracketed (75% sites)",8.85,0,0,0
+"1386","bracketed (75% sites)",8.95,0,0,0
+"1387","bracketed (75% sites)",9.05,0,0,0
+"1388","bracketed (75% sites)",9.15,0,0,0
+"1389","bracketed (75% sites)",9.25,0,0,0
+"1390","bracketed (75% sites)",9.35,0,0,0
+"1391","bracketed (75% sites)",9.45,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1392","bracketed (75% sites)",9.55,0,0,0
+"1393","bracketed (75% sites)",9.65,0,0,0
+"1394","bracketed (75% sites)",9.75,0,0,0
+"1395","bracketed (75% sites)",9.85,0.00371747211895911,0.00371747211895911,0.00371747211895911
+"1396","bracketed (75% sites)",9.95,0,0,0
+"1397","bracketed (75% sites)",10.05,0,0,0
+"1398","bracketed (75% sites)",10.15,0,0,0
+"1399","bracketed (75% sites)",10.25,0,0,0
+"1400","bracketed (75% sites)",10.35,0,0,0
+"1401","bracketed (75% sites)",10.45,0,0,0
+"1402","bracketed (75% sites)",10.55,0,0,0
+"1403","bracketed (75% sites)",10.65,0,0,0
+"1404","bracketed (75% sites)",10.75,0,0,0
+"1405","bracketed (75% sites)",10.85,0,0,0
+"1406","bracketed (75% sites)",10.95,0,0,0
+"1407","bracketed (75% sites)",11.05,0,0,0
+"1408","bracketed (75% sites)",11.15,0,0,0
+"1409","bracketed (75% sites)",11.25,0,0,0
+"1410","bracketed (75% sites)",11.35,0,0,0
+"1411","bracketed (75% sites)",11.45,0,0,0
+"1412","bracketed (75% sites)",11.55,0,0,0
+"1413","bracketed (75% sites)",11.65,0,0,0
+"1414","bracketed (75% sites)",11.75,0,0,0
+"1415","bracketed (75% sites)",11.85,0,0,0
+"1416","bracketed (75% sites)",11.95,0,0,0
+"1417","bracketed (100% sites)",0.25,0.077319587628866,0.077319587628866,0.077319587628866
+"1418","bracketed (100% sites)",0.35,0.0824742268041237,0.0824742268041237,0.0824742268041237
+"1419","bracketed (100% sites)",0.45,0.118556701030928,0.118556701030928,0.118556701030928
+"1420","bracketed (100% sites)",0.55,0.0927835051546392,0.0927835051546392,0.0927835051546392
+"1421","bracketed (100% sites)",0.65,0.0463917525773196,0.0463917525773196,0.0463917525773196
+"1422","bracketed (100% sites)",0.75,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1423","bracketed (100% sites)",0.85,0.0154639175257732,0.0154639175257732,0.0154639175257732
+"1424","bracketed (100% sites)",0.95,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1425","bracketed (100% sites)",1.05,0.0257731958762887,0.0257731958762887,0.0257731958762887
+"1426","bracketed (100% sites)",1.15,0.0154639175257732,0.0154639175257732,0.0154639175257732
+"1427","bracketed (100% sites)",1.25,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1428","bracketed (100% sites)",1.35,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1429","bracketed (100% sites)",1.45,0.0154639175257732,0.0154639175257732,0.0154639175257732
+"1430","bracketed (100% sites)",1.55,0,0,0
+"1431","bracketed (100% sites)",1.65,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1432","bracketed (100% sites)",1.75,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1433","bracketed (100% sites)",1.85,0.0257731958762887,0.0257731958762887,0.0257731958762887
+"1434","bracketed (100% sites)",1.95,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1435","bracketed (100% sites)",2.05,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1436","bracketed (100% sites)",2.15,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1437","bracketed (100% sites)",2.25,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1438","bracketed (100% sites)",2.35,0.0154639175257732,0.0154639175257732,0.0154639175257732
+"1439","bracketed (100% sites)",2.45,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1440","bracketed (100% sites)",2.55,0.0309278350515464,0.0309278350515464,0.0309278350515464
+"1441","bracketed (100% sites)",2.65,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1442","bracketed (100% sites)",2.75,0.0206185567010309,0.0206185567010309,0.0206185567010309
+"1443","bracketed (100% sites)",2.85,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1444","bracketed (100% sites)",2.95,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1445","bracketed (100% sites)",3.05,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1446","bracketed (100% sites)",3.15,0.0257731958762887,0.0257731958762887,0.0257731958762887
+"1447","bracketed (100% sites)",3.25,0.0154639175257732,0.0154639175257732,0.0154639175257732
+"1448","bracketed (100% sites)",3.35,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1449","bracketed (100% sites)",3.45,0.0360824742268041,0.0360824742268041,0.0360824742268041
+"1450","bracketed (100% sites)",3.55,0,0,0
+"1451","bracketed (100% sites)",3.65,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1452","bracketed (100% sites)",3.75,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1453","bracketed (100% sites)",3.85,0,0,0
+"1454","bracketed (100% sites)",3.95,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1455","bracketed (100% sites)",4.05,0,0,0
+"1456","bracketed (100% sites)",4.15,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1457","bracketed (100% sites)",4.25,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1458","bracketed (100% sites)",4.35,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1459","bracketed (100% sites)",4.45,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1460","bracketed (100% sites)",4.55,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1461","bracketed (100% sites)",4.65,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1462","bracketed (100% sites)",4.75,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1463","bracketed (100% sites)",4.85,0.0154639175257732,0.0154639175257732,0.0154639175257732
+"1464","bracketed (100% sites)",4.95,0,0,0
+"1465","bracketed (100% sites)",5.05,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1466","bracketed (100% sites)",5.15,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1467","bracketed (100% sites)",5.25,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1468","bracketed (100% sites)",5.35,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1469","bracketed (100% sites)",5.45,0,0,0
+"1470","bracketed (100% sites)",5.55,0,0,0
+"1471","bracketed (100% sites)",5.65,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1472","bracketed (100% sites)",5.75,0,0,0
+"1473","bracketed (100% sites)",5.85,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1474","bracketed (100% sites)",5.95,0.0103092783505155,0.0103092783505155,0.0103092783505155
+"1475","bracketed (100% sites)",6.05,0,0,0
+"1476","bracketed (100% sites)",6.15,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1477","bracketed (100% sites)",6.25,0,0,0
+"1478","bracketed (100% sites)",6.35,0,0,0
+"1479","bracketed (100% sites)",6.45,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1480","bracketed (100% sites)",6.55,0,0,0
+"1481","bracketed (100% sites)",6.65,0,0,0
+"1482","bracketed (100% sites)",6.75,0,0,0
+"1483","bracketed (100% sites)",6.85,0,0,0
+"1484","bracketed (100% sites)",6.95,0,0,0
+"1485","bracketed (100% sites)",7.05,0,0,0
+"1486","bracketed (100% sites)",7.15,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1487","bracketed (100% sites)",7.25,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1488","bracketed (100% sites)",7.35,0,0,0
+"1489","bracketed (100% sites)",7.45,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1490","bracketed (100% sites)",7.55,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1491","bracketed (100% sites)",7.65,0,0,0
+"1492","bracketed (100% sites)",7.75,0,0,0
+"1493","bracketed (100% sites)",7.85,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1494","bracketed (100% sites)",7.95,0,0,0
+"1495","bracketed (100% sites)",8.05,0,0,0
+"1496","bracketed (100% sites)",8.15,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1497","bracketed (100% sites)",8.25,0,0,0
+"1498","bracketed (100% sites)",8.35,0,0,0
+"1499","bracketed (100% sites)",8.45,0,0,0
+"1500","bracketed (100% sites)",8.55,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1501","bracketed (100% sites)",8.65,0,0,0
+"1502","bracketed (100% sites)",8.75,0,0,0
+"1503","bracketed (100% sites)",8.85,0,0,0
+"1504","bracketed (100% sites)",8.95,0,0,0
+"1505","bracketed (100% sites)",9.05,0,0,0
+"1506","bracketed (100% sites)",9.15,0,0,0
+"1507","bracketed (100% sites)",9.25,0,0,0
+"1508","bracketed (100% sites)",9.35,0,0,0
+"1509","bracketed (100% sites)",9.45,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1510","bracketed (100% sites)",9.55,0,0,0
+"1511","bracketed (100% sites)",9.65,0,0,0
+"1512","bracketed (100% sites)",9.75,0,0,0
+"1513","bracketed (100% sites)",9.85,0.00515463917525773,0.00515463917525773,0.00515463917525773
+"1514","bracketed (100% sites)",9.95,0,0,0
+"1515","bracketed (100% sites)",10.05,0,0,0
+"1516","bracketed (100% sites)",10.15,0,0,0
+"1517","bracketed (100% sites)",10.25,0,0,0
+"1518","bracketed (100% sites)",10.35,0,0,0
+"1519","bracketed (100% sites)",10.45,0,0,0
+"1520","bracketed (100% sites)",10.55,0,0,0
+"1521","bracketed (100% sites)",10.65,0,0,0
+"1522","bracketed (100% sites)",10.75,0,0,0
+"1523","bracketed (100% sites)",10.85,0,0,0
+"1524","bracketed (100% sites)",10.95,0,0,0
+"1525","bracketed (100% sites)",11.05,0,0,0
+"1526","bracketed (100% sites)",11.15,0,0,0
+"1527","bracketed (100% sites)",11.25,0,0,0
+"1528","bracketed (100% sites)",11.35,0,0,0
+"1529","bracketed (100% sites)",11.45,0,0,0
+"1530","bracketed (100% sites)",11.55,0,0,0
+"1531","bracketed (100% sites)",11.65,0,0,0
+"1532","bracketed (100% sites)",11.75,0,0,0
+"1533","bracketed (100% sites)",11.85,0,0,0
+"1534","bracketed (100% sites)",11.95,0,0,0
+"1535","uniform (50% sites)",0.25,0.0227820719889248,0.030379746835443,0.0378838121353187
+"1536","uniform (50% sites)",0.35,0.0353164556962025,0.0455696202531646,0.0557590141925585
+"1537","uniform (50% sites)",0.45,0.0692967139912984,0.0823812889545717,0.0912606823877145
+"1538","uniform (50% sites)",0.55,0.0709715350510827,0.0798464306367667,0.0899367088607595
+"1539","uniform (50% sites)",0.65,0.0556962025316456,0.0685279187817259,0.082453093876502
+"1540","uniform (50% sites)",0.75,0.0454430379746835,0.0568860361339488,0.0644461626757644
+"1541","uniform (50% sites)",0.85,0.0441888081934304,0.0532320246739061,0.0608860759493671
+"1542","uniform (50% sites)",0.95,0.0101131568853088,0.0151516117718331,0.0177451326865
+"1543","uniform (50% sites)",1.05,0.0429241462870261,0.0531645569620253,0.0582278481012658
+"1544","uniform (50% sites)",1.15,0.0354857675255413,0.0443008767881864,0.0492964639862258
+"1545","uniform (50% sites)",1.25,0.0226582278481013,0.0304182998136606,0.0393495791299878
+"1546","uniform (50% sites)",1.35,0.00506329113924051,0.0100882884258199,0.0126903553299492
+"1547","uniform (50% sites)",1.45,0.0202775814431665,0.030379746835443,0.0379746835443038
+"1548","uniform (50% sites)",1.55,0.0151697353279632,0.0177664974619289,0.0216066953672171
+"1549","uniform (50% sites)",1.65,0.0202263137706176,0.0253164556962025,0.0291304389520388
+"1550","uniform (50% sites)",1.75,0.0176533915986057,0.020253164556962,0.0241413930476129
+"1551","uniform (50% sites)",1.85,0.0151880479926165,0.0177215189873418,0.0227848101265823
+"1552","uniform (50% sites)",1.95,0.0138607594936709,0.0177215189873418,0.0228151705969286
+"1553","uniform (50% sites)",2.05,0.0100997991263591,0.0126582278481013,0.0151716532412735
+"1554","uniform (50% sites)",2.15,0.018899757064314,0.0227272727272727,0.0266760907280087
+"1555","uniform (50% sites)",2.25,0.00253164556962025,0.00631640859747599,0.00761421319796954
+"1556","uniform (50% sites)",2.35,0.00505657844265439,0.0101394332712202,0.0126903553299492
+"1557","uniform (50% sites)",2.45,0.00758486766398159,0.010126582278481,0.0126750947760715
+"1558","uniform (50% sites)",2.55,0.0163913885043327,0.0239868635015783,0.029251269035533
+"1559","uniform (50% sites)",2.65,0.0025282892213272,0.00755667506297229,0.00761421319796954
+"1560","uniform (50% sites)",2.75,0.0100997991263591,0.0177215189873418,0.0202801516417143
+"1561","uniform (50% sites)",2.85,0.00120558375634518,0.00757575757575758,0.00761421319796954
+"1562","uniform (50% sites)",2.95,0.00624093580642699,0.0101394332712202,0.0126903553299492
+"1563","uniform (50% sites)",3.05,0.0025219130855151,0.00884488997429963,0.0101522842639594
+"1564","uniform (50% sites)",3.15,0.0087853215701317,0.0151898734177215,0.0177664974619289
+"1565","uniform (50% sites)",3.25,0.0025282892213272,0.00757575757575758,0.00761421319796954
+"1566","uniform (50% sites)",3.35,0.00253469768039581,0.00760457495341515,0.0101522842639594
+"1567","uniform (50% sites)",3.45,0.0138244109300768,0.0177664974619289,0.0228426395939086
+"1568","uniform (50% sites)",3.55,0.00253164556962025,0.00759493670886076,0.0101522842639594
+"1569","uniform (50% sites)",3.65,0.00504989956317954,0.00761421319796954,0.0101522842639594
+"1570","uniform (50% sites)",3.75,0,0.00504414421290996,0.0050761421319797
+"1571","uniform (50% sites)",3.85,0,0,0
+"1572","uniform (50% sites)",3.95,0.00119949494949495,0.00505689809487278,0.0050761421319797
+"1573","uniform (50% sites)",4.05,0.00119647355163728,0.00504414421290996,0.0050761421319797
+"1574","uniform (50% sites)",4.15,0,0.00252844904743639,0.00253807106598985
+"1575","uniform (50% sites)",4.25,0.0025282892213272,0.0050761421319797,0.00761421319796954
+"1576","uniform (50% sites)",4.35,0,0.00253164556962025,0.00253807106598985
+"1577","uniform (50% sites)",4.45,0.00119647355163728,0.00505689809487278,0.0050761421319797
+"1578","uniform (50% sites)",4.55,0.00119949494949495,0.00758534714230917,0.00761421319796954
+"1579","uniform (50% sites)",4.65,0.0050438261710302,0.00757580588591653,0.00761421319796954
+"1580","uniform (50% sites)",4.75,0.00506268266420551,0.0101266471824847,0.0126903553299492
+"1581","uniform (50% sites)",4.85,0.00119647355163728,0.00758534714230917,0.00761421319796954
+"1582","uniform (50% sites)",4.95,0,0,0
+"1583","uniform (50% sites)",5.05,0.00253469768039581,0.00755667506297229,0.00761421319796954
+"1584","uniform (50% sites)",5.15,0.00372206102732519,0.00506329113924051,0.0050761421319797
+"1585","uniform (50% sites)",5.25,0,0.00253164556962025,0.00253807106598985
+"1586","uniform (50% sites)",5.35,0,0.00253164556962025,0.00253807106598985
+"1587","uniform (50% sites)",5.45,0,0.00252844904743639,0.00253807106598985
+"1588","uniform (50% sites)",5.55,0,0,0
+"1589","uniform (50% sites)",5.65,0,0.00253164556962025,0.00253807106598985
+"1590","uniform (50% sites)",5.75,0,0,0
+"1591","uniform (50% sites)",5.85,0,0.00253164556962025,0.00253807106598985
+"1592","uniform (50% sites)",5.95,0.00503778337531486,0.0050761421319797,0.00761421319796954
+"1593","uniform (50% sites)",6.05,0,0,0
+"1594","uniform (50% sites)",6.15,0,0.00253164556962025,0.00253807106598985
+"1595","uniform (50% sites)",6.25,0,0,0
+"1596","uniform (50% sites)",6.35,0,0,0
+"1597","uniform (50% sites)",6.45,0,0.00252844904743639,0.00253807106598985
+"1598","uniform (50% sites)",6.55,0,0,0
+"1599","uniform (50% sites)",6.65,0,0,0
+"1600","uniform (50% sites)",6.75,0,0,0
+"1601","uniform (50% sites)",6.85,0,0,0
+"1602","uniform (50% sites)",6.95,0,0.00253164556962025,0.00253807106598985
+"1603","uniform (50% sites)",7.05,0,0,0
+"1604","uniform (50% sites)",7.15,0,0.00253164556962025,0.00253807106598985
+"1605","uniform (50% sites)",7.25,0,0.00253164556962025,0.00253807106598985
+"1606","uniform (50% sites)",7.35,0,0,0
+"1607","uniform (50% sites)",7.45,0,0.00253164556962025,0.00253807106598985
+"1608","uniform (50% sites)",7.55,0,0.00253164556962025,0.00253807106598985
+"1609","uniform (50% sites)",7.65,0,0,0
+"1610","uniform (50% sites)",7.75,0,0,0
+"1611","uniform (50% sites)",7.85,0,0.00253164556962025,0.00253807106598985
+"1612","uniform (50% sites)",7.95,0,0,0
+"1613","uniform (50% sites)",8.05,0,0,0
+"1614","uniform (50% sites)",8.15,0.00252494978158977,0.00506329113924051,0.0050761421319797
+"1615","uniform (50% sites)",8.25,0,0,0
+"1616","uniform (50% sites)",8.35,0,0,0
+"1617","uniform (50% sites)",8.45,0,0,0
+"1618","uniform (50% sites)",8.55,0,0.00252844904743639,0.00253807106598985
+"1619","uniform (50% sites)",8.65,0,0,0
+"1620","uniform (50% sites)",8.75,0,0,0
+"1621","uniform (50% sites)",8.85,0,0,0
+"1622","uniform (50% sites)",8.95,0,0,0
+"1623","uniform (50% sites)",9.05,0,0,0
+"1624","uniform (50% sites)",9.15,0,0,0
+"1625","uniform (50% sites)",9.25,0,0,0
+"1626","uniform (50% sites)",9.35,0,0,0
+"1627","uniform (50% sites)",9.45,0,0.00253164556962025,0.00253807106598985
+"1628","uniform (50% sites)",9.55,0,0,0
+"1629","uniform (50% sites)",9.65,0,0,0
+"1630","uniform (50% sites)",9.75,0,0,0
+"1631","uniform (50% sites)",9.85,0,0.00253164556962025,0.00253807106598985
+"1632","uniform (50% sites)",9.95,0,0,0
+"1633","uniform (50% sites)",10.05,0,0,0
+"1634","uniform (50% sites)",10.15,0,0,0
+"1635","uniform (50% sites)",10.25,0,0,0
+"1636","uniform (50% sites)",10.35,0,0,0
+"1637","uniform (50% sites)",10.45,0,0,0
+"1638","uniform (50% sites)",10.55,0,0,0
+"1639","uniform (50% sites)",10.65,0,0,0
+"1640","uniform (50% sites)",10.75,0,0,0
+"1641","uniform (50% sites)",10.85,0,0,0
+"1642","uniform (50% sites)",10.95,0,0,0
+"1643","uniform (50% sites)",11.05,0,0,0
+"1644","uniform (50% sites)",11.15,0,0,0
+"1645","uniform (50% sites)",11.25,0,0,0
+"1646","uniform (50% sites)",11.35,0,0,0
+"1647","uniform (50% sites)",11.45,0,0,0
+"1648","uniform (50% sites)",11.55,0,0,0
+"1649","uniform (50% sites)",11.65,0,0,0
+"1650","uniform (50% sites)",11.75,0,0,0
+"1651","uniform (50% sites)",11.85,0,0,0
+"1652","uniform (50% sites)",11.95,0,0,0
+"1653","uniform (75% sites)",0.25,0.0260115606936416,0.0303428977154074,0.0348356926188069
+"1654","uniform (75% sites)",0.35,0.0404624277456647,0.0463768115942029,0.0521819128915177
+"1655","uniform (75% sites)",0.45,0.0721450167413503,0.0810421378905923,0.0928951803168183
+"1656","uniform (75% sites)",0.55,0.0665655105973025,0.0810421378905923,0.0897317165116863
+"1657","uniform (75% sites)",0.65,0.05484795174667,0.0667635658914729,0.0796594621764262
+"1658","uniform (75% sites)",0.75,0.0448577597795403,0.0563546756880925,0.0724182433279038
+"1659","uniform (75% sites)",0.85,0.0406357431749242,0.0564379659881042,0.0636805730082935
+"1660","uniform (75% sites)",0.95,0.00717712394138997,0.0144927536231884,0.0201759849843864
+"1661","uniform (75% sites)",1.05,0.0418968333752199,0.0477514911869178,0.0636805730082935
+"1662","uniform (75% sites)",1.15,0.0346296080358482,0.046242774566474,0.0535290063901767
+"1663","uniform (75% sites)",1.25,0.0200499750124938,0.0345821325648415,0.0377386670037074
+"1664","uniform (75% sites)",1.35,0.00425509320184571,0.00870829120323559,0.0144728575018849
+"1665","uniform (75% sites)",1.45,0.0186861788076161,0.0316547417933684,0.0362565971349585
+"1666","uniform (75% sites)",1.55,0.0129160350485582,0.0201439265957799,0.0232237950792046
+"1667","uniform (75% sites)",1.65,0.020228459257403,0.0261248736097068,0.0347826086956522
+"1668","uniform (75% sites)",1.75,0.0100433526011561,0.0188365371689743,0.0275647147524504
+"1669","uniform (75% sites)",1.85,0.00869565217391304,0.0201729106628242,0.023121387283237
+"1670","uniform (75% sites)",1.95,0.0115766105386613,0.0173410404624277,0.0231884057971014
+"1671","uniform (75% sites)",2.05,0.00425949129181807,0.0100949525237381,0.0144949758031994
+"1672","uniform (75% sites)",2.15,0.017364915807992,0.023121387283237,0.0289855072463768
+"1673","uniform (75% sites)",2.25,0.00289378225320019,0.00578872413504231,0.00870892315470172
+"1674","uniform (75% sites)",2.35,0.00575499354069363,0.0115606936416185,0.0144751943569466
+"1675","uniform (75% sites)",2.45,0.00424722609793369,0.0101115148477634,0.0144728575018849
+"1676","uniform (75% sites)",2.55,0.0158236994219653,0.023121387283237,0.0305072463768116
+"1677","uniform (75% sites)",2.65,0.00289415263466533,0.00578872413504231,0.00869565217391304
+"1678","uniform (75% sites)",2.75,0.0100698178518618,0.0173661724051269,0.0231565720030158
+"1679","uniform (75% sites)",2.85,0.00288580066965401,0.00578872413504231,0.00869565217391304
+"1680","uniform (75% sites)",2.95,0.00577955978782943,0.0115606936416185,0.0144530760556321
+"1681","uniform (75% sites)",3.05,0.00136494252873563,0.00867052023121387,0.0115782860015079
+"1682","uniform (75% sites)",3.15,0.0086944649818524,0.0144927536231884,0.0174178463094034
+"1683","uniform (75% sites)",3.25,0.0013728323699422,0.00578872413504231,0.00868371450113094
+"1684","uniform (75% sites)",3.35,0.00425949129181807,0.00868308620256346,0.0115942028985507
+"1685","uniform (75% sites)",3.45,0.0114492753623188,0.0202020622678283,0.0232237950792046
+"1686","uniform (75% sites)",3.55,0.00575499354069363,0.00867052023121387,0.0116279069767442
+"1687","uniform (75% sites)",3.65,0.00425509320184571,0.00869565217391304,0.0116118975396023
+"1688","uniform (75% sites)",3.75,0.00136494252873563,0.00289855072463768,0.00579710144927536
+"1689","uniform (75% sites)",3.85,0,0,0
+"1690","uniform (75% sites)",3.95,0,0.00289855072463768,0.00580594876980115
+"1691","uniform (75% sites)",4.05,0,0.00289017341040462,0.00581395348837209
+"1692","uniform (75% sites)",4.15,0,0.00288600889540404,0.00290697674418605
+"1693","uniform (75% sites)",4.25,0.00288580066965401,0.00578034682080925,0.00868371450113094
+"1694","uniform (75% sites)",4.35,0,0.00288184438040346,0.00290697674418605
+"1695","uniform (75% sites)",4.45,0,0.00575540759879426,0.00581395348837209
+"1696","uniform (75% sites)",4.55,0.00289415263466533,0.00579710144927536,0.00867052023121387
+"1697","uniform (75% sites)",4.65,0,0.00578872413504231,0.00870892315470172
+"1698","uniform (75% sites)",4.75,0.00579710144927536,0.0115606936416185,0.0144949758031994
+"1699","uniform (75% sites)",4.85,0,0.00867052023121387,0.00872093023255814
+"1700","uniform (75% sites)",4.95,0,0,0
+"1701","uniform (75% sites)",5.05,0.00136494252873563,0.00577201779080808,0.00870892315470172
+"1702","uniform (75% sites)",5.15,0,0.00290697674418605,0.00579710144927536
+"1703","uniform (75% sites)",5.25,0,0.00287770379939713,0.00289855072463768
+"1704","uniform (75% sites)",5.35,0,0.00289017341040462,0.00290297438490057
+"1705","uniform (75% sites)",5.45,0,0.00289017341040462,0.00290297438490057
+"1706","uniform (75% sites)",5.55,0,0,0
+"1707","uniform (75% sites)",5.65,0,0.00289017341040462,0.00290297438490057
+"1708","uniform (75% sites)",5.75,0,0,0
+"1709","uniform (75% sites)",5.85,0,0.00289017341040462,0.00290697674418605
+"1710","uniform (75% sites)",5.95,0,0.00721732157177225,0.00870892315470172
+"1711","uniform (75% sites)",6.05,0,0,0
+"1712","uniform (75% sites)",6.15,0,0.00288600889540404,0.00290297438490057
+"1713","uniform (75% sites)",6.25,0,0,0
+"1714","uniform (75% sites)",6.35,0,0,0
+"1715","uniform (75% sites)",6.45,0,0.00289017341040462,0.00290297438490057
+"1716","uniform (75% sites)",6.55,0,0,0
+"1717","uniform (75% sites)",6.65,0,0,0
+"1718","uniform (75% sites)",6.75,0,0,0
+"1719","uniform (75% sites)",6.85,0,0,0
+"1720","uniform (75% sites)",6.95,0,0.00289017341040462,0.00290697674418605
+"1721","uniform (75% sites)",7.05,0,0,0
+"1722","uniform (75% sites)",7.15,0,0.00288184438040346,0.00289855072463768
+"1723","uniform (75% sites)",7.25,0,0.00287770379939713,0.00290297438490057
+"1724","uniform (75% sites)",7.35,0,0,0
+"1725","uniform (75% sites)",7.45,0,0.00289017341040462,0.00290697674418605
+"1726","uniform (75% sites)",7.55,0,0.00289017341040462,0.00289855072463768
+"1727","uniform (75% sites)",7.65,0,0,0
+"1728","uniform (75% sites)",7.75,0,0,0
+"1729","uniform (75% sites)",7.85,0,0.00288600889540404,0.00289855072463768
+"1730","uniform (75% sites)",7.95,0,0,0
+"1731","uniform (75% sites)",8.05,0,0,0
+"1732","uniform (75% sites)",8.15,0.00287749677034682,0.00576368876080692,0.00579710144927536
+"1733","uniform (75% sites)",8.25,0,0,0
+"1734","uniform (75% sites)",8.35,0,0,0
+"1735","uniform (75% sites)",8.45,0,0,0
+"1736","uniform (75% sites)",8.55,0,0.00289017341040462,0.00290697674418605
+"1737","uniform (75% sites)",8.65,0,0,0
+"1738","uniform (75% sites)",8.75,0,0,0
+"1739","uniform (75% sites)",8.85,0,0,0
+"1740","uniform (75% sites)",8.95,0,0,0
+"1741","uniform (75% sites)",9.05,0,0,0
+"1742","uniform (75% sites)",9.15,0,0,0
+"1743","uniform (75% sites)",9.25,0,0,0
+"1744","uniform (75% sites)",9.35,0,0,0
+"1745","uniform (75% sites)",9.45,0,0.00289017341040462,0.00290297438490057
+"1746","uniform (75% sites)",9.55,0,0,0
+"1747","uniform (75% sites)",9.65,0,0,0
+"1748","uniform (75% sites)",9.75,0,0,0
+"1749","uniform (75% sites)",9.85,0,0.00289017341040462,0.00290297438490057
+"1750","uniform (75% sites)",9.95,0,0,0
+"1751","uniform (75% sites)",10.05,0,0,0
+"1752","uniform (75% sites)",10.15,0,0,0
+"1753","uniform (75% sites)",10.25,0,0,0
+"1754","uniform (75% sites)",10.35,0,0,0
+"1755","uniform (75% sites)",10.45,0,0,0
+"1756","uniform (75% sites)",10.55,0,0,0
+"1757","uniform (75% sites)",10.65,0,0,0
+"1758","uniform (75% sites)",10.75,0,0,0
+"1759","uniform (75% sites)",10.85,0,0,0
+"1760","uniform (75% sites)",10.95,0,0,0
+"1761","uniform (75% sites)",11.05,0,0,0
+"1762","uniform (75% sites)",11.15,0,0,0
+"1763","uniform (75% sites)",11.25,0,0,0
+"1764","uniform (75% sites)",11.35,0,0,0
+"1765","uniform (75% sites)",11.45,0,0,0
+"1766","uniform (75% sites)",11.55,0,0,0
+"1767","uniform (75% sites)",11.65,0,0,0
+"1768","uniform (75% sites)",11.75,0,0,0
+"1769","uniform (75% sites)",11.85,0,0,0
+"1770","uniform (75% sites)",11.95,0,0,0
+"1771","uniform (100% sites)",0.25,0.0199664429530201,0.0302521862924547,0.0370511875744005
+"1772","uniform (100% sites)",0.35,0.0369717872234651,0.045598776423321,0.0557412526162526
+"1773","uniform (100% sites)",0.45,0.0550214922223968,0.0757575757575757,0.0881515444015444
+"1774","uniform (100% sites)",0.55,0.0654650532167311,0.0846045488902632,0.105254237288136
+"1775","uniform (100% sites)",0.65,0.0589356401856402,0.0690153619409331,0.0894502457002457
+"1776","uniform (100% sites)",0.75,0.0438412844662845,0.0572390572390572,0.0679661016949152
+"1777","uniform (100% sites)",0.85,0.0369284056784057,0.0521834754217305,0.0658601783601784
+"1778","uniform (100% sites)",0.95,0.006744812994813,0.0151408650303271,0.021960593143479
+"1779","uniform (100% sites)",1.05,0.0437641710502449,0.0508480419194705,0.0623582894975512
+"1780","uniform (100% sites)",1.15,0.0370964714714715,0.0486526356091573,0.0641851964838542
+"1781","uniform (100% sites)",1.25,0.0199961019591892,0.0304569399908383,0.0388763763763764
+"1782","uniform (100% sites)",1.35,0.00335570469798658,0.0100502794550066,0.0135375629867155
+"1783","uniform (100% sites)",1.45,0.0234725788963077,0.0335009315166887,0.0405560882070949
+"1784","uniform (100% sites)",1.55,0.00478187919463087,0.0169779776317307,0.0236952861952862
+"1785","uniform (100% sites)",1.65,0.0201664293946173,0.0268459398894181,0.0357529375386518
+"1786","uniform (100% sites)",1.75,0.0134442862630782,0.0236489185641728,0.0304054054054054
+"1787","uniform (100% sites)",1.85,0.010099424088518,0.0202020202020202,0.026983801983802
+"1788","uniform (100% sites)",1.95,0.0117041538182478,0.0201681241949698,0.0269889659879422
+"1789","uniform (100% sites)",2.05,0.00334981257435299,0.0102040816326531,0.0186655405405405
+"1790","uniform (100% sites)",2.15,0.0134228187919463,0.0235690235690236,0.0339359698681732
+"1791","uniform (100% sites)",2.25,0.00159395973154362,0.00675675675675676,0.0101369628488273
+"1792","uniform (100% sites)",2.35,0.00158862876254181,0.0101180726180726,0.0167785234899329
+"1793","uniform (100% sites)",2.45,0.00317725752508361,0.0101010101010101,0.0152790618044855
+"1794","uniform (100% sites)",2.55,0.0117219492219492,0.0235690235690236,0.0271670702179177
+"1795","uniform (100% sites)",2.65,0.00334981257435299,0.00671140939597315,0.0101531722400366
+"1796","uniform (100% sites)",2.75,0.0067221431315391,0.0168918918918919,0.0236952861952862
+"1797","uniform (100% sites)",2.85,0,0.00673400673400673,0.0101010101010101
+"1798","uniform (100% sites)",2.95,0.00496632996632997,0.0101867865790384,0.0169491525423729
+"1799","uniform (100% sites)",3.05,0.00160472972972973,0.0100502794550066,0.010171332046332
+"1800","uniform (100% sites)",3.15,0.00654554730457457,0.0135364177737059,0.0203102453102453
+"1801","uniform (100% sites)",3.25,0.0015993265993266,0.00672270806498994,0.010171332046332
+"1802","uniform (100% sites)",3.35,0.00158862876254181,0.0100840620974849,0.0135135135135135
+"1803","uniform (100% sites)",3.45,0.0101010101010101,0.0168918918918919,0.0253367003367003
+"1804","uniform (100% sites)",3.55,0.00336700336700337,0.0100840620974849,0.0135617760617761
+"1805","uniform (100% sites)",3.65,0.00159395973154362,0.00675675675675676,0.0135135135135135
+"1806","uniform (100% sites)",3.75,0.00158862876254181,0.00337837837837838,0.00676878149335776
+"1807","uniform (100% sites)",3.85,0,0,0
+"1808","uniform (100% sites)",3.95,0,0.00337269087269087,0.00680272108843537
+"1809","uniform (100% sites)",4.05,0,0.00336700336700337,0.00678088803088803
+"1810","uniform (100% sites)",4.15,0,0.00335009315166887,0.00340136054421769
+"1811","uniform (100% sites)",4.25,0.00159395973154362,0.00505638497009542,0.0101369628488273
+"1812","uniform (100% sites)",4.35,0,0.00335570469798658,0.00339588377723971
+"1813","uniform (100% sites)",4.45,0,0.00337837837837838,0.00679176755447942
+"1814","uniform (100% sites)",4.55,0,0.00673400673400673,0.0101694915254237
+"1815","uniform (100% sites)",4.65,0,0.00675675675675676,0.0100849094976612
+"1816","uniform (100% sites)",4.75,0.00669962514870598,0.0118134502122997,0.0168648762398762
+"1817","uniform (100% sites)",4.85,0,0.00674538174538175,0.010171332046332
+"1818","uniform (100% sites)",4.95,0,0,0
+"1819","uniform (100% sites)",5.05,0.00159395973154362,0.00673400673400673,0.0101694915254237
+"1820","uniform (100% sites)",5.15,0,0.00336700336700337,0.00676878149335776
+"1821","uniform (100% sites)",5.25,0,0.00335570469798658,0.00339588377723971
+"1822","uniform (100% sites)",5.35,0,0,0.00339044401544402
+"1823","uniform (100% sites)",5.45,0,0.00335570469798658,0.00340136054421769
+"1824","uniform (100% sites)",5.55,0,0,0
+"1825","uniform (100% sites)",5.65,0,0.00336135403249497,0.00340136054421769
+"1826","uniform (100% sites)",5.75,0,0,0
+"1827","uniform (100% sites)",5.85,0,0.00336700336700337,0.00340136054421769
+"1828","uniform (100% sites)",5.95,0.0015993265993266,0.00671140939597315,0.0101876513317191
+"1829","uniform (100% sites)",6.05,0,0,0
+"1830","uniform (100% sites)",6.15,0,0.00335570469798658,0.00339588377723971
+"1831","uniform (100% sites)",6.25,0,0,0
+"1832","uniform (100% sites)",6.35,0,0,0
+"1833","uniform (100% sites)",6.45,0,0.00336700336700337,0.00340136054421769
+"1834","uniform (100% sites)",6.55,0,0,0
+"1835","uniform (100% sites)",6.65,0,0,0
+"1836","uniform (100% sites)",6.75,0,0,0
+"1837","uniform (100% sites)",6.85,0,0,0
+"1838","uniform (100% sites)",6.95,0,0.00335570469798658,0.00339588377723971
+"1839","uniform (100% sites)",7.05,0,0,0
+"1840","uniform (100% sites)",7.15,0,0,0.00338439074667888
+"1841","uniform (100% sites)",7.25,0,0.00336700336700337,0.00339588377723971
+"1842","uniform (100% sites)",7.35,0,0,0
+"1843","uniform (100% sites)",7.45,0,0.00335570469798658,0.00338439074667888
+"1844","uniform (100% sites)",7.55,0,0.00336135403249497,0.00340136054421769
+"1845","uniform (100% sites)",7.65,0,0,0
+"1846","uniform (100% sites)",7.75,0,0,0
+"1847","uniform (100% sites)",7.85,0,0,0.00339588377723971
+"1848","uniform (100% sites)",7.95,0,0,0
+"1849","uniform (100% sites)",8.05,0,0,0
+"1850","uniform (100% sites)",8.15,0.00158862876254181,0.00340136054421769,0.00677966101694915
+"1851","uniform (100% sites)",8.25,0,0,0
+"1852","uniform (100% sites)",8.35,0,0,0
+"1853","uniform (100% sites)",8.45,0,0,0
+"1854","uniform (100% sites)",8.55,0,0.00335009315166887,0.00339588377723971
+"1855","uniform (100% sites)",8.65,0,0,0
+"1856","uniform (100% sites)",8.75,0,0,0
+"1857","uniform (100% sites)",8.85,0,0,0
+"1858","uniform (100% sites)",8.95,0,0,0
+"1859","uniform (100% sites)",9.05,0,0,0
+"1860","uniform (100% sites)",9.15,0,0,0
+"1861","uniform (100% sites)",9.25,0,0,0
+"1862","uniform (100% sites)",9.35,0,0,0
+"1863","uniform (100% sites)",9.45,0,0,0.00340136054421769
+"1864","uniform (100% sites)",9.55,0,0,0
+"1865","uniform (100% sites)",9.65,0,0,0
+"1866","uniform (100% sites)",9.75,0,0,0
+"1867","uniform (100% sites)",9.85,0,0.00335570469798658,0.00339588377723971
+"1868","uniform (100% sites)",9.95,0,0,0
+"1869","uniform (100% sites)",10.05,0,0,0
+"1870","uniform (100% sites)",10.15,0,0,0
+"1871","uniform (100% sites)",10.25,0,0,0
+"1872","uniform (100% sites)",10.35,0,0,0
+"1873","uniform (100% sites)",10.45,0,0,0
+"1874","uniform (100% sites)",10.55,0,0,0
+"1875","uniform (100% sites)",10.65,0,0,0
+"1876","uniform (100% sites)",10.75,0,0,0
+"1877","uniform (100% sites)",10.85,0,0,0
+"1878","uniform (100% sites)",10.95,0,0,0
+"1879","uniform (100% sites)",11.05,0,0,0
+"1880","uniform (100% sites)",11.15,0,0,0
+"1881","uniform (100% sites)",11.25,0,0,0
+"1882","uniform (100% sites)",11.35,0,0,0
+"1883","uniform (100% sites)",11.45,0,0,0
+"1884","uniform (100% sites)",11.55,0,0,0
+"1885","uniform (100% sites)",11.65,0,0,0
+"1886","uniform (100% sites)",11.75,0,0,0
+"1887","uniform (100% sites)",11.85,0,0,0
+"1888","uniform (100% sites)",11.95,0,0,0
+"1889","baseline (no loss)",0.25,0,0.0362173038229376,0
+"1890","baseline (no loss)",0.35,0,0.06841046277666,0
+"1891","baseline (no loss)",0.45,0,0.0663983903420523,0
+"1892","baseline (no loss)",0.55,0,0.06841046277666,0
+"1893","baseline (no loss)",0.65,0,0.0583501006036217,0
+"1894","baseline (no loss)",0.75,0,0.0422535211267606,0
+"1895","baseline (no loss)",0.85,0,0.0321931589537223,0
+"1896","baseline (no loss)",0.95,0,0.0221327967806841,0
+"1897","baseline (no loss)",1.05,0,0.0482897384305835,0
+"1898","baseline (no loss)",1.15,0,0.0201207243460765,0
+"1899","baseline (no loss)",1.25,0,0.0241448692152917,0
+"1900","baseline (no loss)",1.35,0,0.0221327967806841,0
+"1901","baseline (no loss)",1.45,0,0.0221327967806841,0
+"1902","baseline (no loss)",1.55,0,0.0201207243460765,0
+"1903","baseline (no loss)",1.65,0,0.0221327967806841,0
+"1904","baseline (no loss)",1.75,0,0.0221327967806841,0
+"1905","baseline (no loss)",1.85,0,0.0201207243460765,0
+"1906","baseline (no loss)",1.95,0,0.0201207243460765,0
+"1907","baseline (no loss)",2.05,0,0.0160965794768612,0
+"1908","baseline (no loss)",2.15,0,0.0201207243460765,0
+"1909","baseline (no loss)",2.25,0,0.028169014084507,0
+"1910","baseline (no loss)",2.35,0,0.0140845070422535,0
+"1911","baseline (no loss)",2.45,0,0.0120724346076459,0
+"1912","baseline (no loss)",2.55,0,0.0100603621730382,0
+"1913","baseline (no loss)",2.65,0,0.00603621730382294,0
+"1914","baseline (no loss)",2.75,0,0.0120724346076459,0
+"1915","baseline (no loss)",2.85,0,0.00603621730382294,0
+"1916","baseline (no loss)",2.95,0,0.0120724346076459,0
+"1917","baseline (no loss)",3.05,0,0.0100603621730382,0
+"1918","baseline (no loss)",3.15,0,0.0221327967806841,0
+"1919","baseline (no loss)",3.25,0,0.0100603621730382,0
+"1920","baseline (no loss)",3.35,0,0.00804828973843058,0
+"1921","baseline (no loss)",3.45,0,0.0140845070422535,0
+"1922","baseline (no loss)",3.55,0,0.00603621730382294,0
+"1923","baseline (no loss)",3.65,0,0.00804828973843058,0
+"1924","baseline (no loss)",3.75,0,0.00603621730382294,0
+"1925","baseline (no loss)",3.85,0,0.00402414486921529,0
+"1926","baseline (no loss)",3.95,0,0.00603621730382294,0
+"1927","baseline (no loss)",4.05,0,0.00402414486921529,0
+"1928","baseline (no loss)",4.15,0,0.00402414486921529,0
+"1929","baseline (no loss)",4.25,0,0.00402414486921529,0
+"1930","baseline (no loss)",4.35,0,0.00804828973843058,0
+"1931","baseline (no loss)",4.45,0,0.00402414486921529,0
+"1932","baseline (no loss)",4.55,0,0.00201207243460765,0
+"1933","baseline (no loss)",4.65,0,0.00603621730382294,0
+"1934","baseline (no loss)",4.75,0,0.00201207243460765,0
+"1935","baseline (no loss)",4.85,0,0.00201207243460765,0
+"1936","baseline (no loss)",4.95,0,0.00201207243460765,0
+"1937","baseline (no loss)",5.05,0,0.00201207243460765,0
+"1938","baseline (no loss)",5.15,0,0,0
+"1939","baseline (no loss)",5.25,0,0.00201207243460765,0
+"1940","baseline (no loss)",5.35,0,0.00201207243460765,0
+"1941","baseline (no loss)",5.45,0,0.00201207243460765,0
+"1942","baseline (no loss)",5.55,0,0.0100603621730382,0
+"1943","baseline (no loss)",5.65,0,0.00201207243460765,0
+"1944","baseline (no loss)",5.75,0,0.00201207243460765,0
+"1945","baseline (no loss)",5.85,0,0.00402414486921529,0
+"1946","baseline (no loss)",5.95,0,0,0
+"1947","baseline (no loss)",6.05,0,0.00201207243460765,0
+"1948","baseline (no loss)",6.15,0,0.00402414486921529,0
+"1949","baseline (no loss)",6.25,0,0.00603621730382294,0
+"1950","baseline (no loss)",6.35,0,0,0
+"1951","baseline (no loss)",6.45,0,0.00804828973843058,0
+"1952","baseline (no loss)",6.55,0,0,0
+"1953","baseline (no loss)",6.65,0,0,0
+"1954","baseline (no loss)",6.75,0,0.00201207243460765,0
+"1955","baseline (no loss)",6.85,0,0.00201207243460765,0
+"1956","baseline (no loss)",6.95,0,0.00402414486921529,0
+"1957","baseline (no loss)",7.05,0,0,0
+"1958","baseline (no loss)",7.15,0,0,0
+"1959","baseline (no loss)",7.25,0,0.00201207243460765,0
+"1960","baseline (no loss)",7.35,0,0.00201207243460765,0
+"1961","baseline (no loss)",7.45,0,0,0
+"1962","baseline (no loss)",7.55,0,0.00201207243460765,0
+"1963","baseline (no loss)",7.65,0,0,0
+"1964","baseline (no loss)",7.75,0,0.00603621730382294,0
+"1965","baseline (no loss)",7.85,0,0.00402414486921529,0
+"1966","baseline (no loss)",7.95,0,0.00201207243460765,0
+"1967","baseline (no loss)",8.05,0,0,0
+"1968","baseline (no loss)",8.15,0,0.00201207243460765,0
+"1969","baseline (no loss)",8.25,0,0,0
+"1970","baseline (no loss)",8.35,0,0.00402414486921529,0
+"1971","baseline (no loss)",8.45,0,0.00201207243460765,0
+"1972","baseline (no loss)",8.55,0,0,0
+"1973","baseline (no loss)",8.65,0,0,0
+"1974","baseline (no loss)",8.75,0,0.00201207243460765,0
+"1975","baseline (no loss)",8.85,0,0,0
+"1976","baseline (no loss)",8.95,0,0,0
+"1977","baseline (no loss)",9.05,0,0.00201207243460765,0
+"1978","baseline (no loss)",9.15,0,0.00201207243460765,0
+"1979","baseline (no loss)",9.25,0,0,0
+"1980","baseline (no loss)",9.35,0,0,0
+"1981","baseline (no loss)",9.45,0,0,0
+"1982","baseline (no loss)",9.55,0,0,0
+"1983","baseline (no loss)",9.65,0,0.00201207243460765,0
+"1984","baseline (no loss)",9.75,0,0,0
+"1985","baseline (no loss)",9.85,0,0,0
+"1986","baseline (no loss)",9.95,0,0.00201207243460765,0
+"1987","baseline (no loss)",10.05,0,0,0
+"1988","baseline (no loss)",10.15,0,0,0
+"1989","baseline (no loss)",10.25,0,0,0
+"1990","baseline (no loss)",10.35,0,0,0
+"1991","baseline (no loss)",10.45,0,0,0
+"1992","baseline (no loss)",10.55,0,0.00201207243460765,0
+"1993","baseline (no loss)",10.65,0,0,0
+"1994","baseline (no loss)",10.75,0,0,0
+"1995","baseline (no loss)",10.85,0,0,0
+"1996","baseline (no loss)",10.95,0,0.00201207243460765,0
+"1997","baseline (no loss)",11.05,0,0,0
+"1998","baseline (no loss)",11.15,0,0,0
+"1999","baseline (no loss)",11.25,0,0,0
+"2000","baseline (no loss)",11.35,0,0,0
+"2001","baseline (no loss)",11.45,0,0,0
+"2002","baseline (no loss)",11.55,0,0,0
+"2003","baseline (no loss)",11.65,0,0,0
+"2004","baseline (no loss)",11.75,0,0,0
+"2005","baseline (no loss)",11.85,0,0,0
+"2006","baseline (no loss)",11.95,0,0,0
+"2007","baseline (taphonomic loss)",0.25,0,0.0303643724696356,0
+"2008","baseline (taphonomic loss)",0.35,0,0.0465587044534413,0
+"2009","baseline (taphonomic loss)",0.45,0,0.0789473684210526,0
+"2010","baseline (taphonomic loss)",0.55,0,0.0809716599190283,0
+"2011","baseline (taphonomic loss)",0.65,0,0.0688259109311741,0
+"2012","baseline (taphonomic loss)",0.75,0,0.0566801619433198,0
+"2013","baseline (taphonomic loss)",0.85,0,0.0526315789473684,0
+"2014","baseline (taphonomic loss)",0.95,0,0.01417004048583,0
+"2015","baseline (taphonomic loss)",1.05,0,0.0506072874493927,0
+"2016","baseline (taphonomic loss)",1.15,0,0.0445344129554656,0
+"2017","baseline (taphonomic loss)",1.25,0,0.0323886639676113,0
+"2018","baseline (taphonomic loss)",1.35,0,0.0101214574898785,0
+"2019","baseline (taphonomic loss)",1.45,0,0.0303643724696356,0
+"2020","baseline (taphonomic loss)",1.55,0,0.0182186234817814,0
+"2021","baseline (taphonomic loss)",1.65,0,0.0263157894736842,0
+"2022","baseline (taphonomic loss)",1.75,0,0.0202429149797571,0
+"2023","baseline (taphonomic loss)",1.85,0,0.0182186234817814,0
+"2024","baseline (taphonomic loss)",1.95,0,0.0182186234817814,0
+"2025","baseline (taphonomic loss)",2.05,0,0.0121457489878543,0
+"2026","baseline (taphonomic loss)",2.15,0,0.0222672064777328,0
+"2027","baseline (taphonomic loss)",2.25,0,0.00607287449392713,0
+"2028","baseline (taphonomic loss)",2.35,0,0.0101214574898785,0
+"2029","baseline (taphonomic loss)",2.45,0,0.0101214574898785,0
+"2030","baseline (taphonomic loss)",2.55,0,0.0242914979757085,0
+"2031","baseline (taphonomic loss)",2.65,0,0.00607287449392713,0
+"2032","baseline (taphonomic loss)",2.75,0,0.0161943319838057,0
+"2033","baseline (taphonomic loss)",2.85,0,0.00607287449392713,0
+"2034","baseline (taphonomic loss)",2.95,0,0.0101214574898785,0
+"2035","baseline (taphonomic loss)",3.05,0,0.00809716599190283,0
+"2036","baseline (taphonomic loss)",3.15,0,0.01417004048583,0
+"2037","baseline (taphonomic loss)",3.25,0,0.00607287449392713,0
+"2038","baseline (taphonomic loss)",3.35,0,0.00809716599190283,0
+"2039","baseline (taphonomic loss)",3.45,0,0.0182186234817814,0
+"2040","baseline (taphonomic loss)",3.55,0,0.00809716599190283,0
+"2041","baseline (taphonomic loss)",3.65,0,0.00809716599190283,0
+"2042","baseline (taphonomic loss)",3.75,0,0.00404858299595142,0
+"2043","baseline (taphonomic loss)",3.85,0,0,0
+"2044","baseline (taphonomic loss)",3.95,0,0.00404858299595142,0
+"2045","baseline (taphonomic loss)",4.05,0,0.00404858299595142,0
+"2046","baseline (taphonomic loss)",4.15,0,0.00202429149797571,0
+"2047","baseline (taphonomic loss)",4.25,0,0.00607287449392713,0
+"2048","baseline (taphonomic loss)",4.35,0,0.00202429149797571,0
+"2049","baseline (taphonomic loss)",4.45,0,0.00404858299595142,0
+"2050","baseline (taphonomic loss)",4.55,0,0.00607287449392713,0
+"2051","baseline (taphonomic loss)",4.65,0,0.00607287449392713,0
+"2052","baseline (taphonomic loss)",4.75,0,0.0101214574898785,0
+"2053","baseline (taphonomic loss)",4.85,0,0.00607287449392713,0
+"2054","baseline (taphonomic loss)",4.95,0,0,0
+"2055","baseline (taphonomic loss)",5.05,0,0.00607287449392713,0
+"2056","baseline (taphonomic loss)",5.15,0,0.00404858299595142,0
+"2057","baseline (taphonomic loss)",5.25,0,0.00202429149797571,0
+"2058","baseline (taphonomic loss)",5.35,0,0.00202429149797571,0
+"2059","baseline (taphonomic loss)",5.45,0,0.00202429149797571,0
+"2060","baseline (taphonomic loss)",5.55,0,0,0
+"2061","baseline (taphonomic loss)",5.65,0,0.00202429149797571,0
+"2062","baseline (taphonomic loss)",5.75,0,0,0
+"2063","baseline (taphonomic loss)",5.85,0,0.00202429149797571,0
+"2064","baseline (taphonomic loss)",5.95,0,0.00607287449392713,0
+"2065","baseline (taphonomic loss)",6.05,0,0,0
+"2066","baseline (taphonomic loss)",6.15,0,0.00202429149797571,0
+"2067","baseline (taphonomic loss)",6.25,0,0,0
+"2068","baseline (taphonomic loss)",6.35,0,0,0
+"2069","baseline (taphonomic loss)",6.45,0,0.00202429149797571,0
+"2070","baseline (taphonomic loss)",6.55,0,0,0
+"2071","baseline (taphonomic loss)",6.65,0,0,0
+"2072","baseline (taphonomic loss)",6.75,0,0,0
+"2073","baseline (taphonomic loss)",6.85,0,0,0
+"2074","baseline (taphonomic loss)",6.95,0,0.00202429149797571,0
+"2075","baseline (taphonomic loss)",7.05,0,0,0
+"2076","baseline (taphonomic loss)",7.15,0,0.00202429149797571,0
+"2077","baseline (taphonomic loss)",7.25,0,0.00202429149797571,0
+"2078","baseline (taphonomic loss)",7.35,0,0,0
+"2079","baseline (taphonomic loss)",7.45,0,0.00202429149797571,0
+"2080","baseline (taphonomic loss)",7.55,0,0.00202429149797571,0
+"2081","baseline (taphonomic loss)",7.65,0,0,0
+"2082","baseline (taphonomic loss)",7.75,0,0,0
+"2083","baseline (taphonomic loss)",7.85,0,0.00202429149797571,0
+"2084","baseline (taphonomic loss)",7.95,0,0,0
+"2085","baseline (taphonomic loss)",8.05,0,0,0
+"2086","baseline (taphonomic loss)",8.15,0,0.00404858299595142,0
+"2087","baseline (taphonomic loss)",8.25,0,0,0
+"2088","baseline (taphonomic loss)",8.35,0,0,0
+"2089","baseline (taphonomic loss)",8.45,0,0,0
+"2090","baseline (taphonomic loss)",8.55,0,0.00202429149797571,0
+"2091","baseline (taphonomic loss)",8.65,0,0,0
+"2092","baseline (taphonomic loss)",8.75,0,0,0
+"2093","baseline (taphonomic loss)",8.85,0,0,0
+"2094","baseline (taphonomic loss)",8.95,0,0,0
+"2095","baseline (taphonomic loss)",9.05,0,0,0
+"2096","baseline (taphonomic loss)",9.15,0,0,0
+"2097","baseline (taphonomic loss)",9.25,0,0,0
+"2098","baseline (taphonomic loss)",9.35,0,0,0
+"2099","baseline (taphonomic loss)",9.45,0,0.00202429149797571,0
+"2100","baseline (taphonomic loss)",9.55,0,0,0
+"2101","baseline (taphonomic loss)",9.65,0,0,0
+"2102","baseline (taphonomic loss)",9.75,0,0,0
+"2103","baseline (taphonomic loss)",9.85,0,0.00202429149797571,0
+"2104","baseline (taphonomic loss)",9.95,0,0,0
+"2105","baseline (taphonomic loss)",10.05,0,0,0
+"2106","baseline (taphonomic loss)",10.15,0,0,0
+"2107","baseline (taphonomic loss)",10.25,0,0,0
+"2108","baseline (taphonomic loss)",10.35,0,0,0
+"2109","baseline (taphonomic loss)",10.45,0,0,0
+"2110","baseline (taphonomic loss)",10.55,0,0,0
+"2111","baseline (taphonomic loss)",10.65,0,0,0
+"2112","baseline (taphonomic loss)",10.75,0,0,0
+"2113","baseline (taphonomic loss)",10.85,0,0,0
+"2114","baseline (taphonomic loss)",10.95,0,0,0
+"2115","baseline (taphonomic loss)",11.05,0,0,0
+"2116","baseline (taphonomic loss)",11.15,0,0,0
+"2117","baseline (taphonomic loss)",11.25,0,0,0
+"2118","baseline (taphonomic loss)",11.35,0,0,0
+"2119","baseline (taphonomic loss)",11.45,0,0,0
+"2120","baseline (taphonomic loss)",11.55,0,0,0
+"2121","baseline (taphonomic loss)",11.65,0,0,0
+"2122","baseline (taphonomic loss)",11.75,0,0,0
+"2123","baseline (taphonomic loss)",11.85,0,0,0
+"2124","baseline (taphonomic loss)",11.95,0,0,0

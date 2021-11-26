@@ -3,10 +3,10 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 28 September 2021
+# Last modified 2 November 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
-# MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING BUT PLOTS THE MEDIAN BASELINE/SPD...
+# MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING
 
 #------------------------------------------------
 # I. GET EVIDENCE OF HUMAN OCCUPATION
@@ -569,11 +569,12 @@ generate_multiple_spds <- function(calibrated_samples, timeRange, runm, normalis
 #--------------------------------------------------------------------------------------------------------------------------------
 
 ## Generate and compare the mean SPD
+## @param baseline_SPD       = the baseline SPD we want to compare our subsetted SPDs to
 ## @param calibrated_samples = our calibrated sample data
 ## @param timeRange          = the time range we are interested in sampling over
 ## @param runm               = the running mean to be used when creating the SPD
 ## @param normalised         = logical for normalising the calibration curves and SPD (TRUE or FALSE)
-compare_spds <- function(calibrated_samples, timeRange, runm, normalised){
+compare_spds <- function(baseline_SPD, calibrated_samples, timeRange, runm, normalised){
   
   #-----------------------
   # Get subsampled SPDs
@@ -599,8 +600,50 @@ compare_spds <- function(calibrated_samples, timeRange, runm, normalised){
                                    apply(subsampled.spds[[x]], 1, quantile, prob = c(0.975)))
   }
   
+  #--------------------
+  # Calculate p-value
+  # based on https://rdrr.io/cran/rcarbon/src/R/tests.R
+  #--------------------
+  
+  pValueList <- numeric(length = length(subsampled.spds))
+  
+  # For each subsample type:
+  for (x in 1:length(subsampled.spds)) {
+    
+    ## Create Vector of Means
+    zscoreMean <- apply(subsampled.spds[[x]], 1, mean)
+    
+    ## Create Vector of SDs
+    zscoreSD <- apply(subsampled.spds[[x]], 1, sd)
+    
+    ## Z-Transform baseline and sub-sampled spds
+    tmp.subsampled   <- t(apply(subsampled.spds[[x]], 1, function(p){ return((p - mean(p))/sd(p)) }))
+    baseline         <- baseline_SPD$grid$PrDens
+    tmp.baseline     <- (baseline - zscoreMean)/zscoreSD
+    
+    ## Compute CI
+    tmp.ci <- t(apply(tmp.subsampled, 1, quantile, prob = c(0.025, 0.975), na.rm = TRUE))
+    
+    ## Compute expected statistic
+    expected.statistic <- abs(apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a<0); return(sum(a[i])) }, y = tmp.ci[,1])) +
+      apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a>0); return(sum(a[i])) }, y = tmp.ci[,2])
+    
+    ## Compute observed statistic
+    lower    <- tmp.baseline - tmp.ci[,1]
+    indexLow <- which(tmp.baseline < tmp.ci[,1])
+    higher   <- tmp.baseline - tmp.ci[,2]
+    indexHi  <- which(tmp.baseline > tmp.ci[,2])
+    observed.statistic <- sum(abs(lower[indexLow])) + sum(higher[indexHi])
+    
+    ## Calculate p-value
+    pValueList[[x]] <- 1
+    if (observed.statistic > 0) {    
+      pValueList[[x]] <- c(length(expected.statistic[expected.statistic > observed.statistic]) + 1)/c(nsim + 1)    
+    }
+  }
+  
   # RETURN OUTPUT
-  return(list(calBP = sample_calBP, envelope = subsampledCIlist, raw = subsampled.spds))
+  return(list(calBP = sample_calBP, envelope = subsampledCIlist, raw = subsampled.spds, pvalue = pValueList))
   
 }
 

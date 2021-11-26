@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------------------------------------------------------------------
 # title: "Sampling bias in radiocarbon dating project: simulation study (no population change) - 5 samples"
 # author: "Rebecca Wheatley"
-# date: "7 October 2021"
+# date: "21 October 2021"
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 library(rcarbon)
@@ -367,6 +367,8 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),5] <- 0
 }
 
+write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/Plot_data-SPD_noloss-5samples_20sims.csv")
+
 # Plot (combined):
 group.colors <- c("baseline (no loss) replicates" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
@@ -376,24 +378,6 @@ group.colors <- c("baseline (no loss) replicates" = "grey",
                   "uniform (50% sites)"           = "darkorchid1", "uniform (75% sites"           = "darkorchid3", "uniform (100% sites)"          = "darkorchid4",
                   "baseline (no loss)" = "black")
 
-# <- plot.spd.noloss %>%
-#  mutate(sample = fct_relevel(sample, 
-#                              "baseline (no loss) replicates", 
-#                              "uniform (50% sites)", "uniform (75% sites)", "uniform (100% sites)", 
-#                              "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", 
-#                              "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)",
-#                              "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", 
-#                              "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)", 
-#                              "baseline (no loss)")) %>%
-#  ggplot() +
-#  geom_ribbon(aes(x = years.ka, ymin = lowerCI, ymax = upperCI, fill = sample), alpha = 0.2) +
-#  geom_line(aes(x = years.ka, y = median, color = sample), lwd = 1.5) +
-#  scale_fill_manual(values=group.colors) +
-#  scale_color_manual(values=group.colors) +
-#  labs(x = "Years (ka)", y = "Probability") +
-#  ggtitle("Summed probability distribution (no population change)") +
-#  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-#p
 
 # Plot (multi panelled):
 uniform <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline (no loss)", "uniform (50% sites)", "uniform (75% sites)", "uniform (100% sites)"),] %>%
@@ -456,11 +440,11 @@ baseline <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline (no loss)", 
   labs(x = "Years (ka)", y = "Probability") +
   ylim(0, 0.0007) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-spd.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, baseline,
-                    labels = c("A", "B", "C", "D", "E", "F"),
+spd.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
+                    labels = c("A", "B", "C", "D", "E"),
                     ncol = 2, nrow = 3)
 spd.noloss
-ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/SPD_noloss-5samples_20sims.png",
+ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/No_population_change-SPD_noloss-5samples_20sims.png",
          width = 1500,
          height = 1000)
 
@@ -699,6 +683,8 @@ for (i in 1:length(median.bin.age)){
   plot.fd.samples.noloss[(length(median.bin.age)*16+i),5] <- 0
 }
 
+write.csv(plot.fd.samples.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/Plot_data-FD_samples_noloss-5samples_20sims.csv")
+
 # Combined plot
 group.colors <- c("baseline (no loss) replicates" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
@@ -707,22 +693,6 @@ group.colors <- c("baseline (no loss) replicates" = "grey",
                   "bracketed (50% sites)"         = "chartreuse2", "bracketed (75% sites)"        = "chartreuse3", "bracketed (100% sites)"        = "chartreuse4",
                   "uniform (50% sites)"           = "darkorchid1", "uniform (75% sites"           = "darkorchid3", "uniform (100% sites)"          = "darkorchid4",
                   "baseline (no loss)" = "black")
-
-#p <- plot.fd.samples.noloss %>%
-#  mutate(sample = fct_relevel(sample, 
-#                              "baseline (no loss) replicates", "uniform", "bracketed", 
-#                              "singleton random", "singleton recent", "singleton ancient", 
-#                              "baseline (no loss)")) %>%
-#  ggplot() +
-#  geom_ribbon(aes(x = median.bin.age, ymin = lowerCI, ymax = upperCI, fill = sample), alpha = 0.2) +
-#  geom_spline(aes(x = median.bin.age, y = median, color = sample), lwd = 1.5, df = 40) +
-#  scale_fill_manual(values=group.colors) +
-#  scale_color_manual(values=group.colors) +
-#  labs(x = "Years (ka)", y = "Standardised frequency") +
-#  ggtitle("Frequency distribution of dates (no population change)") +
-#  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000)) +
-#  theme_bw()
-#p
 
 # Plot (multi panelled):
 uniform <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseline (no loss)", "uniform (50% sites)", "uniform (75% sites)", "uniform (100% sites)"),] %>%
@@ -733,7 +703,7 @@ uniform <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseline
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.random <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseline (no loss)", "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)", "baseline (no loss)")) %>%
@@ -743,7 +713,7 @@ singleton.random <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c(
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.ancient <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseline (no loss)", "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)", "baseline (no loss)")) %>%
@@ -753,7 +723,7 @@ singleton.ancient <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.recent <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseline (no loss)", "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", "baseline (no loss)")) %>%
@@ -763,7 +733,7 @@ singleton.recent <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c(
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 bracketed <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseline (no loss)", "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample,  "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", "baseline (no loss)")) %>%
@@ -773,7 +743,7 @@ bracketed <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseli
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 baseline <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baseline (no loss)", "baseline (no loss) replicates"),] %>%
   mutate(samples = fct_relevel(sample, "baseline (no loss) replicates", "baseline (no loss)")) %>%
@@ -783,13 +753,13 @@ baseline <- plot.fd.samples.noloss[plot.fd.samples.noloss$sample %in% c("baselin
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-fd.samples.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, baseline,
-                     labels = c("A", "B", "C", "D", "E", "F"),
+fd.samples.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
+                     labels = c("A", "B", "C", "D", "E"),
                      ncol = 2, nrow = 3)
 fd.samples.noloss
-ggexport(fd.samples.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/FD_samples_noloss-5samples_20sims.png",
+ggexport(fd.samples.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/No_population_change-FD_samples_noloss-5samples_20sims.png",
          width = 1500,
          height = 1000)
 
@@ -1027,6 +997,8 @@ for (i in 1:length(median.bin.age)){
   plot.fd.sites.noloss[(length(median.bin.age)*16+i),5] <- 0
 }
 
+write.csv(plot.fd.sites.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/Plot_data-FD_sites_noloss-5samples_20sims.csv")
+
 # Plot (combined)
 group.colors <- c("baseline (no loss) replicates" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
@@ -1035,22 +1007,6 @@ group.colors <- c("baseline (no loss) replicates" = "grey",
                   "bracketed (50% sites)"         = "chartreuse2", "bracketed (75% sites)"        = "chartreuse3", "bracketed (100% sites)"        = "chartreuse4",
                   "uniform (50% sites)"           = "darkorchid1", "uniform (75% sites"           = "darkorchid3", "uniform (100% sites)"          = "darkorchid4",
                   "baseline (no loss)" = "black")
-
-#p <- plot.fd.sites.noloss %>%
-#  mutate(sample = fct_relevel(sample, 
-#                              "baseline (no loss) replicates", "uniform", "bracketed", 
-#                              "singleton random", "singleton recent", "singleton ancient", 
-#                              "baseline (no loss)")) %>%
-#  ggplot() +
-#  geom_ribbon(aes(x = median.bin.age, ymin = lowerCI, ymax = upperCI, fill = sample), alpha = 0.2) +
-#  geom_spline(aes(x = median.bin.age, y = median, color = sample), lwd = 1.5, df = 40) +
-#  scale_fill_manual(values=group.colors) +
-#  scale_color_manual(values=group.colors) +
-#  labs(x = "Years (ka)", y = "Standardised frequency") +
-#  ggtitle("Frequency distribution of sites (no population change)") +
-#  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000)) +
-#  theme_bw()
-#p
 
 # Plot (multi panelled):
 uniform <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (no loss)", "uniform (50% sites)", "uniform (75% sites)", "uniform (100% sites)"),] %>%
@@ -1061,7 +1017,7 @@ uniform <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (no
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (sites)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.random <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (no loss)", "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)", "baseline (no loss)")) %>%
@@ -1071,7 +1027,7 @@ singleton.random <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("bas
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (sites)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.ancient <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (no loss)", "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)", "baseline (no loss)")) %>%
@@ -1081,7 +1037,7 @@ singleton.ancient <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("ba
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (sites)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.recent <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (no loss)", "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", "baseline (no loss)")) %>%
@@ -1091,7 +1047,7 @@ singleton.recent <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("bas
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (sites)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 bracketed <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (no loss)", "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", "baseline (no loss)")) %>%
@@ -1101,7 +1057,7 @@ bracketed <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (sites)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 baseline <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (no loss)", "baseline (no loss) replicates"),] %>%
   mutate(sample = fct_relevel(sample, "baseline (no loss) replicates", "baseline (no loss)")) %>%
@@ -1111,13 +1067,13 @@ baseline <- plot.fd.sites.noloss[plot.fd.sites.noloss$sample %in% c("baseline (n
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (sites)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.07) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-fd.sites.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, baseline,
-                             labels = c("A", "B", "C", "D", "E", "F"),
+fd.sites.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
+                             labels = c("A", "B", "C", "D", "E"),
                              ncol = 2, nrow = 3)
 fd.sites.noloss
-ggexport(fd.sites.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/FD_sites_noloss-5samples_20sims.png",
+ggexport(fd.sites.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/No_population_change-FD_sites_noloss-5samples_20sims.png",
          width = 1500,
          height = 1000)
 
@@ -1461,6 +1417,8 @@ for (i in 1:length(spd.baseline.taphloss$calBP)){
   plot.spd.taphloss[(length(spd.baseline.taphloss$calBP)*17+i),5] <- 0
 }
 
+write.csv(plot.spd.taphloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/Plot_data-SPD_taphloss-5samples_20sims.csv")
+
 # Plot (multi panelled):
 group.colors <- c("baseline (taphonomic loss) replicates" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
@@ -1479,7 +1437,7 @@ uniform <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline (no loss)
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.0008) +
+  ylim(0, 0.00085) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.random <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1487,7 +1445,7 @@ singleton.random <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline 
   geom_ribbon(aes(x = years.ka, ymin = lowerCI, ymax = upperCI, fill = sample), alpha = 0.2) +
   geom_line(aes(x = years.ka, y = median, color = sample), lwd = 1.5) +
   scale_fill_manual(values=group.colors) +
-  ylim(0, 0.0008) +
+  ylim(0, 0.00085) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
@@ -1499,7 +1457,7 @@ singleton.ancient <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.0008) +
+  ylim(0, 0.00085) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.recent <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1509,7 +1467,7 @@ singleton.recent <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline 
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.0008) +
+  ylim(0, 0.00085) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 bracketed <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1519,7 +1477,7 @@ bracketed <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline (no los
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.0008) +
+  ylim(0, 0.00085) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 baseline <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "baseline (taphonomic loss) replicates"),] %>%
   mutate(sample = fct_relevel(sample, "baseline (taphonomic loss) replicates", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1529,13 +1487,13 @@ baseline <- plot.spd.taphloss[plot.spd.taphloss$sample %in% c("baseline (no loss
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.0008) +
+  ylim(0, 0.00085) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-spd.taphloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, baseline,
-                        labels = c("A", "B", "C", "D", "E", "F"),
+spd.taphloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
+                        labels = c("A", "B", "C", "D", "E"),
                         ncol = 2, nrow = 3)
 spd.taphloss
-ggexport(spd.taphloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/SPD_taphloss-5samples_20sims.png",
+ggexport(spd.taphloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/No_population_change-SPD_taphloss-5samples_20sims.png",
          width = 1500,
          height = 1000)
 
@@ -1781,6 +1739,8 @@ for (i in 1:length(median.bin.age)){
   plot.fd.samples.taphloss.correct[(length(median.bin.age)*17+i),5] <- 0
 }
 
+write.csv(plot.fd.samples.taphloss.correct, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/Plot_data-FD_samples_taphloss_corrected-5samples_20sims.csv")
+
 # Plot (multi-panelled)
 group.colors <- c("baseline (taphonomic loss) replicates" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
@@ -1800,7 +1760,7 @@ uniform <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$sam
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.08) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.random <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1810,7 +1770,7 @@ singleton.random <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.co
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.08) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.ancient <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1820,7 +1780,7 @@ singleton.ancient <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.c
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.08) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.recent <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1830,7 +1790,7 @@ singleton.recent <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.co
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.08) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 bracketed <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample,  "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1840,7 +1800,7 @@ bracketed <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$s
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.08) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 baseline <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$sample %in% c("baseline (taphonomic loss) replicates", "baseline (no loss)", "baseline (taphonomic loss)"),] %>%
   mutate(samples = fct_relevel(sample, "baseline (taphonomic loss) replicates", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -1850,13 +1810,13 @@ baseline <- plot.fd.samples.taphloss.correct[plot.fd.samples.taphloss.correct$sa
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.08) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-fd.samples.taphloss.correct <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, baseline,
-                                         labels = c("A", "B", "C", "D", "E", "F"),
+fd.samples.taphloss.correct <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
+                                         labels = c("A", "B", "C", "D", "E"),
                                          ncol = 2, nrow = 3)
 fd.samples.taphloss.correct
-ggexport(fd.samples.taphloss.correct, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/FD_samples_taphloss_corrected-5samples_20sims.png",
+ggexport(fd.samples.taphloss.correct, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/No_population_change-FD_samples_taphloss_corrected-5samples_20sims.png",
          width = 1500,
          height = 1000)
 
@@ -2102,6 +2062,8 @@ for (i in 1:length(median.bin.age)){
   plot.fd.samples.taphloss.uncorrect[(length(median.bin.age)*17+i),5] <- 0
 }
 
+write.csv(plot.fd.samples.taphloss.uncorrect, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/Plot_data-FD_samples_taphloss_uncorrected-5samples_20sims.csv")
+
 # Plot (multi-panelled)
 group.colors <- c("baseline (taphonomic loss) replicates" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
@@ -2121,7 +2083,7 @@ uniform <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorrect
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.095) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.random <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorrect$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -2131,7 +2093,7 @@ singleton.random <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.095) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.ancient <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorrect$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -2141,7 +2103,7 @@ singleton.ancient <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.095) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 singleton.recent <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorrect$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -2151,7 +2113,7 @@ singleton.recent <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.095) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 bracketed <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorrect$sample %in% c("baseline (no loss)", "baseline (taphonomic loss)", "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample,  "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -2161,7 +2123,7 @@ bracketed <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorre
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.095) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
 baseline <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorrect$sample %in% c("baseline (taphonomic loss) replicates", "baseline (no loss)", "baseline (taphonomic loss)"),] %>%
   mutate(samples = fct_relevel(sample, "baseline (taphonomic loss) replicates", "baseline (no loss)", "baseline (taphonomic loss)")) %>%
@@ -2171,13 +2133,13 @@ baseline <- plot.fd.samples.taphloss.uncorrect[plot.fd.samples.taphloss.uncorrec
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Standardised frequency (dates)") +
-  ylim(0, 0.085) +
+  ylim(0, 0.095) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-fd.samples.taphloss.uncorrect <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, baseline,
-                                         labels = c("A", "B", "C", "D", "E", "F"),
+fd.samples.taphloss.uncorrect <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
+                                         labels = c("A", "B", "C", "D", "E"),
                                          ncol = 2, nrow = 3)
 fd.samples.taphloss.uncorrect
-ggexport(fd.samples.taphloss.uncorrect, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/FD_samples_taphloss_uncorrected-5samples_20sims.png",
+ggexport(fd.samples.taphloss.uncorrect, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figure/No_population_change-FD_samples_taphloss_uncorrected-5samples_20sims.png",
          width = 1500,
          height = 1000)
 
@@ -2420,6 +2382,8 @@ for (i in 1:length(median.bin.age)){
   plot.fd.sites.taphloss[(length(median.bin.age)*17+i),5] <- 0
 }
 
+write.csv(plot.fd.sites.taphloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/Plot_data-FD_sites_taphloss-5samples_20sims.csv")
+
 # Plot (multi-panelled)
 group.colors <- c("baseline (taphonomic loss) replicates" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
@@ -2491,10 +2455,10 @@ baseline <- plot.fd.sites.taphloss[plot.fd.sites.taphloss$sample %in% c("baselin
   labs(x = "Years (ka)", y = "Standardised frequency (sites)") +
   ylim(0, 0.085) +
   scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
-fd.sites.taphloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, baseline,
-                                           labels = c("A", "B", "C", "D", "E", "F"),
+fd.sites.taphloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
+                                           labels = c("A", "B", "C", "D", "E"),
                                            ncol = 2, nrow = 3)
 fd.sites.taphloss
-ggexport(fd.sites.taphloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/No population change/FD_sites_taphloss-5samples_20sims.png",
+ggexport(fd.sites.taphloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/No_population_change-FD_sites_taphloss-5samples_20sims.png",
          width = 1500,
          height = 1000)
