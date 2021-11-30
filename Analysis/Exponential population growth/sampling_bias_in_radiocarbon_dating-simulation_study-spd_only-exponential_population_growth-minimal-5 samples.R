@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------------------------------------------------------------------------------
 # title: "Sampling bias in radiocarbon dating project: simulation study (exponential population growth) - 5 samples"
 # author: "Rebecca Wheatley"
-# date: "26 November 2021"
+# date: "29 November 2021"
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 library(rcarbon)
@@ -26,7 +26,7 @@ no_sites         = 100                  ## the number of sites we want in our si
 no_samples       = 5                    ## the number of samples we want each site to have
 pop_trend        = "exponential growth" ## the underlying population trend we want to mimic
 sampling_effort  = 3                    ## the number of samples we want to take using the uniform sampling method
-nsim             = 20                   ## the number of times we want to replicate each sample
+nsim             = 99                   ## the number of times we want to replicate each sample
 
 #-------------------------------------------------------------------------------------
 # I. SIMULATING NO CHANGE IN POPULATION OVER TIME (WITHOUT TAPHONOMIC LOSS)
@@ -193,6 +193,7 @@ spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, run
 # Get the median and 95% CI for the SPDs for the baseline data sets
 spd.baseline.noloss  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                      calibrated_samples = cal.baseline.noloss, 
+                                     sampling_method = "baseline (replicates)",
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
@@ -200,113 +201,111 @@ spd.baseline.noloss  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
 # Get the median and 95% CI for the SPDs for the subsampled data sets
 spd.uniform.50p      <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                      calibrated_samples = cal.uniform.50p, 
+                                     sampling_method = "uniform (50% sites)", 
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
 spd.uniform.75p      <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                      calibrated_samples = cal.uniform.75p, 
+                                     sampling_method = "uniform (75% sites)",
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
 spd.uniform.100p     <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                     calibrated_samples = cal.uniform.100p, 
+                                     calibrated_samples = cal.uniform.100p,  
+                                     sampling_method = "uniform (100% sites)",
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
 
 spd.singleton.ancient.50p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.ancient.50p, 
+                                           subsampling_method = "singleton ancient (50% sites)", 
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
 spd.singleton.ancient.75p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.ancient.75p, 
+                                           subsampling_method = "singleton ancient (75% sites)", 
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
 spd.singleton.ancient.100p <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.ancient.100p, 
+                                           subsampling_method = "singleton ancient (100% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
 
 spd.singleton.recent.50p   <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                           calibrated_samples = cal.singleton.recent.50p, 
+                                           calibrated_samples = cal.singleton.recent.50p,  
+                                           sampling_method = "singleton recent (50% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
 spd.singleton.recent.75p   <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                           calibrated_samples = cal.singleton.recent.75p, 
+                                           calibrated_samples = cal.singleton.recent.75p,   
+                                           sampling_method = "singleton recent (75% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
 spd.singleton.recent.100p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.recent.100p, 
+                                           sampling_method = "singleton recent (100% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
 
 spd.singleton.random.50p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                           calibrated_samples = cal.singleton.random.50p, 
+                                          sampling_method = "singleton random (50% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
 spd.singleton.random.75p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                          calibrated_samples = cal.singleton.random.75p, 
+                                          calibrated_samples = cal.singleton.random.75p,  
+                                          sampling_method = "singleton random (75% sites)", 
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
 spd.singleton.random.100p <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                          calibrated_samples = cal.singleton.random.100p, 
+                                          calibrated_samples = cal.singleton.random.100p,   
+                                          sampling_method = "singleton random (100% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
 
 spd.bracketed.50p         <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                          calibrated_samples = cal.bracketed.50p, 
+                                          calibrated_samples = cal.bracketed.50p,  
+                                          sampling_method = "bracketed (50% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
 spd.bracketed.75p         <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                          calibrated_samples = cal.bracketed.75p, 
+                                          calibrated_samples = cal.bracketed.75p,  
+                                          sampling_method = "bracketed (75% sites)", 
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
 spd.bracketed.100p        <- compare_spds(baseline_SPD = spd.baseline.noloss1,
-                                          calibrated_samples = cal.bracketed.100p, 
+                                          calibrated_samples = cal.bracketed.100p,   
+                                          sampling_method = "bracketed (100% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
 
-# Get p-values for subsampled SPDs relative to the baseline SPD
-spd.baseline.noloss$pvalue        ## 0.2380952
+# Get total discrepancy scores for subsampled SPDs relative to the baseline SPD
 
-spd.uniform.50p$pvalue            ## 1
-spd.uniform.75p$pvalue            ## 1
-spd.uniform.100p$pvalue           ## 1
-
-spd.singleton.random.50p$pvalue   ## 1
-spd.singleton.random.75p$pvalue   ## 1
-spd.singleton.random.100p$pvalue  ## 1
-
-spd.singleton.ancient.50p$pvalue  ## 0.04761905
-spd.singleton.ancient.75p$pvalue  ## 0.04761905
-spd.singleton.ancient.100p$pvalue ## 0.04761905
-
-spd.singleton.recent.50p$pvalue   ## 0.04761905
-spd.singleton.recent.75p$pvalue   ## 0.04761905
-spd.singleton.recent.100p$pvalue  ## 0.04761905
-
-spd.bracketed.50p$pvalue          ## 0.04761905
-spd.bracketed.75p$pvalue          ## 0.04761905
-spd.bracketed.100p$pvalue         ## 0.04761905
+spd.singleton.ancient.50p$discrepancy  ## 7.24e-06
+spd.singleton.ancient.75p$discrepancy  ## 3.56e-05
+spd.singleton.ancient.100p$discrepancy ## 0.000249
 
 #------------------------------------------------------------
 # COMPARE SUBSAMPLED SPDS AGAINST THEORETICAL GROWTH MODELS
 #------------------------------------------------------------
 
 ## Using the first subsample of each grouping
-nsim2 = 499
+nsim2 = 99
 
 #-------------------
 # UNIFORM
@@ -316,7 +315,7 @@ nsim2 = 499
 uniform.50p.vs.uniform <- modelTest(cal.uniform.50p[[1]], errors = sample.uniform.50p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                     model = "uniform", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.50p.vs.uniform.p_values <- calculate_p_value(uniform.50p.vs.uniform)
+uniform.50p.vs.uniform.p_values <- calculate_p_value(uniform.50p.vs.uniform, "uniform")
 uniform.50p.vs.uniform.p_values$plot2
 uniform.50p.vs.uniform.p_values$p_total
 uniform.50p.vs.uniform.p_values$discrepancy
@@ -328,7 +327,7 @@ ggsave(uniform.50p.vs.uniform.p_values$plot2,
 uniform.75p.vs.uniform <- modelTest(cal.uniform.75p[[1]], errors = sample.uniform.75p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                     model = "uniform", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.75p.vs.uniform.p_values <- calculate_p_value(uniform.75p.vs.uniform)
+uniform.75p.vs.uniform.p_values <- calculate_p_value(uniform.75p.vs.uniform, "uniform")
 uniform.75p.vs.uniform.p_values$plot2
 uniform.75p.vs.uniform.p_values$p_total
 uniform.75p.vs.uniform.p_values$discrepancy
@@ -340,7 +339,7 @@ ggsave(uniform.75p.vs.uniform.p_values$plot2,
 uniform.100p.vs.uniform <- modelTest(cal.uniform.100p[[1]], errors = sample.uniform.100p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                     model = "uniform", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.100p.vs.uniform.p_values <- calculate_p_value(uniform.100p.vs.uniform)
+uniform.100p.vs.uniform.p_values <- calculate_p_value(uniform.100p.vs.uniform, "uniform")
 uniform.100p.vs.uniform.p_values$plot2
 uniform.100p.vs.uniform.p_values$p_total
 uniform.100p.vs.uniform.p_values$discrepancy
@@ -357,7 +356,7 @@ ggsave(uniform.100p.vs.uniform.p_values$plot2,
 uniform.50p.vs.linear <- modelTest(cal.uniform.50p[[1]], errors = sample.uniform.50p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                     model = "linear", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.50p.vs.linear.p_values <- calculate_p_value(uniform.50p.vs.linear)
+uniform.50p.vs.linear.p_values <- calculate_p_value(uniform.50p.vs.linear, "linear")
 uniform.50p.vs.linear.p_values$plot2
 uniform.50p.vs.linear.p_values$p_total
 uniform.50p.vs.linear.p_values$discrepancy
@@ -369,7 +368,7 @@ ggsave(uniform.50p.vs.linear.p_values$plot2,
 uniform.75p.vs.linear <- modelTest(cal.uniform.75p[[1]], errors = sample.uniform.75p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                    model = "linear", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.75p.vs.linear.p_values <- calculate_p_value(uniform.75p.vs.linear)
+uniform.75p.vs.linear.p_values <- calculate_p_value(uniform.75p.vs.linear, "linear")
 uniform.75p.vs.linear.p_values$plot2
 uniform.75p.vs.linear.p_values$p_total
 uniform.75p.vs.linear.p_values$discrepancy
@@ -381,7 +380,7 @@ ggsave(uniform.75p.vs.linear.p_values$plot2,
 uniform.100p.vs.linear <- modelTest(cal.uniform.100p[[1]], errors = sample.uniform.100p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                    model = "linear", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.100p.vs.linear.p_values <- calculate_p_value(uniform.100p.vs.linear)
+uniform.100p.vs.linear.p_values <- calculate_p_value(uniform.100p.vs.linear, "linear")
 uniform.100p.vs.linear.p_values$plot2
 uniform.100p.vs.linear.p_values$p_total
 uniform.100p.vs.linear.p_values$discrepancy
@@ -397,7 +396,7 @@ ggsave(uniform.100p.vs.linear.p_values$plot2,
 uniform.50p.vs.exponential <- modelTest(cal.uniform.50p[[1]], errors = sample.uniform.50p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                         model = "exponential", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.50p.vs.exponential.p_values <- calculate_p_value(uniform.50p.vs.exponential)
+uniform.50p.vs.exponential.p_values <- calculate_p_value(uniform.50p.vs.exponential, "exponential")
 uniform.50p.vs.exponential.p_values$plot2
 uniform.50p.vs.exponential.p_values$p_total     
 uniform.50p.vs.exponential.p_values$discrepancy
@@ -409,7 +408,7 @@ ggsave(uniform.50p.vs.exponential.p_values$plot2,
 uniform.75p.vs.exponential <- modelTest(cal.uniform.75p[[1]], errors = sample.uniform.75p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                         model = "exponential", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.75p.vs.exponential.p_values <- calculate_p_value(uniform.75p.vs.exponential)
+uniform.75p.vs.exponential.p_values <- calculate_p_value(uniform.75p.vs.exponential, "exponential")
 uniform.75p.vs.exponential.p_values$plot2
 uniform.75p.vs.exponential.p_values$p_total     
 uniform.75p.vs.exponential.p_values$discrepancy
@@ -421,7 +420,7 @@ ggsave(uniform.75p.vs.exponential.p_values$plot2,
 uniform.100p.vs.exponential <- modelTest(cal.uniform.100p[[1]], errors = sample.uniform.100p[[1]]$error, nsim = nsim2, timeRange = timeRange, 
                                         model = "exponential", runm = runm, raw = TRUE)
 ## calculate p-values and discrepancy scores
-uniform.100p.vs.exponential.p_values <- calculate_p_value(uniform.100p.vs.exponential)
+uniform.100p.vs.exponential.p_values <- calculate_p_value(uniform.100p.vs.exponential, "exponential")
 uniform.100p.vs.exponential.p_values$plot2
 uniform.100p.vs.exponential.p_values$p_total     
 uniform.100p.vs.exponential.p_values$discrepancy
@@ -433,12 +432,22 @@ ggsave(uniform.100p.vs.exponential.p_values$plot2,
 # SAVE DATA AND PLOT
 #------------------------------------------------------------
 
+# Rearrange data for plotting (baseline SPD vs mean subsample SPDs)
+baseline <- spd.singleton.ancient.50p$spd_data_long %>% subset(rep == "obs") %>%
+  mutate(sample = "baseline")
+plot.spd.mean <- bind_rows(spd.singleton.ancient.50p$spd_data_long, 
+                           spd.singleton.ancient.75p$spd_data_long,
+                           spd.singleton.ancient.100p$spd_data_long) %>%
+  subset(rep != "obs") %>%
+  bind_rows(baseline)
+
+
 # Rearrange data for plotting:
-plot.spd.noloss <- data.frame(matrix(NA, nrow = length(spd.baseline.noloss$calBP)*17, ncol = 5))
-names(plot.spd.noloss) <- c("sample", "years.ka", "lowerCI", "median", "upperCI")
+plot.spd <- data.frame(matrix(NA, nrow = length(spd.baseline.noloss$calBP)*17, ncol = 5))
+names(plot.spd) <- c("sample", "years.ka", "lowerCI", "median", "upperCI")
 
 for (i in 1:length(spd.baseline.noloss$calBP)){
-  plot.spd.noloss[i,1] <- "baseline (no loss) replicates"
+  plot.spd.noloss[i,1] <- "baseline (replicates)"
   plot.spd.noloss[i,2] <- spd.baseline.noloss$calBP[i]/1000
   plot.spd.noloss[i,3] <- spd.baseline.noloss$envelope[[1]][i,1]
   plot.spd.noloss[i,4] <- spd.baseline.noloss$envelope[[1]][i,2]
@@ -534,7 +543,7 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*15+i),4] <- spd.uniform.100p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*15+i),5] <- spd.uniform.100p$envelope[[1]][i,3]
 
-  plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),1] <- "baseline (no loss)"
+  plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),1] <- "baseline"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),2] <- spd.baseline.noloss1$grid$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),3] <- 0
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),4] <- spd.baseline.noloss1$grid$PrDens[i]
@@ -544,13 +553,13 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
 write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Exponential population growth/Plot_data-SPD_noloss-5samples_20sims.csv")
 
 # Plot (combined):
-group.colors <- c("baseline (no loss) replicates" = "grey", 
+group.colors <- c("baseline (replicates)" = "grey", 
                   "singleton ancient (50% sites)" = "chocolate1", "singleton ancient (75% sites)" = "chocolate2", "singleton ancient (100% sites)" = "chocolate3",
                   "singleton recent (50% sites)"  = "cadetblue1", "singleton recent (75% sites)"  = "cadetblue2", "singleton recent (100% sites)"  = "cadetblue3",  
                   "singleton random (50% sites)"  = "goldenrod1", "singleton random (75% sites)"  = "goldenrod2", "singleton random (100% sites)"  = "goldenrod3",
                   "bracketed (50% sites)"         = "chartreuse2", "bracketed (75% sites)"        = "chartreuse3", "bracketed (100% sites)"        = "chartreuse4",
                   "uniform (50% sites)"           = "darkorchid1", "uniform (75% sites"           = "darkorchid3", "uniform (100% sites)"          = "darkorchid4",
-                  "baseline (no loss)" = "black")
+                  "baseline" = "black")
 
 # Plot (multi panelled):
 uniform <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline (no loss)", "uniform (50% sites)", "uniform (75% sites)", "uniform (100% sites)"),] %>%

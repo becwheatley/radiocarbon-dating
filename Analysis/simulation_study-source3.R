@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 26 November 2021
+# Last modified 29 November 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 # MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING
@@ -571,10 +571,11 @@ generate_multiple_spds <- function(calibrated_samples, timeRange, runm, normalis
 ## Generate and compare the mean SPD
 ## @param baseline_SPD       = the baseline SPD we want to compare our subsetted SPDs to
 ## @param calibrated_samples = our calibrated sample data
+## @param subsampling_method = the subsampling method used to generate the calibrated samples
 ## @param timeRange          = the time range we are interested in sampling over
 ## @param runm               = the running mean to be used when creating the SPD
 ## @param normalised         = logical for normalising the calibration curves and SPD (TRUE or FALSE)
-compare_spds <- function(baseline_SPD, calibrated_samples, timeRange, runm, normalised){
+compare_spds <- function(baseline_SPD, calibrated_samples, subsampling_method, timeRange, runm, normalised){
   
   #-----------------------
   # Get subsampled SPDs
@@ -582,9 +583,9 @@ compare_spds <- function(baseline_SPD, calibrated_samples, timeRange, runm, norm
   sample_SPDs <- generate_multiple_spds(calibrated_samples = calibrated_samples, timeRange = timeRange, runm = runm, 
                                         normalised = normalised)
   
-  #-----------------------
-  # Calculate confidence intervals
-  #-----------------------
+  #-------------------------------------------
+  # Calculate mean and confidence intervals
+  #-------------------------------------------
   
   # Extract calibrated years BP
   sample_calBP <- sample_SPDs[,1]
@@ -596,54 +597,75 @@ compare_spds <- function(baseline_SPD, calibrated_samples, timeRange, runm, norm
   subsampledCIlist <- vector("list",length=length(subsampled.spds))
   for (x in 1:length(subsampled.spds)) {
     subsampledCIlist[[x]] <- cbind(apply(subsampled.spds[[x]], 1, quantile, prob = c(0.025)),
-                                   apply(subsampled.spds[[x]], 1, quantile, prob = c(0.500)),
+                                   apply(subsampled.spds[[x]], 1, mean),
                                    apply(subsampled.spds[[x]], 1, quantile, prob = c(0.975)))
   }
   
   #--------------------
   # Calculate p-value
-  # based on https://rdrr.io/cran/rcarbon/src/R/tests.R
   #--------------------
+
+  # Combine data
   
-  pValueList <- numeric(length = length(subsampled.spds))
+  spd.sims <- sample_SPDs[,2:ncol(sample_SPDs)]
   
-  # For each subsample type:
-  for (x in 1:length(subsampled.spds)) {
-    
-    ## Create Vector of Means
-    zscoreMean <- apply(subsampled.spds[[x]], 1, mean)
-    
-    ## Create Vector of SDs
-    zscoreSD <- apply(subsampled.spds[[x]], 1, sd)
-    
-    ## Z-Transform baseline and sub-sampled spds
-    tmp.subsampled   <- t(apply(subsampled.spds[[x]], 1, function(p){ return((p - mean(p))/sd(p)) }))
-    baseline         <- baseline_SPD$grid$PrDens
-    tmp.baseline     <- (baseline - zscoreMean)/zscoreSD
-    
-    ## Compute CI
-    tmp.ci <- t(apply(tmp.subsampled, 1, quantile, prob = c(0.025, 0.975), na.rm = TRUE))
-    
-    ## Compute expected statistic
-    expected.statistic <- abs(apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a<0); return(sum(a[i])) }, y = tmp.ci[,1])) +
-      apply(tmp.subsampled, 2, function(x, y){ a = x-y; i = which(a>0); return(sum(a[i])) }, y = tmp.ci[,2])
-    
-    ## Compute observed statistic
-    lower    <- tmp.baseline - tmp.ci[,1]
-    indexLow <- which(tmp.baseline < tmp.ci[,1])
-    higher   <- tmp.baseline - tmp.ci[,2]
-    indexHi  <- which(tmp.baseline > tmp.ci[,2])
-    observed.statistic <- sum(abs(lower[indexLow])) + sum(higher[indexHi])
-    
-    ## Calculate p-value
-    pValueList[[x]] <- 1
-    if (observed.statistic > 0) {    
-      pValueList[[x]] <- c(length(expected.statistic[expected.statistic > observed.statistic]) + 1)/c(nsim + 1)    
-    }
-  }
+  colnames(spd.sims) <- paste0("s", 1:ncol(spd.sims))
+  
+  spd.data <- spd.sims %>% as_tibble %>% 
+    mutate(calBP = sample_calBP, obs = baseline_SPD$grid$PrDens)
+  
+  nsim <- ncol(spd.sims)
+  
+  spd.data.long <- spd.data %>% pivot_longer(-calBP, names_to = "rep", values_to = "pd") %>% 
+    mutate(sample = subsampling_method)
+  
+  # Calculate p-value
+  
+  spd.data$calBP %>% head
+  
+  p_sig <- 0.05
+  
+  dat_sig_p <- 
+    spd.data%>% 
+    select(-calBP) %>% 
+    apply(1, function(row) (row - mean(row))^2) %>% # squared area
+    apply(1, cumsum) %>% # cumulative area, i.e., integral
+    apply(1, function(row) ((nsim + 2) - rank(row))/(nsim + 1)) %>% # progressive p-value
+    {tibble(calBP = spd.data$calBP, p =.["obs",], pd = spd.data$obs)} %>% 
+    mutate(sig = p<=p_sig, grp = c(0,diff(sig))) %>% 
+    filter(sig) %>% 
+    mutate(sig = NULL, grp = cumsum(grp))
+  
+  p_total <- dat_sig_p %>% slice(n()) %>% pull(p)
+  
+  # Calculate total discrepancy
+  
+  discrep <- spd.data.long %>% group_by(calBP) %>% summarise(pd = mean(pd)) %>% 
+    left_join(spd.data %>% select(calBP, obs), by = "calBP") %>% 
+    mutate(dis = discrepancy_fun(pd,obs), 
+           dis =cumsum(dis)) %>% 
+    slice(n()) %>% # take the last value to get the total
+    pull(dis) %>% 
+    signif(3)
+  
+  # Plot results
+  
+  plot2 <- 
+    spd.data.long %>% 
+    ggplot(aes(-calBP,pd)) +
+    geom_line(aes(group = rep), alpha = 0.2, color = blues9[5], size = 0.5) +
+    geom_line(col = "grey10", size = 1, lty = "dashed",
+              data = ~.x %>% group_by(calBP) %>% summarise(pd = mean(pd))) +
+    geom_line(col = blues9[9], size = 0.8,
+              data = ~ .x %>% filter(rep == "obs")) +
+    geom_line(aes(group = grp), col = "red", data = dat_sig_p, size = 0.9) +
+    labs(title = paste0("Summed probabilty distribution (baseline vs ", subsampling_method, ")"),
+         subtitle= paste0("Solid line is the emprical curve (red if p < ", p_sig,", blue otherwise)",
+                          "\n","p-value for the total data set is ", p_total,
+                          "\n", "discrepancy for the total data set is ", discrep))
   
   # RETURN OUTPUT
-  return(list(calBP = sample_calBP, envelope = subsampledCIlist, raw = subsampled.spds, pvalue = pValueList))
+  return(list(calBP = sample_calBP, envelope = subsampledCIlist, raw = subsampled.spds, spd_data_long = spd.data.long, pvalue = p_total, discrepancy = discrep, plot = plot2))
   
 }
 
@@ -655,7 +677,7 @@ compare_spds <- function(baseline_SPD, calibrated_samples, timeRange, runm, norm
 ## Calculate the global p-value and total discrepancy for monte carlo simulations based on a hypothetical growth model (modelTest 
 ## results)
 ## @param model_test_results = a modelTest object comparing the observed curve to Monte Carlo simulations of a hypothetical model
-calculate_p_value <- function(model_test_results){
+calculate_p_value <- function(model_test_results, hypothetical_model){
   
   #--------------------------
   # Extract and combine data
@@ -703,11 +725,12 @@ calculate_p_value <- function(model_test_results){
   #--------------------------
   
   discrep <- spd.data.long %>% group_by(calBP) %>% summarise(pd = mean(pd)) %>% 
-             mutate(obs = spd.data$obs, 
-                    dis = discrepancy_fun(pd,obs), 
-                    dis = cumsum(dis)) %>% 
-             slice(n()) %>% # take the last value to get the total
-             pull(dis)
+    left_join(spd.data %>% select(calBP, obs), by = "calBP") %>% 
+    mutate(dis = discrepancy_fun(pd,obs), 
+           dis =cumsum(dis)) %>% 
+    slice(n()) %>% # take the last value to get the total
+    pull(dis) %>% 
+    signif(3)
   
   #--------------------
   # Plot results
@@ -722,7 +745,7 @@ calculate_p_value <- function(model_test_results){
     geom_line(col = blues9[9], size = 0.8,
               data = ~ .x %>% filter(rep == "obs")) +
     geom_line(aes(group = grp), col = "red", data = dat_sig_p, size = 0.9) +
-    labs(title = "Summed probabilty distribution",
+    labs(title = paste0("Summed probabilty distribution (", hypothetical_model, " growth model)"),
          subtitle= paste0("Solid line is the emprical curve (red if p < ", p_sig,", blue otherwise)",
                           "\n","p-value for the total data set is ", p_total,
                           "\n", "discrepancy for the total data set is ", discrep))
@@ -735,4 +758,4 @@ calculate_p_value <- function(model_test_results){
   
 }
 
-discrepancy_fun <- function(x, y, q = 1, p =2) (abs(x^q - y^q))^p
+discrepancy_fun <- function(x, y, q = 1, p =2) (abs(x^q - y^q))^p 
