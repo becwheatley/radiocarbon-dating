@@ -3,7 +3,7 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 29 November 2021
+# Last modified 3 December 2021
 #--------------------------------------------------------------------------------------------------------------------------------
 
 # MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING
@@ -677,7 +677,7 @@ compare_spds <- function(baseline_SPD, calibrated_samples, subsampling_method, t
 ## Calculate the global p-value and total discrepancy for monte carlo simulations based on a hypothetical growth model (modelTest 
 ## results)
 ## @param model_test_results = a modelTest object comparing the observed curve to Monte Carlo simulations of a hypothetical model
-calculate_p_value <- function(model_test_results, hypothetical_model){
+calculate_p_value <- function(model_test_results, sample_type, replicate, theoretical_model){
   
   #--------------------------
   # Extract and combine data
@@ -745,9 +745,10 @@ calculate_p_value <- function(model_test_results, hypothetical_model){
     geom_line(col = blues9[9], size = 0.8,
               data = ~ .x %>% filter(rep == "obs")) +
     geom_line(aes(group = grp), col = "red", data = dat_sig_p, size = 0.9) +
-    labs(title = paste0("Summed probabilty distribution (", hypothetical_model, " growth model)"),
+    labs(title = paste0("Summed probabilty distribution",
+                        "\n", "(", sample_type, " subsample ", replicate, " vs ", theoretical_model, " theoretical growth model)"),
          subtitle= paste0("Solid line is the emprical curve (red if p < ", p_sig,", blue otherwise)",
-                          "\n","p-value for the total data set is ", p_total,
+                          "\n","p-value for the total data set is ", if (length(p_total) > 0) {p_total}else{"NA"},
                           "\n", "discrepancy for the total data set is ", discrep))
 
   #--------------------------
