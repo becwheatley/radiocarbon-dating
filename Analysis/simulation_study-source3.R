@@ -3,10 +3,13 @@
 # SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
 # Source functions
 # Code by Rebecca Wheatley
-# Last modified 3 December 2021
+# Last modified 3 March 2023
 #--------------------------------------------------------------------------------------------------------------------------------
 
 # MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING
+
+## excess date range (to avoid drop offs at start and end of range)
+excessDates <- 5000
 
 #------------------------------------------------
 # I. GET EVIDENCE OF HUMAN OCCUPATION
@@ -47,30 +50,17 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend, n
   
       # Establish the occupation range:
       if (pop_trend == "no change"){
-        #temp <- extraDistr::rdunif(2, min = timeRange[2]-3000, max = timeRange[1]+3000)
-        temp <- extraDistr::rdunif(no_samples*20, min = timeRange[2-3000], max = timeRange[1]+3000)
+        #temp <- extraDistr::rdunif(2, min = timeRange[2]-excessDates, max = timeRange[1]+excessDates)
+        temp <- extraDistr::rdunif(no_samples*20, min = timeRange[2]-excessDates, max = timeRange[1]+excessDates)
       
       } else if (pop_trend == "steady growth"){
-        samples <- round(EnvStats::rtri(no_samples*100, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = timeRange[2]))
-        samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-3000){return(x)}}))
+        samples <- round(EnvStats::rtri(no_samples*100, min = timeRange[2]-excessDates, max = timeRange[1]+excessDates, mode = timeRange[2]))
+        samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-excessDates){return(x)}}))
         temp <- samples2[1:(no_samples*20)]
     
       } else if (pop_trend == "exponential growth"){
-        temp <- round(truncdist::rtrunc(n = no_samples*20, spec = "exp", a = timeRange[2]-3000, b = timeRange[1]+3000, rate = 0.3/500))
-    
-      } else if (pop_trend == "growth then decline"){
-        temp <- round(EnvStats::rtri(no_samples*20, min = timeRange[2]-3000, max = timeRange[1]+3000, mode = (timeRange[1] - timeRange[2])/2))
-      
-      } else if (pop_trend == "growth decline growth"){
-        samples <- round(EnvStats::rtri(no_samples*100, min = timeRange[2] - (timeRange[1] - timeRange[2])/3 - 1000, max = timeRange[2] + (timeRange[1] - timeRange[2])/3 - 1000, mode = timeRange[2]))
-        samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-1000){return(x)}}))
-        temp1 <- samples2[1:(no_samples*10)] 
-        temp2 <- round(EnvStats::rtri(no_samples*10, min = timeRange[2] + (timeRange[1] - timeRange[2])/3, max = timeRange[2] + (timeRange[1] - timeRange[2]) + 1000, mode = timeRange[1] - (timeRange[1] - timeRange[2])/3))
-        temp <- c(temp1, temp2)
-        
-      #} else if (pop_trend == "growth then plateau"){
-         
-      }
+        temp <- round(truncdist::rtrunc(n = no_samples*20, spec = "exp", a = timeRange[2]-excessDates, b = timeRange[1]+excessDates, rate = 0.3/500))
+        }
       
       # Get rid of samples that are outside the bounds of the region of interest
       samples1 <- unlist(lapply(temp, function(x) {if(x >= timeRange[2] && x <= timeRange[1]){return(x)}}))
