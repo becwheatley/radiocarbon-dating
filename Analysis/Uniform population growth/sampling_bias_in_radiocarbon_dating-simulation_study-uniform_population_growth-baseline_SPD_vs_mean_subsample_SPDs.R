@@ -1,9 +1,14 @@
 #-------------------------------------------------------------------------------------------------------------------------------------------
-# title: "Sampling bias in radiocarbon dating project: simulation study (uniform population growth) - baseline SPD vs mean subsample SPDs"
+# title: "Sampling bias in radiocarbon dating project: simulation study (UNIFORM population growth)
+# subtitle: "Baseline SPD vs mean subsample SPDs"
 # author: "Rebecca Wheatley"
-# date: "9 December 2021"
+# date: "3 April 2023"
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
+# Clear workspace
+rm(list = ls())
+
+# Load required packages
 library(rcarbon)
 library(ggformula)
 library(extraDistr)
@@ -16,14 +21,18 @@ theme_set(
   theme_bw() +
     theme(legend.position = "top"))
 
+# Load required functions
 source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation_study-source3.R")
+
+# Set seed for repeatability
+set.seed(1234)
 
 #-------------------------------------------------------------------------------------
 # I. SIMULATE SOME BASELINE DATA AND THEN CREATE BIASED SUBSAMPLES
 #-------------------------------------------------------------------------------------
 
 # SET PARAMETERS:
-timeRange        = c(12000, 200)   ## for Holocene sites
+timeRange        = c(12000, 1000)  ## for Holocene sites
 no_sites         = 100             ## the number of sites we want in our simulated data set
 no_samples       = 5               ## the number of samples we want each site to have
 pop_trend        = "no change"     ## the underlying population trend we want to mimic
@@ -363,7 +372,7 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
   plot.spd.noloss[i,3] <- spd.baseline.noloss$envelope[[1]][i,1]
   plot.spd.noloss[i,4] <- spd.baseline.noloss$envelope[[1]][i,2]
   plot.spd.noloss[i,5] <- spd.baseline.noloss$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)+i),1] <- "singleton ancient (50% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)+i),2] <- spd.singleton.ancient.50p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)+i),3] <- spd.singleton.ancient.50p$envelope[[1]][i,1]
@@ -375,73 +384,73 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*2+i),3] <- spd.singleton.ancient.75p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*2+i),4] <- spd.singleton.ancient.75p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*2+i),5] <- spd.singleton.ancient.75p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*3+i),1] <- "singleton ancient (100% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*3+i),2] <- spd.singleton.ancient.100p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*3+i),3] <- spd.singleton.ancient.100p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*3+i),4] <- spd.singleton.ancient.100p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*3+i),5] <- spd.singleton.ancient.100p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*4+i),1] <- "singleton recent (50% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*4+i),2] <- spd.singleton.recent.50p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*4+i),3] <- spd.singleton.recent.50p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*4+i),4] <- spd.singleton.recent.50p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*4+i),5] <- spd.singleton.recent.50p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*5+i),1] <- "singleton recent (75% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*5+i),2] <- spd.singleton.recent.75p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*5+i),3] <- spd.singleton.recent.75p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*5+i),4] <- spd.singleton.recent.75p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*5+i),5] <- spd.singleton.recent.75p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*6+i),1] <- "singleton recent (100% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*6+i),2] <- spd.singleton.recent.100p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*6+i),3] <- spd.singleton.recent.100p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*6+i),4] <- spd.singleton.recent.100p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*6+i),5] <- spd.singleton.recent.100p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*7+i),1] <- "singleton random (50% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*7+i),2] <- spd.singleton.random.50p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*7+i),3] <- spd.singleton.random.50p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*7+i),4] <- spd.singleton.random.50p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*7+i),5] <- spd.singleton.random.50p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*8+i),1] <- "singleton random (75% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*8+i),2] <- spd.singleton.random.75p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*8+i),3] <- spd.singleton.random.75p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*8+i),4] <- spd.singleton.random.75p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*8+i),5] <- spd.singleton.random.75p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*9+i),1] <- "singleton random (100% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*9+i),2] <- spd.singleton.random.100p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*9+i),3] <- spd.singleton.random.100p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*9+i),4] <- spd.singleton.random.100p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*9+i),5] <- spd.singleton.random.100p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*10+i),1] <- "bracketed (50% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*10+i),2] <- spd.bracketed.50p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*10+i),3] <- spd.bracketed.50p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*10+i),4] <- spd.bracketed.50p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*10+i),5] <- spd.bracketed.50p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*11+i),1] <- "bracketed (75% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*11+i),2] <- spd.bracketed.75p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*11+i),3] <- spd.bracketed.75p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*11+i),4] <- spd.bracketed.75p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*11+i),5] <- spd.bracketed.75p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*12+i),1] <- "bracketed (100% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*12+i),2] <- spd.bracketed.100p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*12+i),3] <- spd.bracketed.100p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*12+i),4] <- spd.bracketed.100p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*12+i),5] <- spd.bracketed.100p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*13+i),1] <- "uniform (50% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*13+i),2] <- spd.uniform.50p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*13+i),3] <- spd.uniform.50p$envelope[[1]][i,1]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*13+i),4] <- spd.uniform.50p$envelope[[1]][i,2]
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*13+i),5] <- spd.uniform.50p$envelope[[1]][i,3]
-  
+   
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*14+i),1] <- "uniform (75% sites)"
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*14+i),2] <- spd.uniform.75p$calBP[i]/1000
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*14+i),3] <- spd.uniform.75p$envelope[[1]][i,1]
@@ -461,7 +470,7 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),5] <- 0
 }
 
-write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/Plot_data-SPD-5samples_99sims.csv")
+write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/Uniform_pop_growth-plot_data-SPD-5samples_199sims.csv")
 
 # Plot (combined):
 group.colors <- c("baseline (replicates)" = "grey", 
@@ -482,7 +491,7 @@ uniform <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "uniform (5
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
   ylim(0, 0.0007) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 singleton.random <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)", "baseline")) %>%
   ggplot() +
@@ -492,7 +501,7 @@ singleton.random <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "s
   ylim(0, 0.0007) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 singleton.ancient <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)", "baseline")) %>%
   ggplot() +
@@ -502,7 +511,7 @@ singleton.ancient <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
   ylim(0, 0.0007) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 singleton.recent <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", "baseline")) %>%
   ggplot() +
@@ -512,7 +521,7 @@ singleton.recent <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "s
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
   ylim(0, 0.0007) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 bracketed <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", "baseline")) %>%
   ggplot() +
@@ -522,7 +531,7 @@ bracketed <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "brackete
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
   ylim(0, 0.0007) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 baseline <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "baseline (replicates)"),] %>%
   mutate(sample = fct_relevel(sample, "baseline (replicates)", "baseline")) %>%
   ggplot() +
@@ -532,7 +541,7 @@ baseline <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "baseline 
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
   ylim(0, 0.0007) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 spd.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
                         labels = c("A", "B", "C", "D", "E"),
                         ncol = 2, nrow = 3,

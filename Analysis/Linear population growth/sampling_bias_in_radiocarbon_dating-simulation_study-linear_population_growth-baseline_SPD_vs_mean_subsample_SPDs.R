@@ -1,7 +1,8 @@
 #-------------------------------------------------------------------------------------------------------------------------------------------
-# title: "Sampling bias in radiocarbon dating project: simulation study (linear population growth) - baseline SPD vs mean subsample SPDs"
+# title: "Sampling bias in radiocarbon dating project: simulation study (LINEAR population growth)
+# subtitle: "Baseline SPD vs mean subsample SPDs"
 # author: "Rebecca Wheatley"
-# date: "3 December 2021"
+# date: "3 April 2023"
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 # Clear workspace
@@ -23,12 +24,15 @@ theme_set(
 # Load source functions
 source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation_study-source3.R")
 
+# Set seed for repeatability
+set.seed(1234)
+
 #-------------------------------------------------------------------------------------
 # I. SIMULATE SOME BASELINE DATA AND THEN CREATE BIASED SUBSAMPLES
 #-------------------------------------------------------------------------------------
 
 # SET PARAMETERS:
-timeRange        = c(12000, 200)   ## for Holocene sites
+timeRange        = c(12000, 1000)  ## for Holocene sites
 no_sites         = 100             ## the number of sites we want in our simulated data set
 no_samples       = 5               ## the number of samples we want each site to have
 pop_trend        = "steady growth" ## the underlying population trend we want to mimic
@@ -352,7 +356,7 @@ pvals[15,1] <- "bracketed.100p"
 pvals[15,2] <- spd.bracketed.100p$discrepancy
 pvals[14,3] <- if(length(spd.bracketed.100p$pvalue>0)){ spd.bracketed.100p$pvalue }else{ "NA" }
 
-write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/linear_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5samples_99sims.csv")
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/linear_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_99sims.csv")
 
 #------------------------------------------------------------
 # III. SAVE DATA AND PLOT
@@ -466,7 +470,7 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),5] <- 0
 }
 
-write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Linear population growth/Plot_data-SPD-5samples_99sims.csv")
+write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Linear population growth/Linear_pop_growth-plot_data-SPD-5samples_99sims.csv")
 
 # Plot (combined):
 group.colors <- c("baseline (replicates)" = "grey", 
@@ -486,18 +490,18 @@ uniform <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "uniform (5
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.00085) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  ylim(0, 0.0007) +
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 singleton.random <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton random (50% sites)", "singleton random (75% sites)", "singleton random (100% sites)", "baseline")) %>%
   ggplot() +
   geom_ribbon(aes(x = years.ka, ymin = lowerCI, ymax = upperCI, fill = sample), alpha = 0.2) +
   geom_line(aes(x = years.ka, y = mean, color = sample), lwd = 1.5) +
   scale_fill_manual(values=group.colors) +
-  ylim(0, 0.00085) +
+  ylim(0, 0.0007) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 singleton.ancient <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton ancient (50% sites)", "singleton ancient (75% sites)", "singleton ancient (100% sites)", "baseline")) %>%
   ggplot() +
@@ -506,8 +510,8 @@ singleton.ancient <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.00085) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  ylim(0, 0.0007) +
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 singleton.recent <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "singleton recent (50% sites)", "singleton recent (75% sites)", "singleton recent (100% sites)", "baseline")) %>%
   ggplot() +
@@ -516,8 +520,8 @@ singleton.recent <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "s
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.00085) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  ylim(0, 0.0007) +
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 bracketed <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)"),] %>%
   mutate(sample = fct_relevel(sample, "bracketed (50% sites)", "bracketed (75% sites)", "bracketed (100% sites)", "baseline")) %>%
   ggplot() +
@@ -526,8 +530,8 @@ bracketed <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "brackete
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.00085) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  ylim(0, 0.0007) +
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 baseline <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "baseline (replicates)"),] %>%
   mutate(sample = fct_relevel(sample, "baseline (replicates)", "baseline")) %>%
   ggplot() +
@@ -536,14 +540,14 @@ baseline <- plot.spd.noloss[plot.spd.noloss$sample %in% c("baseline", "baseline 
   scale_fill_manual(values=group.colors) +
   scale_color_manual(values=group.colors) +
   labs(x = "Years (ka)", y = "Probability") +
-  ylim(0, 0.00085) +
-  scale_x_reverse(breaks = seq(12200/1000, 200/1000, by = -6000/1000), limits = c(12200/1000, 200/1000))
+  ylim(0, 0.0007) +
+  scale_x_reverse(breaks = seq(timeRange[1]/1000, timeRange[2]/1000, by = -2000/1000), limits = c(timeRange[1]/1000, timeRange[2]/1000))
 spd.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.recent, bracketed, #baseline,
                         labels = c("A", "B", "C", "D", "E"),
                         ncol = 2, nrow = 3,
                         common.legend = TRUE)
 spd.noloss
-ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Baseline vs subsamples/Linear_population_growth-baseline_SPD_vs_mean_subsamples-5samples_99sims.png",
+ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Linear_population_growth-baseline_SPD_vs_mean_subsamples-5samples_99sims.png",
          width = 1500,
          height = 1000)
 
