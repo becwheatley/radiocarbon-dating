@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------------------------------------------------------------------------------
-# title: "Sampling bias in radiocarbon dating project: simulation study (UNIFORM population growth)
+# title: "Sampling bias in radiocarbon dating project: simulation study (LINEAR population growth)
 # subtitle: "Subsample SPDs vs theoretical growth models"
 # author: "Rebecca Wheatley"
 # date: "17 April 2023"
@@ -22,7 +22,7 @@ theme_set(
     theme(legend.position = "top"))
 
 # Load saved sample and calibrated sample data
-load("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-99sims.RData")
+load("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Linear population growth/linear_pop_growth-raw_sample_and_calibrated_data-5s-99sims.RData")
 
 # Load source functions
 source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation_study-source3.R")
@@ -63,10 +63,10 @@ for (i in 1:subnum){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 50p/uniform_pop_growth-uniform_50p_", i, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 50p/linear_pop_growth-uniform_50p_", i, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -86,10 +86,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 50p/uniform_pop_growth-uniform_50p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 50p/linear_pop_growth-uniform_50p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -109,10 +109,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 50p/uniform_pop_growth-uniform_50p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 50p/linear_pop_growth-uniform_50p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -123,10 +123,10 @@ for (i in sl:(sl+subnum-1)){
 # VS UNIFORM THEORETICAL GROWTH MODEL
 sl <- subnum*3+1
 for (i in sl:(sl+subnum-1)){
-    
+  
   if (i%%(sl-1) > 0) { index <- i%%(sl-1)} else { index <- subnum }
   
-    uniform  <- modelTest(cal.uniform.75p[[index]], errors = sample.uniform.75p[[index]]$error, nsim = nsim, timeRange = timeRange, 
+  uniform  <- modelTest(cal.uniform.75p[[index]], errors = sample.uniform.75p[[index]]$error, nsim = nsim, timeRange = timeRange, 
                         model = "uniform", runm = runm, raw = TRUE, ncores = ncores)
   p_values <- calculate_p_value(uniform, sample_type = "uniform (75% sites)", replicate = index, theoretical_model = "uniform")
   
@@ -136,10 +136,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 75p/uniform_pop_growth-uniform_75p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 75p/linear_pop_growth-uniform_75p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -159,10 +159,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 75p/uniform_pop_growth-uniform_75p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 75p/linear_pop_growth-uniform_75p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -182,10 +182,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 75p/uniform_pop_growth-uniform_75p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 75p/linear_pop_growth-uniform_75p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -209,10 +209,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 100p/uniform_pop_growth-uniform_100p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 100p/linear_pop_growth-uniform_100p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -232,10 +232,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 100p/uniform_pop_growth-uniform_100p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 100p/linear_pop_growth-uniform_100p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -255,10 +255,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Uniform 100p/uniform_pop_growth-uniform_100p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Uniform 100p/linear_pop_growth-uniform_100p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -282,10 +282,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 50p/uniform_pop_growth-singleton_ancient_50p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 50p/linear_pop_growth-singleton_ancient_50p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -305,10 +305,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 50p/uniform_pop_growth-singleton_ancient_50p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 50p/linear_pop_growth-singleton_ancient_50p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -328,10 +328,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 50p/uniform_pop_growth-singleton_ancient_50p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 50p/linear_pop_growth-singleton_ancient_50p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -355,10 +355,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 75p/uniform_pop_growth-singleton_ancient_75p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 75p/linear_pop_growth-singleton_ancient_75p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -378,10 +378,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 75p/uniform_pop_growth-singleton_ancient_75p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 75p/linear_pop_growth-singleton_ancient_75p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -401,10 +401,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 75p/uniform_pop_growth-singleton_ancient_75p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 75p/linear_pop_growth-singleton_ancient_75p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -428,10 +428,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 100p/uniform_pop_growth-singleton_ancient_100p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 100p/linear_pop_growth-singleton_ancient_100p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -451,10 +451,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 100p/uniform_pop_growth-singleton_ancient_100p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 100p/linear_pop_growth-singleton_ancient_100p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -474,10 +474,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton ancient 100p/uniform_pop_growth-singleton_ancient_100p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton ancient 100p/linear_pop_growth-singleton_ancient_100p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -501,10 +501,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 50p/uniform_pop_growth-singleton_recent_50p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 50p/linear_pop_growth-singleton_recent_50p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -524,10 +524,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 50p/uniform_pop_growth-singleton_recent_50p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 50p/linear_pop_growth-singleton_recent_50p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -547,10 +547,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 50p/uniform_pop_growth-singleton_recent_50p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 50p/linear_pop_growth-singleton_recent_50p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -574,10 +574,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 75p/uniform_pop_growth-singleton_recent_75p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 75p/linear_pop_growth-singleton_recent_75p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -597,10 +597,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 75p/uniform_pop_growth-singleton_recent_75p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 75p/linear_pop_growth-singleton_recent_75p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -620,10 +620,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 75p/uniform_pop_growth-singleton_recent_75p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 75p/linear_pop_growth-singleton_recent_75p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -647,10 +647,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 100p/uniform_pop_growth-singleton_recent_100p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 100p/linear_pop_growth-singleton_recent_100p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -670,10 +670,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 100p/uniform_pop_growth-singleton_recent_100p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 100p/linear_pop_growth-singleton_recent_100p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -693,10 +693,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton recent 100p/uniform_pop_growth-singleton_recent_100p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton recent 100p/linear_pop_growth-singleton_recent_100p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -721,10 +721,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 50p/uniform_pop_growth-singleton_random_50p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 50p/linear_pop_growth-singleton_random_50p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -744,10 +744,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 50p/uniform_pop_growth-singleton_random_50p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 50p/linear_pop_growth-singleton_random_50p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -767,10 +767,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 50p/uniform_pop_growth-singleton_random_50p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 50p/linear_pop_growth-singleton_random_50p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -794,10 +794,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 75p/uniform_pop_growth-singleton_random_75p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 75p/linear_pop_growth-singleton_random_75p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -817,10 +817,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 75p/uniform_pop_growth-singleton_random_75p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 75p/linear_pop_growth-singleton_random_75p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -840,10 +840,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 75p/uniform_pop_growth-singleton_random_75p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 75p/linear_pop_growth-singleton_random_75p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -868,10 +868,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 100p/uniform_pop_growth-singleton_random_100p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 100p/linear_pop_growth-singleton_random_100p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -891,10 +891,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 100p/uniform_pop_growth-singleton_random_100p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 100p/linear_pop_growth-singleton_random_100p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -914,10 +914,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Singleton random 100p/uniform_pop_growth-singleton_random_100p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Singleton random 100p/linear_pop_growth-singleton_random_100p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -942,10 +942,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 50p/uniform_pop_growth-bracketed_50p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 50p/linear_pop_growth-bracketed_50p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -965,10 +965,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 50p/uniform_pop_growth-bracketed_50p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 50p/linear_pop_growth-bracketed_50p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -988,10 +988,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 50p/uniform_pop_growth-bracketed_50p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 50p/linear_pop_growth-bracketed_50p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -1017,10 +1017,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 75p/uniform_pop_growth-bracketed_75p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 75p/linear_pop_growth-bracketed_75p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -1040,10 +1040,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 75p/uniform_pop_growth-bracketed_75p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 75p/linear_pop_growth-bracketed_75p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -1063,10 +1063,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 75p/uniform_pop_growth-bracketed_75p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 75p/linear_pop_growth-bracketed_75p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -1090,10 +1090,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 100p/uniform_pop_growth-bracketed_100p_", index, "_vs_uniform-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 100p/linear_pop_growth-bracketed_100p_", index, "_vs_uniform-5s-499sims.png"))
   
 }
 
@@ -1113,10 +1113,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 100p/uniform_pop_growth-bracketed_100p_", index, "_vs_linear-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 100p/linear_pop_growth-bracketed_100p_", index, "_vs_linear-5s-499sims.png"))
   
 }
 
@@ -1136,10 +1136,10 @@ for (i in sl:(sl+subnum-1)){
   pvals[i,4] <- p_values$discrepancy
   if (length(p_values$p_total) > 0) { pvals[i,5] <- p_values$p_total } else { pvals[i,5] <- "NA" }
   pvals[i,6] <- nsim
-  pvals[i,7] <- "uniform"
+  pvals[i,7] <- "linear"
   
   ggsave(p_values$plot2, 
-         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Bracketed 100p/uniform_pop_growth-bracketed_100p_", index, "_vs_exponential-5s-499sims.png"))
+         file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Linear population growth/Bracketed 100p/linear_pop_growth-bracketed_100p_", index, "_vs_exponential-5s-499sims.png"))
   
 }
 
@@ -1147,5 +1147,5 @@ for (i in sl:(sl+subnum-1)){
 #----------------------
 # XVI. SAVE WORKSPACE
 #----------------------
-write.csv(pvals, "uniform_pop_growth-subsamples_vs_theoretical_growth_models-5s_499sims-pvalues.csv")
-save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-subsamples_vs_theoretical_growth_models-5s_499sims.RData")
+write.csv(pvals, "linear_pop_growth-subsamples_vs_theoretical_growth_models-5s_499sims-pvalues.csv")
+save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Linear population growth/linear_pop_growth-subsamples_vs_theoretical_growth_models-5s_499sims.RData")
