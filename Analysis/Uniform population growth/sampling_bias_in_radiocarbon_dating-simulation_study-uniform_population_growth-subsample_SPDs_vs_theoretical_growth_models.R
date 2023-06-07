@@ -1147,5 +1147,5 @@ for (i in sl:(sl+subnum-1)){
 #----------------------
 # XVI. SAVE WORKSPACE
 #----------------------
-write.csv(pvals, "uniform_pop_growth-subsamples_vs_theoretical_growth_models-5s_499sims-pvalues.csv")
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-subsamples_vs_theoretical_growth_models-5s_499sims-pvalues.csv")
 save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-subsamples_vs_theoretical_growth_models-5s_499sims.RData")

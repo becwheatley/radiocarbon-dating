@@ -1,10 +1,9 @@
-#--------------------------------------------------------------------------------------------------------------------------------
-# RADIOCARBON DATING PROJECT
-# SIMULATION STUDY - INVESTIGATE THE EFFECT OF SAMPLING BIAS ON COMMON ANALYSIS RESULTS
-# Source functions
-# Code by Rebecca Wheatley
-# Last modified 3 March 2023
-#--------------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------------------
+# title: "Sampling bias in radiocarbon dating project: simulation study
+# subtitle: "Source functions"
+# author: "Rebecca Wheatley & Barry Brook"
+# date: "7 June 2023"
+#--------------------------------------------------------------------------------------------------------------------------------------------------
 
 # MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING
 
@@ -54,7 +53,7 @@ get_available_evidence <- function(timeRange, no_sites, no_samples, pop_trend, n
         temp <- extraDistr::rdunif(no_samples*20, min = timeRange[2]-excessDates, max = timeRange[1]+excessDates)
       
       } else if (pop_trend == "steady growth"){
-        samples <- round(EnvStats::rtri(no_samples*100, min = timeRange[2]-excessDates, max = timeRange[1]+excessDates, mode = timeRange[2]))
+        samples <- round(EnvStats::rtri(no_samples*30, min = timeRange[2]-excessDates, max = timeRange[1]+excessDates, mode = timeRange[2]))
         samples2 <- unlist(lapply(samples, function(x) {if(x >= timeRange[2]-excessDates){return(x)}}))
         temp <- samples2[1:(no_samples*20)]
     
@@ -512,8 +511,8 @@ calibrate_samples <- function(samples, normalised, ncores){
     ages   <- samples[[s]]$age
     errors <- samples[[s]]$error
     
-    ## Calibrate these ages using the SHCal20 calibration curves (can calibrate dates up to 55,000 years old)
-    calibrated_data[[s]] <- rcarbon::calibrate(x = ages, errors = errors, calCurves = 'shcal20', normalised = normalised, ncores = ncores)
+    ## Calibrate these ages using the intcal20 calibration curves (can calibrate dates up to 55,000 years old)
+    calibrated_data[[s]] <- rcarbon::calibrate(x = ages, errors = errors, calCurves = 'intcal20', normalised = normalised, ncores = ncores)
   }
   
   return(calibrated_data)
@@ -749,4 +748,324 @@ calculate_p_value <- function(model_test_results, sample_type, replicate, theore
   
 }
 
+#---------------------------------
+# Discrepancy function used above
+#---------------------------------
 discrepancy_fun <- function(x, y, q = 1, p =2) (abs(x^q - y^q))^p 
+
+#--------------------------------------------------------------------------------------------------------------------------------
+# VIII. COMPUTE THE MOST LIKELY UNDERLYING MODEL FOR A CALIBRATED DATE SET
+#--------------------------------------------------------------------------------------------------------------------------------
+
+#---------------------------------
+# Calculate AICc
+#---------------------------------
+AICc <- function(model) {
+  k <- length(coef(model))
+  n <- length(model$residuals)
+  AIC(model) + (2 * k * (k + 1)) / (n - k - 1)
+}
+
+#---------------------------------
+# Compile the set of most likely calibrated dates
+#---------------------------------
+sort_calibrated_dates <- function(dates, calibrated_dates) {
+  
+  # Create an empty list for the sorted calibrated data (one entry for each sample)
+  sorted_cals <- vector("list", length = length(dates))
+  
+  for (i in 1:length(sorted_cals)){
+    sorted_cals[[i]] <- sort(sapply(1:length(dates[[i]]$age)[1], function(x) round(sum(calibrated_dates[[i]]$grids[[x]][1]*calibrated_dates[[i]]$grids[[x]][2]))), decreasing=T)
+  }
+  return(sorted_cals)
+}
+
+#---------------------------------
+# Fit and return the best growth model for the frequency distribution (based on a selected bin width)
+#---------------------------------
+fit_models_binned <- function(dates, bin_width=1000, show_plot=TRUE, sampling_type, true_model) {
+  
+  # Create an empty data frame for the best models
+  best_models <- data.frame(matrix(NA, nrow = length(dates), ncol = 10))
+  names(best_models) <- c("sampling_type", "method", "AIC.Null", "AIC.Linear", "AIC.Exponential", "best_model", "AIC.best", "intercept", "growth_rate", "best_model_correct")
+  best_models[,1] <- sampling_type
+  best_models[,2] <- "binned"
+  
+  for (i in 1:nrow(best_models)){
+    
+    # Create frequency bins for the dates
+    bin_edges <- rev(seq(min(dates[[i]]), max(dates[[i]]), by=bin_width))
+    frequencies <- rev(as.vector(table(cut(dates[[i]], breaks=bin_edges, right=F, include.lowest=T))))
+    unit_time <- -rev(seq(min(dates[[i]])+bin_width/2, max(dates[[i]])-bin_width/2, by=bin_width))
+  
+    # Create log frequencies
+    log.frequencies <- log(frequencies)
+    log.frequencies[is.infinite(log.frequencies)] <- NA # (replace -Infs with NA)
+  
+    # Fit models and calculate AICs
+    models <- list(
+      Null = lm(frequencies ~ 1),
+      Linear = lm(frequencies ~ unit_time),
+      Exponential = lm(log.frequencies ~ unit_time)
+    )
+  
+    aic_values <- sapply(models, AICc)
+  
+    # Compute residuals for the Exponential model on the original scale
+    log.frequencies2 <- na.omit(log.frequencies)
+    exp_residuals <- exp(log.frequencies2) - exp(predict(models$Exponential))
+  
+    # Replace AIC of the Exponential model in the 'aic_values' vector with the AIC on the original scale
+    aic_values["Exponential"] <- (-2*sum(dnorm(exp_residuals, mean=0, sd=sd(exp_residuals), log=T)))+(2*length(coef(models$Exponential)))
+  
+    # Report best model
+    best_model <- names(aic_values)[which.min(aic_values)]
+    
+    # Save data
+    best_models[i,3] <- aic_values[[1]]
+    best_models[i,4] <- aic_values[[2]]
+    best_models[i,5] <- aic_values[[3]]
+    best_models[i,6] <- best_model
+    if (best_model == "Linear"){
+      best_models[i,7] <- aic_values[[2]]
+      best_models[i,8] <- coef(models$Linear)["(Intercept)"]
+      best_models[i,9] <- coef(models$Linear)["unit_time"]
+    } else if (best_model == "Exponential"){
+      best_models[i,7] <- aic_values[[3]]
+      best_models[i,8] <- coef(models$Exponential)["(Intercept)"]
+      best_models[i,9] <- coef(models$Exponential)["unit_time"] 
+    } else {
+      best_models[i,7] <- aic_values[[1]]
+      best_models[i,8] <- coef(models$Null)["(Intercept)"]
+      best_models[i,9] <- "NA"
+    } 
+    
+    if (best_model == true_model){
+      best_models[i,10] <- "TRUE"
+    } else {
+      best_models[i,10] <- "FALSE"
+    }
+  
+    if(show_plot) { # Plot histogram with best model
+      # Define functions for each model
+      hist_data <- data.frame(time=unit_time, freq=frequencies)
+    
+      hist_plot <- ggplot2::ggplot(hist_data, ggplot2::aes(x = time, y = freq)) +
+        ggplot2::geom_bar(stat = "identity", fill = "grey80") +
+        ggplot2::labs(title = paste("Histogram of Calibrated Radiocarbon Dates (", best_model, " Model)", sep = ""), 
+                      x = "Calibrated Radiocarbon Dates", y = "Frequency") +
+        ggplot2::theme_minimal()
+    
+      # Add model predictions
+      model_functions <- list(
+        Null = function(x) coef(models$Null)["(Intercept)"],
+        Linear = function(x) coef(models$Linear)["(Intercept)"] + coef(models$Linear)["unit_time"] * x,
+        Exponential = function(x) exp(coef(models$Exponential)["(Intercept)"]) * exp(coef(models$Exponential)["unit_time"] * x)
+      )
+    
+      predicted_freq <- model_functions[[best_model]](unit_time)
+    
+      hist_plot <- hist_plot +
+        ggplot2::geom_line(data=data.frame(time=unit_time, freq=predicted_freq), ggplot2::aes(x=time, y=freq), color="red")
+      
+      ggsave(hist_plot, 
+             file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/Frequency plots/uniform_pop_growth-", sampling_type, "-", i, "-5s-99sims-FREQ_plot.png"))
+      
+    }
+  }
+  
+  return(best_models)
+}
+
+#---------------------------------
+# Fit and return best growth model for the frequency distribution (uniform, linear, exponential) based on KDE Gaussian smoothing of the dates
+#---------------------------------
+fit_models_kde <- function(dates, show_plot=TRUE, sampling_type, true_model) {
+  
+  # Create an empty data frame for the best models
+  best_models <- data.frame(matrix(NA, nrow = length(dates), ncol = 10))
+  names(best_models) <- c("sampling_type", "method", "AIC.Null", "AIC.Linear", "AIC.Exponential", "best_model", "AIC.best", "intercept", "growth_rate", "best_model_correct")
+  best_models[,1] <- sampling_type
+  best_models[,2] <- "kde"
+  
+  for (i in 1:nrow(best_models)){
+  
+    # Estimate the KDE of the dates
+    kde <- stats::density(dates[[i]])
+    unit_time <- kde$x
+    densities <- kde$y
+    
+    # Create log densities
+    log.densities <- log(densities)
+    log.densities[is.infinite(log.densities)] <- NA # (replace -Infs with NA)
+  
+    # Fit models and calculate AICcs
+    models <- list(
+      Null = lm(densities ~ 1),
+      Linear = lm(densities ~ unit_time),
+      Exponential = lm(log.densities ~ unit_time)
+    )
+    
+    aic_values <- sapply(models, AICc)
+    
+    # Compute residuals for the Exponential model on the original scale
+    log.densities2 <- na.omit(log.densities)
+    exp_residuals <- exp(log.densities2) - exp(predict(models$Exponential))
+    
+    # Replace AIC of the Exponential model in the 'aic_values' vector with the AIC on the original scale
+    aic_values["Exponential"] <- (-2*sum(dnorm(exp_residuals, mean=0, sd=sd(exp_residuals), log=T)))+(2*length(coef(models$Exponential)))
+    
+    best_model <- names(aic_values)[which.min(aic_values)]
+    
+    # Save data
+    best_models[i,3] <- aic_values[[1]]
+    best_models[i,4] <- aic_values[[2]]
+    best_models[i,5] <- aic_values[[3]]
+    best_models[i,6] <- best_model
+    if (best_model == "Linear"){
+      best_models[i,7] <- aic_values[[2]]
+      best_models[i,8] <- coef(models$Linear)["(Intercept)"]
+      best_models[i,9] <- coef(models$Linear)["unit_time"]
+    } else if (best_model == "Exponential"){
+      best_models[i,7] <- aic_values[[3]]
+      best_models[i,8] <- coef(models$Exponential)["(Intercept)"]
+      best_models[i,9] <- coef(models$Exponential)["unit_time"] 
+    } else {
+      best_models[i,7] <- aic_values[[1]]
+      best_models[i,8] <- coef(models$Null)["(Intercept)"]
+      best_models[i,9] <- "NA"
+    } 
+    
+    if (best_model == true_model){
+      best_models[i,10] <- "TRUE"
+    } else {
+      best_models[i,10] <- "FALSE"
+    }
+
+    if (show_plot) { # Plot KDE with best model
+      # Define functions for each model
+      kde_data <- data.frame(time = unit_time, density = densities)
+      
+      kde_plot <- ggplot2::ggplot(kde_data, ggplot2::aes(x = time, y = density)) +
+        ggplot2::geom_line(color = "grey80") +
+        ggplot2::scale_x_reverse() +
+        ggplot2::labs(title = paste("KDE of Calibrated Radiocarbon Dates (", best_model, " Model)", sep = ""),
+                      x = "Calibrated Radiocarbon Dates", y = "Density") +
+        ggplot2::theme_minimal()
+      
+      # Add model predictions
+      model_functions <- list(
+        Null = function(x) coef(models$Null)["(Intercept)"],
+        Linear = function(x) coef(models$Linear)["(Intercept)"] + coef(models$Linear)["unit_time"] * x,
+        Exponential = function(x) exp(coef(models$Exponential)["(Intercept)"]) * exp(coef(models$Exponential)["unit_time"] * x)
+      )
+      
+      predicted_density <- model_functions[[best_model]](unit_time)
+      
+      kde_plot <- kde_plot +
+        ggplot2::geom_line(data = data.frame(time = unit_time, density = predicted_density), ggplot2::aes(x = time, y = density), color = "red")
+      
+      ggsave(kde_plot, 
+             file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/KDE plots/uniform_pop_growth-", sampling_type, "-", i, "-5s-99sims-KDE_plot.png"))
+      
+    }
+  }
+  return(best_models)
+}
+
+
+#---------------------------------
+# Fit and return the best growth model for the SPD
+#---------------------------------
+fit_models_spd <- function(spds, show_plot=TRUE, sampling_type, true_model) {
+  
+  # Create an empty data frame for the best models
+  best_models <- data.frame(matrix(NA, nrow = ncol(spds$raw[[1]]), ncol = 10))
+  names(best_models) <- c("sampling_type", "method", "AIC.Null", "AIC.Linear", "AIC.Exponential", "best_model", "AIC.best", "intercept", "growth_rate", "best_model_correct")
+  best_models[,1] <- sampling_type
+  best_models[,2] <- "spd"
+  
+  for (i in 1:nrow(best_models)){
+  
+    # Extract probabilities and calBP dates
+    probs <- spds$raw[[1]][,i]
+    calBP <- spds$calBP
+    
+    # Create log probabilities
+    log.probs <- log(probs)
+    log.probs[is.infinite(log.probs)] <- NA # (replace -Infs with NA)
+    
+    # Fit models and calculate AICs
+    models <- list(
+      Null = lm(probs ~ 1),
+      Linear = lm(probs ~ calBP),
+      Exponential = lm(log.probs ~ calBP)
+    )
+    
+    aic_values <- sapply(models, AICc)
+    
+    # Compute residuals for the Exponential model on the original scale
+    log.probs2 <- na.omit(log.probs)
+    exp_residuals <- exp(log.probs2) - exp(predict(models$Exponential))
+    
+    # Replace AIC of the Exponential model in the 'aic_values' vector with the AIC on the original scale
+    aic_values["Exponential"] <- (-2*sum(dnorm(exp_residuals, mean=0, sd=sd(exp_residuals), log=T)))+(2*length(coef(models$Exponential)))
+    
+    # Report best model
+    best_model <- names(aic_values)[which.min(aic_values)]
+    
+    # Save data
+    best_models[i,3] <- aic_values[[1]]
+    best_models[i,4] <- aic_values[[2]]
+    best_models[i,5] <- aic_values[[3]]
+    best_models[i,6] <- best_model
+    if (best_model == "Linear"){
+      best_models[i,7] <- aic_values[[2]]
+      best_models[i,8] <- coef(models$Linear)["(Intercept)"]
+      best_models[i,9] <- coef(models$Linear)["unit_time"]
+    } else if (best_model == "Exponential"){
+      best_models[i,7] <- aic_values[[3]]
+      best_models[i,8] <- coef(models$Exponential)["(Intercept)"]
+      best_models[i,9] <- coef(models$Exponential)["unit_time"] 
+    } else {
+      best_models[i,7] <- aic_values[[1]]
+      best_models[i,8] <- coef(models$Null)["(Intercept)"]
+      best_models[i,9] <- "NA"
+    } 
+    
+    if (best_model == true_model){
+      best_models[i,10] <- "TRUE"
+    } else {
+      best_models[i,10] <- "FALSE"
+    }
+    
+    if(show_plot) { # Plot SPD with best model
+      # Define functions for each model
+      plot_data <- data.frame(time=calBP, prob=probs)
+      
+      hist_plot <- ggplot2::ggplot(plot_data, ggplot2::aes(x = time, y = prob)) +
+        ggplot2::geom_line(stat = "identity", colour = "grey80") +
+        ggplot2::labs(title = paste("SPD of Calibrated Radiocarbon Dates (", best_model, " Model)", sep = ""), 
+                      x = "Calibrated Radiocarbon Dates", y = "Probability density") +
+        ggplot2::theme_minimal()
+      
+      # Add model predictions
+      model_functions <- list(
+        Null = function(x) coef(models$Null)["(Intercept)"],
+        Linear = function(x) coef(models$Linear)["(Intercept)"] + coef(models$Linear)["calBP"] * x,
+        Exponential = function(x) exp(coef(models$Exponential)["(Intercept)"]) * exp(coef(models$Exponential)["calBP"] * x)
+      )
+      
+      predicted_prob <- model_functions[[best_model]](calBP)
+      
+      hist_plot <- hist_plot +
+        ggplot2::geom_line(data=data.frame(time=calBP, freq=predicted_prob), ggplot2::aes(x=time, y=freq), color="red")
+      
+      ggsave(hist_plot, 
+             file = paste0("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Subsamples vs theoretical growth models/Uniform population growth/SPD plots/uniform_pop_growth-", sampling_type, "-", i, "-5s-99sims-SPD_plot.png"))
+      
+    }
+  }
+  
+  return(best_models)
+}

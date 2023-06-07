@@ -2,7 +2,7 @@
 # title: "Sampling bias in radiocarbon dating project: simulation study (LINEAR population growth)
 # subtitle: "Baseline SPD vs mean subsample SPDs"
 # author: "Rebecca Wheatley"
-# date: "3 April 2023"
+# date: "15 May 2023"
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 # Clear workspace
@@ -37,7 +37,7 @@ no_sites         = 100             ## the number of sites we want in our simulat
 no_samples       = 5               ## the number of samples we want each site to have
 pop_trend        = "steady growth" ## the underlying population trend we want to mimic
 sampling_effort  = 3               ## the number of samples we want to take using the uniform sampling method
-nsim             = 99              ## the number of times we want to replicate each sample
+nsim             = 1000            ## the number of times we want to replicate each sample
 
 # GET BASELINE DATA SET/S:
 baseline.data <- get_available_evidence(timeRange = timeRange, no_sites = no_sites, no_samples = no_samples, 
@@ -126,11 +126,11 @@ sample.bracketed.100p        <- get_samples(evidence = baseline.data[[1]][[1]],
 
 # CALIBRATE DATA SETS:
 normalised      = TRUE ## are calibration curves (and, later, SPDs) normalised?
-ncores          = 8    ## the number of threads to use when calibrating the radiocarbon dates
+ncores          = 1    ## the number of threads to use when calibrating the radiocarbon dates
 
 cal.baseline.noloss1 <- rcarbon::calibrate(x = baseline.data[[1]][[1]]$age, 
                                            errors = baseline.data[[1]][[1]]$error, 
-                                           calCurves = 'shcal20', 
+                                           calCurves = 'intcal20', 
                                            normalised = normalised)
 
 cal.baseline.noloss <- calibrate_samples(samples = baseline.data[[1]], 

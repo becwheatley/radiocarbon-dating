@@ -2,7 +2,7 @@
 # title: "Sampling bias in radiocarbon dating project: simulation study (UNIFORM population growth)
 # subtitle: "Baseline SPD vs mean subsample SPDs"
 # author: "Rebecca Wheatley"
-# date: "3 April 2023"
+# date: "16 May 2023"
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 # Clear workspace
@@ -25,7 +25,7 @@ theme_set(
 source("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/simulation_study-source3.R")
 
 # Set seed for repeatability
-set.seed(1234)
+set.seed(1000)
 
 #-------------------------------------------------------------------------------------
 # I. SIMULATE SOME BASELINE DATA AND THEN CREATE BIASED SUBSAMPLES
@@ -37,7 +37,7 @@ no_sites         = 100             ## the number of sites we want in our simulat
 no_samples       = 5               ## the number of samples we want each site to have
 pop_trend        = "no change"     ## the underlying population trend we want to mimic
 sampling_effort  = 3               ## the number of samples we want to take using the uniform sampling method
-nsim             = 99              ## the number of times we want to replicate each sample
+nsim             = 5               ## the number of times we want to replicate each sample
 
 # GET BASELINE DATA SET/S:
 baseline.data <- get_available_evidence(timeRange = timeRange, no_sites = no_sites, no_samples = no_samples, 
@@ -188,7 +188,7 @@ cal.bracketed.100p         <- calibrate_samples(samples = sample.bracketed.100p,
                                                 ncores = ncores)
 
 # Save the workspace
-save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-99sims.RData")
+save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-5sims.RData")
 
 #--------------------------------------------------------------------------------------
 # II. COMPARE THE SPD FOR THE BASELINE DATA TO THE MEAN SPD FOR EACH BIASED SUBSAMPLE
@@ -356,7 +356,7 @@ pvals[15,1] <- "bracketed.100p"
 pvals[15,2] <- spd.bracketed.100p$discrepancy
 pvals[14,3] <- if(length(spd.bracketed.100p$pvalue>0)){ spd.bracketed.100p$pvalue }else{ "NA" }
 
-write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_99sims.csv")
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_5sims.csv")
 
 #------------------------------------------------------------
 # III. SAVE DATA AND PLOT
@@ -470,7 +470,7 @@ for (i in 1:length(spd.baseline.noloss$calBP)){
   plot.spd.noloss[(length(spd.baseline.noloss$calBP)*16+i),5] <- 0
 }
 
-write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/Uniform_pop_growth-plot_data-SPD-5samples_199sims.csv")
+write.csv(plot.spd.noloss, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/Uniform_pop_growth-plot_data-SPD-5samples_5sims.csv")
 
 # Plot (combined):
 group.colors <- c("baseline (replicates)" = "grey", 
@@ -547,9 +547,9 @@ spd.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.
                         ncol = 2, nrow = 3,
                         common.legend = TRUE)
 spd.noloss
-ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Uniform_population_growth-baseline_SPD_vs_mean_subsamples-5samples_99sims.png",
+ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Uniform_population_growth-baseline_SPD_vs_mean_subsamples-5samples_5sims.png",
          width = 1500,
          height = 1000)
 
 # Save the workspace
-save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data_plus_SPDs-5s-99sims.RData")
+save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data_plus_SPDs-5s-5sims.RData")
