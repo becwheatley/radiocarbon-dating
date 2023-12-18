@@ -8,7 +8,7 @@
 # MULTIPLE DRAWS OF THE BASELINE DATA SET, USES THE FIRST ONE FOR SUB-SAMPLING
 
 ## excess date range (to avoid drop offs at start and end of range)
-excessDates <- 5000
+excessDates <- 3000
 
 #------------------------------------------------
 # I. GET EVIDENCE OF HUMAN OCCUPATION

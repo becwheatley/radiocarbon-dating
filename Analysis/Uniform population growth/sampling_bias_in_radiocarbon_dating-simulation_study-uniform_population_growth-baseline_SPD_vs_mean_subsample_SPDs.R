@@ -2,7 +2,7 @@
 # title: "Sampling bias in radiocarbon dating project: simulation study (UNIFORM population growth)
 # subtitle: "Baseline SPD vs mean subsample SPDs"
 # author: "Rebecca Wheatley"
-# date: "16 May 2023"
+# date: "26 June 2023"
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
 # Clear workspace
@@ -37,7 +37,7 @@ no_sites         = 100             ## the number of sites we want in our simulat
 no_samples       = 5               ## the number of samples we want each site to have
 pop_trend        = "no change"     ## the underlying population trend we want to mimic
 sampling_effort  = 3               ## the number of samples we want to take using the uniform sampling method
-nsim             = 5               ## the number of times we want to replicate each sample
+nsim             = 1000            ## the number of times we want to replicate each sample
 
 # GET BASELINE DATA SET/S:
 baseline.data <- get_available_evidence(timeRange = timeRange, no_sites = no_sites, no_samples = no_samples, 
@@ -124,183 +124,390 @@ sample.bracketed.100p        <- get_samples(evidence = baseline.data[[1]][[1]],
                                             percent_sites = 100, 
                                             nsim = nsim)
 
+# Save the workspace
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_data-5s-1000sims.RData")
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BASELINE_ONLY.RData")
+
 # CALIBRATE DATA SETS:
 normalised      = TRUE ## are calibration curves (and, later, SPDs) normalised?
-ncores          = 8    ## the number of threads to use when calibrating the radiocarbon dates
+ncores          = 1    ## the number of threads to use when calibrating the radiocarbon dates
 
 cal.baseline.noloss1 <- rcarbon::calibrate(x = baseline.data[[1]][[1]]$age, 
                                            errors = baseline.data[[1]][[1]]$error, 
-                                           calCurves = 'shcal20', 
+                                           calCurves = 'intcal20', 
                                            normalised = normalised)
 
 cal.baseline.noloss <- calibrate_samples(samples = baseline.data[[1]], 
                                          normalised = normalised, 
                                          ncores = ncores)
 
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BASELINE_ONLY.RData")
+rm(cal.baseline.noloss)
+
 cal.uniform.50p     <- calibrate_samples(samples = sample.uniform.50p, 
                                          normalised = normalised, 
                                          ncores = ncores)
+
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-UNIFORM_50P.RData")
+rm(cal.uniform.50p)
+
 cal.uniform.75p     <- calibrate_samples(samples = sample.uniform.75p, 
                                          normalised = normalised, 
                                          ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-UNIFORM_75P.RData")
+rm(cal.uniform.75p)
+
 cal.uniform.100p    <- calibrate_samples(samples = sample.uniform.100p, 
                                          normalised = normalised, 
                                          ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-UNIFORM_100P.RData")
+rm(cal.uniform.100p)
+
 
 cal.singleton.ancient.50p  <- calibrate_samples(samples = sample.singleton.ancient.50p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_ANCIENT_50P.RData")
+rm(cal.singleton.ancient.50p)
+
 cal.singleton.ancient.75p  <- calibrate_samples(samples = sample.singleton.ancient.75p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_ANCIENT_75P.RData")
+rm(cal.singleton.ancient.75p)
+
 cal.singleton.ancient.100p <- calibrate_samples(samples = sample.singleton.ancient.100p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_ANCIENT_100P.RData")
+rm(cal.singleton.ancient.100p)
+
 
 cal.singleton.recent.50p   <- calibrate_samples(samples = sample.singleton.recent.50p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RECENT_50P.RData")
+rm(cal.singleton.recent.50p)
+
 cal.singleton.recent.75p   <- calibrate_samples(samples = sample.singleton.recent.75p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RECENT_75P.RData")
+rm(cal.singleton.recent.75p)
+
 cal.singleton.recent.100p  <- calibrate_samples(samples = sample.singleton.recent.100p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RECENT_100P.RData")
+rm(cal.singleton.recent.100p)
 
 cal.singleton.random.50p   <- calibrate_samples(samples = sample.singleton.random.50p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RANDOM_50P.RData")
+rm(cal.singleton.random.50p)
+
 cal.singleton.random.75p   <- calibrate_samples(samples = sample.singleton.random.75p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RANDOM_75P.RData")
+rm(cal.singleton.random.75p)
+
 cal.singleton.random.100p  <- calibrate_samples(samples = sample.singleton.random.100p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RANDOM_100P.RData")
+rm(cal.singleton.random.100p)
 
 cal.bracketed.50p          <- calibrate_samples(samples = sample.bracketed.50p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BRACKETED_50P.RData")
+rm(cal.bracketed.50p)
+
 cal.bracketed.75p          <- calibrate_samples(samples = sample.bracketed.75p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BRACKETED_75P.RData")
+rm(cal.bracketed.75p)
+
 cal.bracketed.100p         <- calibrate_samples(samples = sample.bracketed.100p, 
                                                 normalised = normalised, 
                                                 ncores = ncores)
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BRACKETED_100P.RData")
+rm(cal.bracketed.100p)
 
-# Save the workspace
-save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-5sims.RData")
+ # Save the workspace
+#save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims.RData")
 
 #--------------------------------------------------------------------------------------
 # II. COMPARE THE SPD FOR THE BASELINE DATA TO THE MEAN SPD FOR EACH BIASED SUBSAMPLE
 #--------------------------------------------------------------------------------------
 
-runm = 100 ## the running mean to use for the SPDs
+runm       = 100 ## the running mean to use for the SPDs
+normalised = TRUE ## are SPDs normalised
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BASELINE_ONLY.RData")
+pvals <- data.frame(matrix(NA, nrow = 1, ncol = 3))
+names(pvals) <- c("sample", "discrepancy", "p-value")
 
 spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 
-# Get the median and 95% CI for the SPDs for the baseline data sets
+ # Get the median and 95% CI for the SPDs for the baseline data sets
 spd.baseline.noloss  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                      calibrated_samples = cal.baseline.noloss, 
                                      subsampling_method = "baseline (replicates)",
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
+rm(cal.baseline.noloss)
+pvals[1,1] <- "baseline"
+pvals[1,2] <- spd.baseline.noloss$discrepancy
+pvals[1,3] <- if(length(spd.baseline.noloss$pvalue>0)){ spd.baseline.noloss$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-BASELINE_ONLY.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-BASELINE_ONLY.RData")
+rm(spd.baseline.noloss)
 
 # Get the median and 95% CI for the SPDs for the subsampled data sets
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-UNIFORM_50P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.uniform.50p      <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                      calibrated_samples = cal.uniform.50p, 
                                      subsampling_method = "uniform (50% sites)", 
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
+rm(cal.uniform.50p)
+pvals[1,1] <- "uniform.50p"
+pvals[1,2] <- spd.uniform.50p$discrepancy
+pvals[1,3] <- if(length(spd.uniform.50p$pvalue>0)){ spd.uniform.50p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-UNIFORM_50P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-UNIFORM_50P.RData")
+rm(spd.uniform.50p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-UNIFORM_75P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.uniform.75p      <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                      calibrated_samples = cal.uniform.75p, 
                                      subsampling_method = "uniform (75% sites)",
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
+rm(cal.uniform.75p)
+pvals[1,1] <- "uniform.75p"
+pvals[1,2] <- spd.uniform.75p$discrepancy
+pvals[1,3] <- if(length(spd.uniform.75p$pvalue>0)){ spd.uniform.75p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-UNIFORM_75P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-UNIFORM_75P.RData")
+rm(spd.uniform.75p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-UNIFORM_100P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.uniform.100p     <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                      calibrated_samples = cal.uniform.100p,  
                                      subsampling_method = "uniform (100% sites)",
                                      timeRange = timeRange, 
                                      runm = runm, 
                                      normalised = normalised)
+rm(cal.uniform.100p)
+pvals[1,1] <- "uniform.100p"
+pvals[1,2] <- spd.uniform.100p$discrepancy
+pvals[1,3] <- if(length(spd.uniform.100p$pvalue>0)){ spd.uniform.100p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-UNIFORM_100P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-UNIFORM_100P.RData")
+rm(spd.uniform.100p)
 
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_ANCIENT_50P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.ancient.50p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.ancient.50p, 
                                            subsampling_method = "singleton ancient (50% sites)", 
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
+rm(cal.singleton.ancient.50p)
+pvals[1,1] <- "singleton.ancient.50p"
+pvals[1,2] <- spd.singleton.ancient.50p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.ancient.50p$pvalue>0)){ spd.singleton.ancient.50p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_ANCIENT_50P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_ANCIENT_50P.RData")
+rm(spd.singleton.ancient.50p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_ANCIENT_75P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.ancient.75p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.ancient.75p, 
                                            subsampling_method = "singleton ancient (75% sites)", 
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
+rm(cal.singleton.ancient.75p)
+pvals[1,1] <- "singleton.ancient.75p"
+pvals[1,2] <- spd.singleton.ancient.75p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.ancient.75p$pvalue>0)){ spd.singleton.ancient.75p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_ANCIENT_75P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_ANCIENT_75P.RData")
+rm(spd.singleton.ancient.75p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_ANCIENT_100P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.ancient.100p <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.ancient.100p, 
                                            subsampling_method = "singleton ancient (100% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
+rm(cal.singleton.ancient.100p)
+pvals[1,1] <- "singleton.ancient.100p"
+pvals[1,2] <- spd.singleton.ancient.100p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.ancient.100p$pvalue>0)){ spd.singleton.ancient.100p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_ANCIENT_100P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_ANCIENT_100P.RData")
+rm(spd.singleton.ancient.100p)
 
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RECENT_50P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.recent.50p   <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.recent.50p,  
                                            subsampling_method = "singleton recent (50% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
+rm(cal.singleton.recent.50p)
+pvals[1,1] <- "singleton.recent.50p"
+pvals[1,2] <- spd.singleton.recent.50p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.recent.50p$pvalue>0)){ spd.singleton.recent.50p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_RECENT_50P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_RECENT_50P.RData")
+rm(spd.singleton.recent.50p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RECENT_75P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.recent.75p   <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.recent.75p,   
                                            subsampling_method = "singleton recent (75% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
+rm(cal.singleton.recent.75p)
+pvals[1,1] <- "singleton.recent.75p"
+pvals[1,2] <- spd.singleton.recent.75p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.recent.75p$pvalue>0)){ spd.singleton.recent.75p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_RECENT_75P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_RECENT_75P.RData")
+rm(spd.singleton.recent.75p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RECENT_100P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.recent.100p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                            calibrated_samples = cal.singleton.recent.100p, 
                                            subsampling_method = "singleton recent (100% sites)",
                                            timeRange = timeRange, 
                                            runm = runm, 
                                            normalised = normalised)
+rm(cal.singleton.recent.100p)
+pvals[1,1] <- "singleton.recent.100p"
+pvals[1,2] <- spd.singleton.recent.100p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.recent.100p$pvalue>0)){ spd.singleton.recent.100p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_RECENT_100P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_RECENT_100P.RData")
+rm(spd.singleton.recent.100p)
 
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RANDOM_50P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.random.50p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                           calibrated_samples = cal.singleton.random.50p, 
                                           subsampling_method = "singleton random (50% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
+rm(cal.singleton.random.50p)
+pvals[1,1] <- "singleton.random.50p"
+pvals[1,2] <- spd.singleton.random.50p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.random.50p$pvalue>0)){ spd.singleton.random.50p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_RANDOM_50P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_RANDOM_50P.RData")
+rm(spd.singleton.random.50p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RANDOM_75P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.random.75p  <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                           calibrated_samples = cal.singleton.random.75p,  
                                           subsampling_method = "singleton random (75% sites)", 
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
+rm(cal.singleton.random.75p)
+pvals[1,1] <- "singleton.random.75p"
+pvals[1,2] <- spd.singleton.random.75p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.random.75p$pvalue>0)){ spd.singleton.random.75p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_RANDOM_75P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_RANDOM_75P.RData")
+rm(spd.singleton.random.75p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-SINGLETON_RANDOM_100P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.singleton.random.100p <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                           calibrated_samples = cal.singleton.random.100p,   
                                           subsampling_method = "singleton random (100% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
+rm(cal.singleton.random.100p)
+pvals[1,1] <- "singleton.random.100p"
+pvals[1,2] <- spd.singleton.random.100p$discrepancy
+pvals[1,3] <- if(length(spd.singleton.random.100p$pvalue>0)){ spd.singleton.random.100p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-SINGLETON_RANDOM_100P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-SINGLETON_RANDOM_100P.RData")
+rm(spd.singleton.random.100p)
 
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BRACKETED_50P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.bracketed.50p         <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                           calibrated_samples = cal.bracketed.50p,  
                                           subsampling_method = "bracketed (50% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
+rm(cal.bracketed.50p)
+pvals[1,1] <- "bracketed.50p"
+pvals[1,2] <- spd.bracketed.50p$discrepancy
+pvals[1,3] <- if(length(spd.bracketed.50p$pvalue>0)){ spd.bracketed.50p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-BRACKETED_50P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-BRACKETED_50P.RData")
+rm(spd.bracketed.50p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BRACKETED_75P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.bracketed.75p         <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                           calibrated_samples = cal.bracketed.75p,  
                                           subsampling_method = "bracketed (75% sites)", 
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
+rm(cal.bracketed.75p)
+pvals[1,1] <- "bracketed.75p"
+pvals[1,2] <- spd.bracketed.75p$discrepancy
+pvals[1,3] <- if(length(spd.bracketed.75p$pvalue>0)){ spd.bracketed.75p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-BRACKETED_75P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-BRACKETED_75P.RData")
+rm(spd.bracketed.75p)
+
+load("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data-5s-1000sims-BRACKETED_100P.RData")
+spd.baseline.noloss1 <- spd(x = cal.baseline.noloss1, timeRange = timeRange, runm = runm, spdnormalised = normalised)
 spd.bracketed.100p        <- compare_spds(baseline_SPD = spd.baseline.noloss1,
                                           calibrated_samples = cal.bracketed.100p,   
                                           subsampling_method = "bracketed (100% sites)",
                                           timeRange = timeRange, 
                                           runm = runm, 
                                           normalised = normalised)
+rm(cal.bracketed.100p)
+pvals[1,1] <- "bracketed.100p"
+pvals[1,2] <- spd.bracketed.100p$discrepancy
+pvals[1,3] <- if(length(spd.bracketed.100p$pvalue>0)){ spd.bracketed.100p$pvalue }else{ "NA" }
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims-BRACKETED_100P.csv")
+save.image("E:/Radiocarbon dating analysis/Analysis/Uniform population growth/uniform_pop_growth-spds-BRACKETED_100P.RData")
+rm(spd.bracketed.100p)
 
 # SAVE DISCREPANCY SCORES AND TOTAL P-VALUES
 pvals <- data.frame(matrix(NA, nrow = 15, ncol = 3))
@@ -356,7 +563,7 @@ pvals[15,1] <- "bracketed.100p"
 pvals[15,2] <- spd.bracketed.100p$discrepancy
 pvals[14,3] <- if(length(spd.bracketed.100p$pvalue>0)){ spd.bracketed.100p$pvalue }else{ "NA" }
 
-write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_5sims.csv")
+write.csv(pvals, "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Results/Baseline vs subsamples/uniform_pop_growth-baseline_SPD_vs_mean_subsample_SPDs-5ssamples_1000sims.csv")
 
 #------------------------------------------------------------
 # III. SAVE DATA AND PLOT
@@ -547,9 +754,9 @@ spd.noloss <- ggarrange(uniform, singleton.random, singleton.ancient, singleton.
                         ncol = 2, nrow = 3,
                         common.legend = TRUE)
 spd.noloss
-ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Uniform_population_growth-baseline_SPD_vs_mean_subsamples-5samples_5sims.png",
+ggexport(spd.noloss, filename = "C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Figures/Uniform_population_growth-baseline_SPD_vs_mean_subsamples-5samples_1000sims.png",
          width = 1500,
          height = 1000)
 
 # Save the workspace
-save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data_plus_SPDs-5s-5sims.RData")
+save.image("C:/Users/Bec/Work/Projects/Radiocarbon dating/GitHub/Analysis/Uniform population growth/uniform_pop_growth-raw_sample_and_calibrated_data_plus_SPDs-5s-1000sims.RData")
