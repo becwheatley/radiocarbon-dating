@@ -1,10 +1,10 @@
 # radiocarbon-dating
 Investigating the effects of possible sampling biases on the results of common analysis techniques for radiocarbon dating of human occupation.
-documentation by Rebecca Wheatley (2023)
+Documentation by Rebecca Wheatley.
 
 Technical details pertaining to the code and where to find the simulated data and fitted models:
 * All code written in R v. 4.3.0
-* Simulated raw and calibrated data, frequency distributions and summed probability distributions have all been uploaded to the UTas Research Data Portal in the archived project, "RD-SDBIRDS". Barry Brook and Chris Johnson have access
+* Simulated raw and calibrated data, frequency distributions and summed probability distributions have all been uploaded to the UTas Research Data Portal in the archived project, "RD-SDBIRDS".
 
 Workflow:
 * 1. sampling_bias_in_radiocarbon_dating-simulation_study-[trend]_population_growth-baseline_SPD_vs_mean_subsample_SPDs.R files
